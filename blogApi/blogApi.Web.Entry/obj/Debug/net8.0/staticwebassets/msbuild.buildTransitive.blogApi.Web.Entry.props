@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\blogApi.Web.Entry.props" />
+</Project>
