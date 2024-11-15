@@ -85,7 +85,7 @@
 </template>
 
 <script lang="ts" setup>
-import { nextTick, reactive, ref } from 'vue'
+import { nextTick, onMounted, reactive, ref } from 'vue'
 import { Plus } from '@element-plus/icons-vue'
 import {
   type ComponentSize,
@@ -96,9 +96,11 @@ import {
   type UploadUserFile
 } from 'element-plus'
 import { queryCategory } from '@/api/category'
-import { addArticle } from '@/api/article'
+import { addArticle, updateArticle } from '@/api/article'
 import router from '@/router'
 import WangEditor from '@/components/tool/Wang-Editor.vue'
+import { useArticlesStore } from '@/stores/articles'
+
 
 // 图片
 const fileList = ref<UploadUserFile[]>([])
@@ -173,8 +175,6 @@ const getValue = (html: any) => {
 }
 
 // 表单
-const formData = new FormData()
-
 interface ArticleForm {
   articleTitle: string
   userId: number
@@ -184,6 +184,7 @@ interface ArticleForm {
 }
 const formSize = ref<ComponentSize>('default')
 const articleFormRef = ref<FormInstance>()
+// 表单数据
 const articleForm = reactive<ArticleForm>({
   articleTitle: '',
   userId: 1,
@@ -191,7 +192,19 @@ const articleForm = reactive<ArticleForm>({
   articleTags: '',
   articleContent: '',
 })
+// 编辑
+const articlesStore = useArticlesStore()
+if (articlesStore.isEdit && articlesStore.article ) {
+  const article = articlesStore.article
+  articleForm.articleTitle = article.articleTitle
+  articleForm.categoryId = article.categoryId
+  articleTags.value = article.articleTags.split(',')
+  // 编辑器
+}
+
 const rules = reactive<FormRules<ArticleForm>>({})
+// 提交数据
+const formData = new FormData()
 
 const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
@@ -203,15 +216,19 @@ const submitForm = async (formEl: FormInstance | undefined) => {
       articleForm.articleTags = articleTags.value.toString()
       formData.append('articleJson', JSON.stringify(articleForm))
       console.log("articleJson:" + formData.get('articleJson'))
-      // 添加
-      addArticle(formData).then(res => {
-        ElMessage({
-          message: '创建成功！',
-          type: 'success',
+
+      if (articlesStore.isEdit) {
+        updateArticle(formData).then(res => {
+          ElMessage.success("修改成功！")
         })
-        // 跳转到首页
-        router.push('/')
-      })
+      } else {
+        // 添加
+        addArticle(formData).then(res => {
+          ElMessage.success("创建成功！")
+        })
+      }
+      // 跳转到首页
+      router.push('/')
     } else {
       console.log('error submit!', fields)
     }

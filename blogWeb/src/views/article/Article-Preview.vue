@@ -5,6 +5,14 @@
 
     <!--  标头  -->
     <div class="bgContent">
+      <!--  编辑  -->
+      <el-row :gutter="20">
+        <div class="flex gap-2">
+          <a @click="edit()"> <Edit class="edit-icon"></Edit> </a>
+          <a @click="remove()"> <Delete class="edit-icon"></Delete> </a>
+        </div>
+      </el-row>
+
       <!--  标题  -->
       <el-row :gutter="20">
         <h1 class="center">{{ article.articleTitle }}</h1>
@@ -44,11 +52,26 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import { formatDate } from '@/assets/ts/date'
-import { Clock } from '@element-plus/icons-vue'
+import { Clock, Delete, Edit } from '@element-plus/icons-vue'
+import { useArticlesStore } from '@/stores/articles'
+import router from '@/router'
+import { deleteArticle } from '@/api/article'
+import { ElMessage } from 'element-plus'
 
 const route = useRoute()
 const article = JSON.parse(route.params.articleJson.toString())
 
+const articlesStore = useArticlesStore()
+const edit = () => {
+  articlesStore.isEdit = true
+  articlesStore.article = article
+  router.push("/create")
+}
+const remove = () => {
+  deleteArticle(article).then(() => {
+    ElMessage.success("删除成功！")
+  })
+}
 </script>
 
 <style scoped>
@@ -72,9 +95,11 @@ const article = JSON.parse(route.params.articleJson.toString())
   position: absolute;
 }
 
-
 .el-row {
   margin-bottom: 20px;
+}
+.edit-icon {
+  width: 20px;
 }
 span {
   margin: 0 0.5rem;

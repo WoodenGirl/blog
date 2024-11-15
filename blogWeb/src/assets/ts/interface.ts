@@ -1,5 +1,8 @@
 export interface Article {
   articleId: string,
+  categoryId: string,
+  userId: string,
+  articleTitle: string,
   nickname: string,
   categoryDetail: string,
   articleTags: string,

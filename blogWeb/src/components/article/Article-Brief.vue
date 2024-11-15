@@ -7,7 +7,7 @@
           style="width: 100%"
         >
       </el-col>
-      <el-col :span="17" :offset="1">
+      <el-col :span="16" :offset="1">
         <h2>{{ article.articleTitle }}</h2>
         <p>文章分类: {{ article.categoryDetail }}</p>
         <p class="flex gap-2">文章标签:
