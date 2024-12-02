@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>blogApi.Core</name>
+    </assembly>
+    <members>
+        <member name="T:entity.Article">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:blogApi.Core.entity.Category">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:blogApi.Core.entity.Category.categoryId">
+            <summary>
+            Desc:类别id
+            Default:
+            Nullable:False
+            </summary>           
+        </member>
+        <member name="P:blogApi.Core.entity.Category.categoryName">
+            <summary>
+            Desc:类别名称
+            Default:
+            Nullable:False
+            </summary>           
+        </member>
+        <member name="P:blogApi.Core.entity.Category.categoryParent">
+            <summary>
+            Desc:父目录
+            Default:
+            Nullable:False
+            </summary>           
+        </member>
+        <member name="P:blogApi.Core.entity.Category.categoryDetail">
+            <summary>
+            Desc:详细名称
+            </summary>  
+        </member>
+        <member name="T:blogApi.Core.sqlsugar.DbContext">
+            <summary>
+            数据库上下文对象
+            </summary>
+        </member>
+        <member name="F:blogApi.Core.sqlsugar.DbContext.Instance">
+            <summary>
+            SqlSugar 数据库实例
+            </summary>
+        </member>
+        <member name="M:blogApi.Core.sqlsugar.Repository`1.CommQuery(System.String)">
+            <summary>
+            扩展方法，自带方法不能满足的时候可以添加新方法
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:blogApi.Core.Tool.ImgTool.UploadImage(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            上传图像
+            </summary>
+            <param name="image"></param>
+            <returns>返回文件路径</returns>
+        </member>
+    </members>
+</doc>

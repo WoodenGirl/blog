@@ -1,0 +1,57 @@
+# 华为云
+
+## 申请云服务器（镜像宝塔）(需三个月以上)
+放行安全组，设置密码，获取宝塔账号密码
+
+## 申请域名
+前提：需要3个月以上的服务器
+华为云审核一天，工信局工作日五天
+
+备案号： 赣ICP备2024049506号
+
+## 申请桶（obs）
+新增一个编程权限用户
+获取accessKey，编程使用，用于上传图片
+网址显示图片需绑定自定义域名
+
+## 绑定域名
+为云服务器和桶中各添加一个三级域名 （申请的域名为二级域名，如example.com，三级域名即为www.example.com或obs.example.com等任意命名）
+再在云解析服务中添加该域名解析
+
+# 宝塔
+
+## 添加文件
+将vue打包后生成的dist文件上传
+
+## 添加网站
+php项目中添加网站，域名为服务器绑定的域名（www.example.com），目录指向dist
+
+## 添加数据库
+下载mysql8.0, 低版本的mysql没有utf8mb4
+下载phpmyadmin，php, 二者需版本一致(都下载最新即可)
+复制root密码，打开phpmyadmin，新建数据库
+将本地数据库导出结构与数据，PHPmyadmin一键导入
+
+## ftp (asp.net.core项目通过ftp发布到文件夹中)
+下载pure-ftpd
+新建ftp账号
+云服务器放行21，39000-40000
+宝塔放行39000-40000
+filezilla测试连接
+
+# VS发布
+连接ftp
+
+
+宝塔
+查看密码：sudo cat /credentials/password.txt
+
+bt_user: administrator
+bt_password: 1De24T4g67VE87
+
+去除域名设置：rm -f /www/server/panel/data/domain.conf
+查看默认域名：bt default / bt14
+
+
+运行
+dotnet /www/wwwroot/blog/blogApi/publish/blogApi.Web.Entry.dll

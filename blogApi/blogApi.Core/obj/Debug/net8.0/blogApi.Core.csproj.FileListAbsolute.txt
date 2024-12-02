@@ -1,0 +1,14 @@
+E:\project\blog\blogApi\blogApi.Core\bin\Debug\net8.0\blogApi.Core.deps.json
+E:\project\blog\blogApi\blogApi.Core\bin\Debug\net8.0\blogApi.Core.dll
+E:\project\blog\blogApi\blogApi.Core\bin\Debug\net8.0\blogApi.Core.pdb
+E:\project\blog\blogApi\blogApi.Core\bin\Debug\net8.0\blogApi.Core.xml
+E:\project\blog\blogApi\blogApi.Core\obj\Debug\net8.0\blogApi.Core.csproj.AssemblyReference.cache
+E:\project\blog\blogApi\blogApi.Core\obj\Debug\net8.0\blogApi.Core.GeneratedMSBuildEditorConfig.editorconfig
+E:\project\blog\blogApi\blogApi.Core\obj\Debug\net8.0\blogApi.Core.AssemblyInfoInputs.cache
+E:\project\blog\blogApi\blogApi.Core\obj\Debug\net8.0\blogApi.Core.AssemblyInfo.cs
+E:\project\blog\blogApi\blogApi.Core\obj\Debug\net8.0\blogApi.Core.csproj.CoreCompileInputs.cache
+E:\project\blog\blogApi\blogApi.Core\obj\Debug\net8.0\blogApi.Core.dll
+E:\project\blog\blogApi\blogApi.Core\obj\Debug\net8.0\refint\blogApi.Core.dll
+E:\project\blog\blogApi\blogApi.Core\obj\Debug\net8.0\blogApi.Core.pdb
+E:\project\blog\blogApi\blogApi.Core\obj\Debug\net8.0\ref\blogApi.Core.dll
+E:\project\blog\blogApi\blogApi.Core\obj\Debug\net8.0\blogApi.Core.sourcelink.json
