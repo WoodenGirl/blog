@@ -148,3 +148,4 @@ E:\project\blog\blogApi\blogApi.Web.Entry\bin\Release\net8.0\esdk_obs_.net_core.
 E:\project\blog\blogApi\blogApi.Web.Entry\bin\Release\net8.0\log4net.dll
 E:\project\blog\blogApi\blogApi.Web.Entry\obj\Release\net8.0\staticwebassets.upToDateCheck.txt
 E:\project\blog\blogApi\blogApi.Web.Entry\bin\Release\net8.0\appsettings.Production.json
+E:\project\blog\blogApi\blogApi.Web.Entry\obj\Release\net8.0\blogApi.Web.Entry.sourcelink.json

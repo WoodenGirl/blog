@@ -206,6 +206,7 @@ if (articlesStore.isEdit && articlesStore.article ) {
   articleTags.value = article.articleTags.split(',')
   articleForm.articleContent = article.articleContent
   // 显示图片
+  articleForm.articleCover = article.articleCover
   hideUpload.value = true
   fileList.value.push({name: article.articleCover, url: "/images/" + article.articleCover})
 }
@@ -220,16 +221,20 @@ const submitForm = async (formEl: FormInstance | undefined) => {
     if (valid) {
       // 获取图片信息
       const file = fileList.value[0]
-      const suffix = file.name.split('.').pop()
-      const fileName = "articleCover/" + file.uid + "." + suffix
-      // 上传对象
-      putObject(fileName, file)
-      // 赋值
-      articleForm.articleCover = fileName
+      if (file.status != "success") { // 若图片不在服务器上，上传
+        const suffix = file.name.split('.').pop()
+        const fileName = "articleCover/" + file.uid + "." + suffix
+        // 上传对象
+        putObject(fileName, file)
+        // 赋值
+        articleForm.articleCover = fileName
+      }
       // 其他数据
       articleForm.articleTags = articleTags.value.toString()
-      // 修改
-      if (articlesStore.isEdit) {
+
+
+
+      if (articlesStore.isEdit) { // 修改
         // 更新修改时间
         articleForm.updateTime = getNow()
         updateArticle(articleForm).then(res => {
