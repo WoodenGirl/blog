@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <!--  背景  -->
-    <el-image :url="article.articleCover" fit="fill" />
+    <el-image :src="'/images/' + article.articleCover" fit="fill" />
 
     <!--  标头  -->
     <div class="bgContent">

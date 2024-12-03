@@ -13,3 +13,14 @@ export interface Article {
   categoryId: string,
   categoryDetail: string,
 }
+export interface ArticleForm {
+  articleId: string
+  articleTitle: string
+  articleCover: string
+  userId: string
+  categoryId: string
+  articleTags: string
+  articleContent: string
+  createdTime: string
+  updateTime: string
+}

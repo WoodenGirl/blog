@@ -3,8 +3,32 @@
   "WorkspaceRootPath": "E:\\project\\blog\\blogApi\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{9D14BB78-DA2A-4040-B9DB-5A515B599181}|blogApi.Web.Core\\blogApi.Web.Core.csproj|e:\\project\\blog\\blogapi\\blogapi.web.core\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D14BB78-DA2A-4040-B9DB-5A515B599181}|blogApi.Web.Core\\blogApi.Web.Core.csproj|solutionrelative:blogapi.web.core\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AB699EE9-43A8-46F2-A855-04A26DE63372}|blogApi.Application\\blogApi.Application.csproj|e:\\project\\blog\\blogapi\\blogapi.application\\article\\articleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB699EE9-43A8-46F2-A855-04A26DE63372}|blogApi.Application\\blogApi.Application.csproj|solutionrelative:blogapi.application\\article\\articleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C8D99F52-EDC7-411F-8300-6DB14BF59E8C}|blogApi.Web.Entry\\blogApi.Web.Entry.csproj|e:\\project\\blog\\blogapi\\blogapi.web.entry\\appsettings.production.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C8D99F52-EDC7-411F-8300-6DB14BF59E8C}|blogApi.Web.Entry\\blogApi.Web.Entry.csproj|solutionrelative:blogapi.web.entry\\appsettings.production.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C8D99F52-EDC7-411F-8300-6DB14BF59E8C}|blogApi.Web.Entry\\blogApi.Web.Entry.csproj|e:\\project\\blog\\blogapi\\blogapi.web.entry\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C8D99F52-EDC7-411F-8300-6DB14BF59E8C}|blogApi.Web.Entry\\blogApi.Web.Entry.csproj|solutionrelative:blogapi.web.entry\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AB699EE9-43A8-46F2-A855-04A26DE63372}|blogApi.Application\\blogApi.Application.csproj|e:\\project\\blog\\blogapi\\blogapi.application\\dynamic\\dynamicservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB699EE9-43A8-46F2-A855-04A26DE63372}|blogApi.Application\\blogApi.Application.csproj|solutionrelative:blogapi.application\\dynamic\\dynamicservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C8D99F52-EDC7-411F-8300-6DB14BF59E8C}|blogApi.Web.Entry\\blogApi.Web.Entry.csproj|e:\\project\\blog\\blogapi\\blogapi.web.entry\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{C8D99F52-EDC7-411F-8300-6DB14BF59E8C}|blogApi.Web.Entry\\blogApi.Web.Entry.csproj|solutionrelative:blogapi.web.entry\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C8D99F52-EDC7-411F-8300-6DB14BF59E8C}|blogApi.Web.Entry\\blogApi.Web.Entry.csproj|e:\\project\\blog\\blogapi\\blogapi.web.entry\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C8D99F52-EDC7-411F-8300-6DB14BF59E8C}|blogApi.Web.Entry\\blogApi.Web.Entry.csproj|solutionrelative:blogapi.web.entry\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,12 +43,90 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Startup.cs",
+              "DocumentMoniker": "E:\\project\\blog\\blogApi\\blogApi.Web.Core\\Startup.cs",
+              "RelativeDocumentMoniker": "blogApi.Web.Core\\Startup.cs",
+              "ToolTip": "E:\\project\\blog\\blogApi\\blogApi.Web.Core\\Startup.cs",
+              "RelativeToolTip": "blogApi.Web.Core\\Startup.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-03T08:12:34.153Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.Production.json",
+              "DocumentMoniker": "E:\\project\\blog\\blogApi\\blogApi.Web.Entry\\appsettings.Production.json",
+              "RelativeDocumentMoniker": "blogApi.Web.Entry\\appsettings.Production.json",
+              "ToolTip": "E:\\project\\blog\\blogApi\\blogApi.Web.Entry\\appsettings.Production.json",
+              "RelativeToolTip": "blogApi.Web.Entry\\appsettings.Production.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-12-03T08:12:03.705Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "E:\\project\\blog\\blogApi\\blogApi.Web.Entry\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "blogApi.Web.Entry\\appsettings.Development.json",
+              "ToolTip": "E:\\project\\blog\\blogApi\\blogApi.Web.Entry\\appsettings.Development.json",
+              "RelativeToolTip": "blogApi.Web.Entry\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-12-03T08:12:00.21Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DynamicService.cs",
+              "DocumentMoniker": "E:\\project\\blog\\blogApi\\blogApi.Application\\dynamic\\DynamicService.cs",
+              "RelativeDocumentMoniker": "blogApi.Application\\dynamic\\DynamicService.cs",
+              "ToolTip": "E:\\project\\blog\\blogApi\\blogApi.Application\\dynamic\\DynamicService.cs",
+              "RelativeToolTip": "blogApi.Application\\dynamic\\DynamicService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-03T08:10:37.473Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ArticleService.cs",
+              "DocumentMoniker": "E:\\project\\blog\\blogApi\\blogApi.Application\\article\\ArticleService.cs",
+              "RelativeDocumentMoniker": "blogApi.Application\\article\\ArticleService.cs",
+              "ToolTip": "E:\\project\\blog\\blogApi\\blogApi.Application\\article\\ArticleService.cs*",
+              "RelativeToolTip": "blogApi.Application\\article\\ArticleService.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-03T08:09:44.683Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\project\\blog\\blogApi\\blogApi.Web.Entry\\Program.cs",
+              "RelativeDocumentMoniker": "blogApi.Web.Entry\\Program.cs",
+              "ToolTip": "E:\\project\\blog\\blogApi\\blogApi.Web.Entry\\Program.cs",
+              "RelativeToolTip": "blogApi.Web.Entry\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-03T08:09:17.881Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "appsettings.json",
               "DocumentMoniker": "E:\\project\\blog\\blogApi\\blogApi.Web.Entry\\appsettings.json",
               "RelativeDocumentMoniker": "blogApi.Web.Entry\\appsettings.json",
               "ToolTip": "E:\\project\\blog\\blogApi\\blogApi.Web.Entry\\appsettings.json",
               "RelativeToolTip": "blogApi.Web.Entry\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABEAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2024-12-02T01:30:28.637Z",
               "EditorCaption": ""

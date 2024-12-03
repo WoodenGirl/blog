@@ -523,26 +523,24 @@
         "operationId": "api-article-Post",
         "requestBody": {
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "articleCover": {
-                    "type": "string",
-                    "format": "binary"
-                  },
-                  "articleJson": {
-                    "type": "string"
-                  }
-                }
-              },
-              "encoding": {
-                "articleCover": {
-                  "style": "form"
-                },
-                "articleJson": {
-                  "style": "form"
-                }
+                "$ref": "#/components/schemas/Article"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Article"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Article"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "$ref": "#/components/schemas/Article"
               }
             }
           }
@@ -577,26 +575,24 @@
         "operationId": "api-article-Put",
         "requestBody": {
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "articleCover": {
-                    "type": "string",
-                    "format": "binary"
-                  },
-                  "articleJson": {
-                    "type": "string"
-                  }
-                }
-              },
-              "encoding": {
-                "articleCover": {
-                  "style": "form"
-                },
-                "articleJson": {
-                  "style": "form"
-                }
+                "$ref": "#/components/schemas/Article"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Article"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Article"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "$ref": "#/components/schemas/Article"
               }
             }
           }
@@ -710,6 +706,58 @@
   },
   "components": {
     "schemas": {
+      "Article": {
+        "type": "object",
+        "properties": {
+          "articleId": {
+            "type": "string",
+            "description": "Desc:\r\nDefault:\r\nNullable:False",
+            "nullable": true
+          },
+          "articleTitle": {
+            "type": "string",
+            "description": "Desc:\r\nDefault:\r\nNullable:False",
+            "nullable": true
+          },
+          "userId": {
+            "type": "string",
+            "description": "Desc:\r\nDefault:\r\nNullable:False",
+            "nullable": true
+          },
+          "createdTime": {
+            "type": "string",
+            "description": "Desc:\r\nDefault:\r\nNullable:False",
+            "format": "date-time"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "Desc:\r\nDefault:\r\nNullable:False",
+            "format": "date-time"
+          },
+          "articleTags": {
+            "type": "string",
+            "description": "Desc:\r\nDefault:\r\nNullable:False",
+            "nullable": true
+          },
+          "categoryId": {
+            "type": "integer",
+            "description": "Desc:\r\nDefault:\r\nNullable:False",
+            "format": "int32"
+          },
+          "articleContent": {
+            "type": "string",
+            "description": "Desc:\r\nDefault:\r\nNullable:False",
+            "nullable": true
+          },
+          "articleCover": {
+            "type": "string",
+            "description": "Desc:\r\nDefault:\r\nNullable:False",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": ""
+      },
       "Category": {
         "type": "object",
         "properties": {

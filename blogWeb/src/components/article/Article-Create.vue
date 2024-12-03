@@ -101,7 +101,9 @@ import router from '@/router'
 import WangEditor from '@/components/tool/Wang-Editor.vue'
 import { useArticlesStore } from '@/stores/article'
 import { useUserStore } from '@/stores/user'
-import { getNow } from '@/assets/ts/tool'
+import { generateRandomFileName, getNow } from '@/assets/ts/tool'
+import type { ArticleForm } from '@/entity/article'
+import { popObject, putObject } from '@/assets/ts/obs'
 
 
 // 图片
@@ -110,6 +112,7 @@ const fileList = ref<UploadUserFile[]>([])
 const hideUpload = ref(false)
 // 删除图片
 const handlePictureCardRemove: UploadProps['onRemove'] = () => {
+  if (fileList.value[0].status == "success") {popObject(fileList.value[0].name)}
   hideUpload.value = false
   fileList.value.pop()
 }
@@ -177,22 +180,14 @@ const getValue = (html: any) => {
 }
 
 // 表单
-interface ArticleForm {
-  articleId: string
-  articleTitle: string
-  userId: string
-  categoryId: string
-  articleTags: string
-  articleContent: string
-  createdTime: string
-  updateTime: string
-}
+
 const formSize = ref<ComponentSize>('default')
 const articleFormRef = ref<FormInstance>()
 // 表单数据
 const articleForm = reactive<ArticleForm>({
   articleId: '',
   articleTitle: '',
+  articleCover: '',
   userId: useUserStore().user.userId,
   categoryId: '',
   articleTags: '',
@@ -212,36 +207,41 @@ if (articlesStore.isEdit && articlesStore.article ) {
   articleForm.articleContent = article.articleContent
   // 显示图片
   hideUpload.value = true
-  fileList.value.push({name: "article cover", url: article.articleCover})
+  fileList.value.push({name: article.articleCover, url: "/images/" + article.articleCover})
 }
+console.log(fileList.value)
+
 
 const rules = reactive<FormRules<ArticleForm>>({})
-// 提交数据
-const formData = new FormData()
 
 const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   await formEl.validate((valid, fields) => {
     if (valid) {
-      // 图片
-      formData.append('articleCover', fileList.value[0].raw)
-      console.log(fileList.value[0].raw)
+      // 获取图片信息
+      const file = fileList.value[0]
+      const suffix = file.name.split('.').pop()
+      const fileName = "articleCover/" + file.uid + "." + suffix
+      // 上传对象
+      putObject(fileName, file)
+      // 赋值
+      articleForm.articleCover = fileName
       // 其他数据
       articleForm.articleTags = articleTags.value.toString()
       // 修改
       if (articlesStore.isEdit) {
+        // 更新修改时间
         articleForm.updateTime = getNow()
-        formData.append('articleJson', JSON.stringify(articleForm))
-        updateArticle(formData).then(res => {
+        updateArticle(articleForm).then(res => {
           if (res.code == 200) {
             ElMessage.success("修改成功！")
           }
         })
       } else { // 添加
+        // 记录时间
         articleForm.createdTime = getNow()
         articleForm.updateTime = getNow()
-        formData.append('articleJson', JSON.stringify(articleForm))
-        addArticle(formData).then(res => {
+        addArticle(articleForm).then(res => {
           if (res.code == 200) {
             ElMessage.success("创建成功！")
           }

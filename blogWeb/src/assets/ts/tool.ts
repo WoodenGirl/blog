@@ -9,4 +9,11 @@ const getNow = () => {
   return new Date(Date.now() + 8 * 3600 * 1000).toISOString()
 };
 
-export { formatDate, getNow }
+
+const generateRandomFileName = () => {
+  const timestamp = new Date().getTime();
+  const randomNum = Math.floor(Math.random() * 1000000);
+  return `${timestamp}_${randomNum}`;
+}
+
+export { formatDate, getNow, generateRandomFileName }

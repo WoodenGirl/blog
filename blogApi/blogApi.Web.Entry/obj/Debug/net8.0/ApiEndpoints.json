@@ -28,14 +28,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "articleCover",
-        "Type": "Microsoft.AspNetCore.Http.IFormFile",
-        "IsRequired": false
-      },
-      {
-        "Name": "articleJson",
-        "Type": "System.String",
-        "IsRequired": false
+        "Name": "article",
+        "Type": "blogApi.Core.entity.Article",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": [
@@ -59,14 +54,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "articleCover",
-        "Type": "Microsoft.AspNetCore.Http.IFormFile",
-        "IsRequired": false
-      },
-      {
-        "Name": "articleJson",
-        "Type": "System.String",
-        "IsRequired": false
+        "Name": "article",
+        "Type": "blogApi.Core.entity.Article",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": [

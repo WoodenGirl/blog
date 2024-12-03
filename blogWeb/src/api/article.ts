@@ -14,12 +14,11 @@ export function queryArticleByCategoryId(categoryId: number) {
   })
 }
 
-export function addArticle(formData:FormData) {
+export function addArticle(article: object) {
   return instance({
     url: "/article",
     method: "post",
-    headers:{ 'Content-Type': 'multipart/form-data' },
-    data: formData
+    data: article
   })
 }
 

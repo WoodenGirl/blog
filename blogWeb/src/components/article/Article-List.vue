@@ -30,8 +30,6 @@ const toPreview = (data: Article) => {
   article.value = data
   router.push('/article');
 }
-
-
 </script>
 
 <style scoped>
