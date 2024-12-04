@@ -19,7 +19,7 @@ const putObject = (fileName: string, file: any) => {
   obsClient.putObject({
     Bucket: BUCKET,
     Key: fileName,
-    SourceFile: file.raw
+    SourceFile: file
   }, function (err: string, result: any) {
     if(err){
       ElMessage.error("上传失败!");

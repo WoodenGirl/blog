@@ -74,7 +74,7 @@
     </el-form-item>
     <!--  正文  -->
     <el-form-item label="Article Content" prop="content">
-      <wang-editor @getValue="getValue" :content="articleForm.articleContent"></wang-editor>
+      <wang-editor ref="wangEditorRef"></wang-editor>
     </el-form-item>
     <!--  提交取消  -->
     <el-form-item label=" ">
@@ -85,7 +85,7 @@
 </template>
 
 <script lang="ts" setup>
-import { nextTick, reactive, ref } from 'vue'
+import { nextTick, onMounted, reactive, ref } from 'vue'
 import { Plus } from '@element-plus/icons-vue'
 import {
   type ComponentSize,
@@ -101,7 +101,7 @@ import router from '@/router'
 import WangEditor from '@/components/tool/Wang-Editor.vue'
 import { useArticlesStore } from '@/stores/article'
 import { useUserStore } from '@/stores/user'
-import { generateRandomFileName, getNow } from '@/assets/ts/tool'
+import { getNow } from '@/assets/ts/tool'
 import type { ArticleForm } from '@/entity/article'
 import { popObject, putObject } from '@/assets/ts/obs'
 
@@ -174,10 +174,7 @@ const handleInputConfirm = () => {
 }
 
 // 编辑器
-const getValue = (html: any) => {
-  articleForm.articleContent = html
-  console.log(articleForm.articleContent)
-}
+const wangEditorRef = ref<InstanceType<typeof WangEditor>>(null)
 
 // 表单
 
@@ -197,21 +194,31 @@ const articleForm = reactive<ArticleForm>({
 })
 // 编辑
 const articlesStore = useArticlesStore()
-if (articlesStore.isEdit && articlesStore.article ) {
+if (articlesStore.isEdit && articlesStore.article) {
   const article = articlesStore.article
   articleForm.articleId = article.articleId
   articleForm.createdTime = article.createdTime
   articleForm.articleTitle = article.articleTitle
   articleForm.categoryId = article.categoryId
   articleTags.value = article.articleTags.split(',')
-  articleForm.articleContent = article.articleContent
-  // 显示图片
+  // 显示文章
+  onMounted(() => {
+    setTimeout(() => {
+      wangEditorRef.value.valueHtml = article.articleContent
+    }, 1500)
+  })
+  // 获取文章所有图片, 方便之后比较删除图片
+  onMounted(() => {
+    setTimeout(() => {
+      wangEditorRef.value.imageList1 = wangEditorRef.value.editorRef.getElemsByType('image')
+    }, 1500)
+  })
+
+  // 显示封面
   articleForm.articleCover = article.articleCover
   hideUpload.value = true
   fileList.value.push({name: article.articleCover, url: "/images/" + article.articleCover})
 }
-console.log(fileList.value)
-
 
 const rules = reactive<FormRules<ArticleForm>>({})
 
@@ -219,20 +226,22 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   await formEl.validate((valid, fields) => {
     if (valid) {
-      // 获取图片信息
+      // 处理图片封面
       const file = fileList.value[0]
       if (file.status != "success") { // 若图片不在服务器上，上传
+        // 生成文件名称
         const suffix = file.name.split('.').pop()
         const fileName = "articleCover/" + file.uid + "." + suffix
         // 上传对象
-        putObject(fileName, file)
+        putObject(fileName, file.raw)
         // 赋值
         articleForm.articleCover = fileName
       }
-      // 其他数据
+      // 其他数据赋值
       articleForm.articleTags = articleTags.value.toString()
-
-
+      articleForm.articleContent = wangEditorRef.value.valueHtml
+      // 删除文章未使用图片
+      wangEditorRef.value.handleSave()
 
       if (articlesStore.isEdit) { // 修改
         // 更新修改时间

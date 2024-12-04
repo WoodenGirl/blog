@@ -12,32 +12,62 @@
       :defaultConfig="editorConfig"
       :mode="mode"
       @onCreated="handleCreated"
-      @onChange="handleChange"
     />
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import '@wangeditor/editor/dist/css/style.css' // 引入 css
 
-import { onBeforeUnmount, ref, shallowRef, watch } from 'vue'
+import { onBeforeUnmount, ref, shallowRef } from 'vue'
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
-
-const emits = defineEmits(['getValue'])
-const props = defineProps(['content'])
+import { SlateElement } from '@wangeditor/editor'
+import { popObject, putObject } from '@/assets/ts/obs'
+import { findDifferentAttributes, generateUID } from '@/assets/ts/tool'
+import type { ImageElement } from '../../../env'
 
 // 编辑器实例，必须用 shallowRef
 const editorRef = shallowRef()
 
 // 内容 HTML
-const valueHtml = ref()
-valueHtml.value = props.content ? props.content : ''
+const valueHtml = ref('')
 
 // 模式 mode
 const mode = "default"
 
 const toolbarConfig = {}
-const editorConfig = { placeholder: '请输入内容...' }
+const editorConfig = { MENU_CONF: {'uploadImage': {}, 'insertImage': {}} }
+
+// 修改 uploadImage 菜单配置
+type InsertFnType = (url: string, alt: string, href: string) => void
+editorConfig.MENU_CONF['uploadImage'] = {
+  // 上传
+  async customUpload(file: File, insertFn: InsertFnType) {  // TS 语法
+    // 生成文件名
+    const suffix = file.name.split('.').pop()
+    const fileName = "articleInsert/" + generateUID() + "." + suffix
+    // 上传对象
+    putObject(fileName, file)
+    // 显示图像
+    const href = "http://obs.aprilsxz.fun/" + fileName
+    insertFn(href, file.name, href)
+  },
+}
+// 插入图片后的回调函数
+const imageList1 = ref<ImageElement[]>([])
+editorConfig.MENU_CONF['insertImage'] = {
+  onInsertedImage(imageNode: ImageElement | null) {  // TS 语法
+    if (imageNode == null) return
+    imageList1.value.push(imageNode)
+  },
+}
+// 删除图像
+const imageList2 = ref<ImageElement[]>([])
+const handleSave = () => {
+  imageList2.value = editorRef.value.getElemsByType('image')
+  const deleteImages = findDifferentAttributes(imageList1.value, imageList2.value)
+  deleteImages.forEach((item) => {popObject(item)})
+}
 
 // 组件销毁时，也及时销毁编辑器
 onBeforeUnmount(() => {
@@ -46,13 +76,18 @@ onBeforeUnmount(() => {
   editor.destroy()
 })
 
-const handleChange = () => {
-  emits('getValue', valueHtml.value)
-}
-
 const handleCreated = (editor) => {
   editorRef.value = editor // 记录 editor 实例，重要！
 }
+
+defineExpose({
+  editorRef,
+  mode,
+  valueHtml,
+  handleSave,
+  imageList1
+})
+
 </script>
 
 <style scoped>
