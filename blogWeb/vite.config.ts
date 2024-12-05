@@ -16,6 +16,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
+        //target: 'https://localhost:5001/',
         //target: 'https://localhost:44342/',
         target: 'https://api.aprilsxz.fun/', // 目标服务器地址
         "secure": false, // 接受运行在https上，默认不接受

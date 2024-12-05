@@ -17,14 +17,14 @@
 </template>
 
 <script lang="ts" setup>
-import '@wangeditor/editor/dist/css/style.css' // 引入 css
+import '@wangeditor-next/editor/dist/css/style.css' // 引入 css
 
 import { onBeforeUnmount, ref, shallowRef } from 'vue'
-import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
-import { SlateElement } from '@wangeditor/editor'
+import { Editor, Toolbar } from '@wangeditor-next/editor-for-vue'
 import { popObject, putObject } from '@/assets/ts/obs'
 import { findDifferentAttributes, generateUID } from '@/assets/ts/tool'
-import type { ImageElement } from '../../../env'
+import type { ImageElement } from '../../../custom'
+import type { IEditorConfig } from '@wangeditor-next/editor'
 
 // 编辑器实例，必须用 shallowRef
 const editorRef = shallowRef()
@@ -36,7 +36,9 @@ const valueHtml = ref('')
 const mode = "default"
 
 const toolbarConfig = {}
-const editorConfig = { MENU_CONF: {'uploadImage': {}, 'insertImage': {}} }
+const editorConfig: Partial<IEditorConfig> = {
+  MENU_CONF: {}
+}
 
 // 修改 uploadImage 菜单配置
 type InsertFnType = (url: string, alt: string, href: string) => void
@@ -49,7 +51,7 @@ editorConfig.MENU_CONF['uploadImage'] = {
     // 上传对象
     putObject(fileName, file)
     // 显示图像
-    const href = "http://obs.aprilsxz.fun/" + fileName
+    const href = import.meta.env.VITE_OBS_URL + fileName
     insertFn(href, file.name, href)
   },
 }

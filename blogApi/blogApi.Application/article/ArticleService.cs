@@ -37,7 +37,7 @@ namespace blogApi.Application.article
             _articleRepository.Insert(article);
             return ResultVo.success(article.articleId);
         }
-        public ResultVo Delete(int articleId)
+        public ResultVo Delete(string articleId)
         {
             _articleRepository.DeleteById(articleId);
             return ResultVo.success();

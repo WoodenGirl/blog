@@ -63,7 +63,7 @@ import { useUserStore } from '@/stores/user'
 import { ref } from 'vue'
 import { ElMessage, type UploadProps, type UploadUserFile } from 'element-plus'
 import { addDynamic } from '@/api/dynamic'
-import { getNow } from '@/assets/ts/tool'
+import { generateUID, getNow } from '@/assets/ts/tool'
 import { putObject } from '@/assets/ts/obs'
 
 const props = defineProps(['categoryId'])
@@ -102,11 +102,17 @@ const submit = () => {
     userId: useUserStore().user.userId,
     categoryId: props.categoryId,
   })
-  /*// 上传图片
-  const suffix = file.name.split('.').pop()
-  const fileName = "articleCover/" + file.uid + "." + suffix
-  // 上传对象
-  putObject(fileName, file)*/
+
+  // 上传图片
+  fileList.value.forEach((file) => {
+    const suffix = file.name.split('.').pop()
+    const fileName = "dynamicImage/" + generateUID() + "." + suffix
+    // 上传对象
+    putObject(fileName, file.raw)
+    dynamic.value.dynamicImages += fileName + ";"
+  })
+
+  // 上传动态
   addDynamic(dynamic.value).then((res) => {
     if (res.code == 200) {
       ElMessage.success("发表成功！")

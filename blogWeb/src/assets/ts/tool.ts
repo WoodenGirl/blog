@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import type { ImageElement } from '../../../env'
+import type { ImageElement } from '../../../custom'
 
 const formatDate = (date: string) => {
   // 使用date-fns格式化日期

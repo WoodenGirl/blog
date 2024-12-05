@@ -21,10 +21,8 @@ export async function fetchComments(linkedId: string): Promise<Comment[]> {
   // 获取数据
   const comments = ref<Comment[]>([])
   comments.value = await queryComment(linkedId).then(res => res.data);
-  console.log(comments.value)
   // 寻找根节点
   commentRoots.value = comments.value.filter(item => item.commentParent == 0)
-  console.log(commentRoots.value)
   // 为其添加子节点
   for (const commentRoot of commentRoots.value) {
     commentRoot.children = []

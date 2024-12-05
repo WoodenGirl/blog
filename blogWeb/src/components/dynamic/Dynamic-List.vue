@@ -4,7 +4,7 @@
     <dynamic-input :category-id="categoryId" @rerender="fetchDynamics"></dynamic-input>
     <!-- 展示动态  -->
     <div v-for="dynamic of dynamics" :key="dynamic.dynamicId">
-      <dynamic-brief :dynamic="dynamic"></dynamic-brief>
+      <dynamic-brief :dynamic="dynamic" class="dynamic-brief"></dynamic-brief>
     </div>
   </div>
 
@@ -34,5 +34,7 @@ fetchDynamics()
 </script>
 
 <style scoped>
-
+.dynamic-brief {
+  margin: 1rem 0;
+}
 </style>

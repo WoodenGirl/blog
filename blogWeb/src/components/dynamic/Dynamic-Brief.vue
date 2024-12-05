@@ -6,7 +6,7 @@
         <el-avatar size="default" fit="cover" :src="dynamic.avatar"/>
       </el-col>
       <!--  昵称 创建时间 -->
-      <el-col :span="21">
+      <el-col :span="21" style="margin-left: 0.5rem">
         <p class="nickname">{{ dynamic.nickname }}</p>
         {{ formatDate(dynamic.createdTime) }}
       </el-col>
@@ -15,7 +15,25 @@
     <el-row class="content">
       <p>{{ dynamic.dynamicContent }}</p>
     </el-row>
-
+    <!--  图片  -->
+    <el-row>
+      <el-image
+        v-for="src in srcList"
+        :key="src"
+        class="imgList"
+        :src="'/images/' + src"
+        fit="cover"
+        @click="handlePicturePreview(src)"
+      />
+    </el-row>
+    <el-dialog v-model="dialogVisible">
+      <img
+        w-full
+        :src="'/images/' + dialogImageUrl"
+        alt="Preview Image"
+        style="max-height: 100%; max-width: 100%"
+      />
+    </el-dialog>
     <!--  评论 点赞  -->
     <el-row>
       <el-col :span="1">
@@ -40,8 +58,23 @@
 import { formatDate } from '@/assets/ts/tool'
 import CommentAll from '@/components/comment/Comment-All.vue'
 import { ref } from 'vue'
+import type { UploadProps } from 'element-plus'
 
-defineProps(['dynamic'])
+const props = defineProps(['dynamic'])
+
+// 图片列表
+const srcList = ref<string[]>([])
+srcList.value = props.dynamic.dynamicImages.split(";")
+srcList.value.pop()
+// 预览图片
+const dialogImageUrl = ref('')
+const dialogVisible = ref(false)
+const handlePicturePreview  = (url: string) => {
+  dialogImageUrl.value = url
+  dialogVisible.value = true
+}
+
+
 
 // 点赞
 const isLike = ref(false)
@@ -59,6 +92,16 @@ const triggerComment = () => {
 <style scoped>
 p {
   margin: 0.5rem 0;
+}
+.imgList {
+  display: inline-block;
+  margin-right: 3rem;
+  max-height: 10rem;
+  max-width: 10rem;
+  margin-bottom: 1rem;
+}
+.imgList:hover {
+  cursor: pointer;
 }
 .noDisplay {
   display: none;

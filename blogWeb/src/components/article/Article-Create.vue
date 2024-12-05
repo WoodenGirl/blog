@@ -101,7 +101,7 @@ import router from '@/router'
 import WangEditor from '@/components/tool/Wang-Editor.vue'
 import { useArticlesStore } from '@/stores/article'
 import { useUserStore } from '@/stores/user'
-import { getNow } from '@/assets/ts/tool'
+import { generateUID, getNow } from '@/assets/ts/tool'
 import type { ArticleForm } from '@/entity/article'
 import { popObject, putObject } from '@/assets/ts/obs'
 
@@ -231,7 +231,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
       if (file.status != "success") { // 若图片不在服务器上，上传
         // 生成文件名称
         const suffix = file.name.split('.').pop()
-        const fileName = "articleCover/" + file.uid + "." + suffix
+        const fileName = "articleCover/" + generateUID() + "." + suffix
         // 上传对象
         putObject(fileName, file.raw)
         // 赋值
