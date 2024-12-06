@@ -123,8 +123,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
             }
           }
         ],
@@ -158,6 +157,46 @@
           "comment"
         ],
         "operationId": "api-comment-linkedid-Get",
+        "parameters": [
+          {
+            "name": "linkedid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RESTfulResult_ResultVo"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RESTfulResult_ResultVo"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RESTfulResult_ResultVo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/comment/count/{linkedid}": {
+      "get": {
+        "tags": [
+          "comment"
+        ],
+        "operationId": "api-comment-count-linkedid-Get",
         "parameters": [
           {
             "name": "linkedid",
@@ -260,6 +299,46 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RESTfulResult_ResultVo"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RESTfulResult_ResultVo"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RESTfulResult_ResultVo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/comment/cascade/{linkedid}": {
+      "delete": {
+        "tags": [
+          "comment"
+        ],
+        "operationId": "api-comment-cascade-linkedid-Delete",
+        "parameters": [
+          {
+            "name": "linkedid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }
         ],

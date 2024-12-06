@@ -300,6 +300,58 @@
     ]
   },
   {
+    "ContainingType": "blogApi.Application.comment.CommentService",
+    "Method": "DeleteCascade",
+    "RelativePath": "api/comment/cascade/{linkedid}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "linkedid",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Furion.UnifyResult.RESTfulResult\u00601[[blogApi.Core.entity.ResultVo, blogApi.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "blogApi.Application.comment.CommentService",
+    "Method": "Count",
+    "RelativePath": "api/comment/count/{linkedid}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "linkedid",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Furion.UnifyResult.RESTfulResult\u00601[[blogApi.Core.entity.ResultVo, blogApi.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "blogApi.Application.dynamic.DynamicService",
     "Method": "Add",
     "RelativePath": "api/dynamic",
@@ -361,7 +413,7 @@
     "Parameters": [
       {
         "Name": "dynamicid",
-        "Type": "System.Int32",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],

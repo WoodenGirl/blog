@@ -3,6 +3,34 @@
   "WorkspaceRootPath": "E:\\project\\blog\\blogApi\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{AB699EE9-43A8-46F2-A855-04A26DE63372}|blogApi.Application\\blogApi.Application.csproj|e:\\project\\blog\\blogapi\\blogapi.application\\comment\\commentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB699EE9-43A8-46F2-A855-04A26DE63372}|blogApi.Application\\blogApi.Application.csproj|solutionrelative:blogapi.application\\comment\\commentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AB699EE9-43A8-46F2-A855-04A26DE63372}|blogApi.Application\\blogApi.Application.csproj|e:\\project\\blog\\blogapi\\blogapi.application\\article\\articleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB699EE9-43A8-46F2-A855-04A26DE63372}|blogApi.Application\\blogApi.Application.csproj|solutionrelative:blogapi.application\\article\\articleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AB699EE9-43A8-46F2-A855-04A26DE63372}|blogApi.Application\\blogApi.Application.csproj|e:\\project\\blog\\blogapi\\blogapi.application\\comment\\dots\\commentview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB699EE9-43A8-46F2-A855-04A26DE63372}|blogApi.Application\\blogApi.Application.csproj|solutionrelative:blogapi.application\\comment\\dots\\commentview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FB30091-15C7-4FD9-AB7D-266814F360F5}|blogApi.Core\\blogApi.Core.csproj|e:\\project\\blog\\blogapi\\blogapi.core\\entity\\dynamic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4FB30091-15C7-4FD9-AB7D-266814F360F5}|blogApi.Core\\blogApi.Core.csproj|solutionrelative:blogapi.core\\entity\\dynamic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FB30091-15C7-4FD9-AB7D-266814F360F5}|blogApi.Core\\blogApi.Core.csproj|e:\\project\\blog\\blogapi\\blogapi.core\\entity\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4FB30091-15C7-4FD9-AB7D-266814F360F5}|blogApi.Core\\blogApi.Core.csproj|solutionrelative:blogapi.core\\entity\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AB699EE9-43A8-46F2-A855-04A26DE63372}|blogApi.Application\\blogApi.Application.csproj|e:\\project\\blog\\blogapi\\blogapi.application\\dynamic\\dots\\dynamicview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB699EE9-43A8-46F2-A855-04A26DE63372}|blogApi.Application\\blogApi.Application.csproj|solutionrelative:blogapi.application\\dynamic\\dots\\dynamicview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AB699EE9-43A8-46F2-A855-04A26DE63372}|blogApi.Application\\blogApi.Application.csproj|e:\\project\\blog\\blogapi\\blogapi.application\\dynamic\\dynamicservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB699EE9-43A8-46F2-A855-04A26DE63372}|blogApi.Application\\blogApi.Application.csproj|solutionrelative:blogapi.application\\dynamic\\dynamicservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C8D99F52-EDC7-411F-8300-6DB14BF59E8C}|blogApi.Web.Entry\\blogApi.Web.Entry.csproj|e:\\project\\blog\\blogapi\\blogapi.web.entry\\appsettings.production.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{C8D99F52-EDC7-411F-8300-6DB14BF59E8C}|blogApi.Web.Entry\\blogApi.Web.Entry.csproj|solutionrelative:blogapi.web.entry\\appsettings.production.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
@@ -18,11 +46,100 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ArticleService.cs",
+              "DocumentMoniker": "E:\\project\\blog\\blogApi\\blogApi.Application\\article\\ArticleService.cs",
+              "RelativeDocumentMoniker": "blogApi.Application\\article\\ArticleService.cs",
+              "ToolTip": "E:\\project\\blog\\blogApi\\blogApi.Application\\article\\ArticleService.cs",
+              "RelativeToolTip": "blogApi.Application\\article\\ArticleService.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAUwB4AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-06T08:23:23.33Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "CommentService.cs",
+              "DocumentMoniker": "E:\\project\\blog\\blogApi\\blogApi.Application\\comment\\CommentService.cs",
+              "RelativeDocumentMoniker": "blogApi.Application\\comment\\CommentService.cs",
+              "ToolTip": "E:\\project\\blog\\blogApi\\blogApi.Application\\comment\\CommentService.cs*",
+              "RelativeToolTip": "blogApi.Application\\comment\\CommentService.cs*",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAqwBAAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-06T06:55:44.214Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CommentView.cs",
+              "DocumentMoniker": "E:\\project\\blog\\blogApi\\blogApi.Application\\comment\\dots\\CommentView.cs",
+              "RelativeDocumentMoniker": "blogApi.Application\\comment\\dots\\CommentView.cs",
+              "ToolTip": "E:\\project\\blog\\blogApi\\blogApi.Application\\comment\\dots\\CommentView.cs",
+              "RelativeToolTip": "blogApi.Application\\comment\\dots\\CommentView.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-06T07:52:16.771Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Comment.cs",
+              "DocumentMoniker": "E:\\project\\blog\\blogApi\\blogApi.Core\\entity\\Comment.cs",
+              "RelativeDocumentMoniker": "blogApi.Core\\entity\\Comment.cs",
+              "ToolTip": "E:\\project\\blog\\blogApi\\blogApi.Core\\entity\\Comment.cs",
+              "RelativeToolTip": "blogApi.Core\\entity\\Comment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwgAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-06T07:52:10.195Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Dynamic.cs",
+              "DocumentMoniker": "E:\\project\\blog\\blogApi\\blogApi.Core\\entity\\Dynamic.cs",
+              "RelativeDocumentMoniker": "blogApi.Core\\entity\\Dynamic.cs",
+              "ToolTip": "E:\\project\\blog\\blogApi\\blogApi.Core\\entity\\Dynamic.cs",
+              "RelativeToolTip": "blogApi.Core\\entity\\Dynamic.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-06T07:02:01.29Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DynamicView.cs",
+              "DocumentMoniker": "E:\\project\\blog\\blogApi\\blogApi.Application\\dynamic\\dots\\DynamicView.cs",
+              "RelativeDocumentMoniker": "blogApi.Application\\dynamic\\dots\\DynamicView.cs",
+              "ToolTip": "E:\\project\\blog\\blogApi\\blogApi.Application\\dynamic\\dots\\DynamicView.cs",
+              "RelativeToolTip": "blogApi.Application\\dynamic\\dots\\DynamicView.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-06T07:01:52.998Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DynamicService.cs",
+              "DocumentMoniker": "E:\\project\\blog\\blogApi\\blogApi.Application\\dynamic\\DynamicService.cs",
+              "RelativeDocumentMoniker": "blogApi.Application\\dynamic\\DynamicService.cs",
+              "ToolTip": "E:\\project\\blog\\blogApi\\blogApi.Application\\dynamic\\DynamicService.cs",
+              "RelativeToolTip": "blogApi.Application\\dynamic\\DynamicService.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwBgAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-06T07:01:38.439Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "appsettings.Production.json",
               "DocumentMoniker": "E:\\project\\blog\\blogApi\\blogApi.Web.Entry\\appsettings.Production.json",
               "RelativeDocumentMoniker": "blogApi.Web.Entry\\appsettings.Production.json",
@@ -30,12 +147,11 @@
               "RelativeToolTip": "blogApi.Web.Entry\\appsettings.Production.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-12-05T03:05:49.096Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-05T03:05:49.096Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 8,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "E:\\project\\blog\\blogApi\\blogApi.Web.Entry\\appsettings.Development.json",
               "RelativeDocumentMoniker": "blogApi.Web.Entry\\appsettings.Development.json",
@@ -43,8 +159,7 @@
               "RelativeToolTip": "blogApi.Web.Entry\\appsettings.Development.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-12-05T03:05:45.141Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-05T03:05:45.141Z"
             }
           ]
         }

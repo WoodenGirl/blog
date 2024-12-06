@@ -12,5 +12,8 @@ export const useUserStore = defineStore('user', () => {
     password: '',
     signature: ''
   })
-  return { user }
+  return { user }}, {
+  persist: {
+    storage: sessionStorage,
+  }
 })

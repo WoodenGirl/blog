@@ -5,16 +5,16 @@
       <!--  背景  -->
       <el-image :src="'/images/' + article!.articleCover" fit="fill" />
 
+      <!--  编辑  -->
+      <el-row :gutter="20">
+        <div class="flex gap-2 edit">
+          <a @click="edit()"> <Edit class="edit-icon"></Edit> </a>
+          <a @click="remove()"> <Delete class="edit-icon"></Delete> </a>
+        </div>
+      </el-row>
+
       <!--  标头  -->
       <div class="bgContent">
-        <!--  编辑  -->
-        <el-row :gutter="20">
-          <div class="flex gap-2 edit">
-            <a @click="edit()"> <Edit class="edit-icon"></Edit> </a>
-            <a @click="remove()"> <Delete class="edit-icon"></Delete> </a>
-          </div>
-        </el-row>
-
         <!--  标题  -->
         <el-row :gutter="20">
           <h1 class="center">{{ article!.articleTitle }}</h1>
@@ -66,6 +66,7 @@ import { ElMessage } from 'element-plus'
 import { popObject } from '@/assets/ts/obs'
 import { storeToRefs } from 'pinia'
 import CommentAll from '@/components/comment/Comment-All.vue'
+import { deleteCommentCascade } from '@/api/comment'
 
 const articlesStore = useArticlesStore()
 const {article} = storeToRefs(articlesStore)
@@ -75,13 +76,16 @@ const edit = () => {
   router.push("/create")
 }
 const remove = () => {
-  // 从obs删除封面
-  popObject(article.value!.articleCover)
   deleteArticle(article.value!.articleId).then(() => {
+    // 从obs删除封面
+    popObject(article.value!.articleCover)
+    // 删除评论
+    deleteCommentCascade(article.value!.articleId)
     ElMessage.success("删除成功！")
     // 跳转上一页
     router.go(-1)
   })
+
 }
 </script>
 
@@ -105,7 +109,7 @@ const remove = () => {
 
 .edit {
   position: absolute;
-  top: 0;
+  top: -500px;
   right: 20px;
 }
 

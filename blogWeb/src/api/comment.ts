@@ -7,6 +7,13 @@ export function queryComment(linkedId: string) {
   })
 }
 
+export function countComment(linkedId: string) {
+  return instance({
+    url: "/comment/count/" + linkedId,
+    method: "get"
+  })
+}
+
 export function addComment(comment: object) {
   return instance({
     url: "/comment",
@@ -18,6 +25,13 @@ export function addComment(comment: object) {
 export function deleteComment(commentId: string) {
   return instance({
     url: "/comment/" + commentId,
+    method: "delete",
+  })
+}
+
+export function deleteCommentCascade(linkedId: string) {
+  return instance({
+    url: "/comment/cascade/" + linkedId,
     method: "delete",
   })
 }

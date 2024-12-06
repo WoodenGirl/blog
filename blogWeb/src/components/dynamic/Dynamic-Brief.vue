@@ -10,6 +10,10 @@
         <p class="nickname">{{ dynamic.nickname }}</p>
         {{ formatDate(dynamic.createdTime) }}
       </el-col>
+      <!--  删除 -->
+      <el-col :span="1">
+        <a @click="remove()"> <Delete class="edit-icon"></Delete> </a>
+      </el-col>
     </el-row>
     <!--  内容  -->
     <el-row class="content">
@@ -40,7 +44,8 @@
         <a class="icon element-icons" :class="{'el-icon-dianzan1': !isLike, 'el-icon-dianzan2': isLike}" @click="triggerLike"></a> 3
       </el-col>
       <el-col :span="1" :offset="1">
-        <a class="icon element-icons" :class="{'el-icon-pinglun1': !isComment, 'el-icon-pinglun2': isComment}" @click="triggerComment"></a> 5
+        <a class="icon element-icons" :class="{'el-icon-pinglun1': !isComment, 'el-icon-pinglun2': isComment}" @click="triggerComment"></a>
+        {{ commentCount }}
       </el-col>
     </el-row>
 
@@ -58,7 +63,10 @@
 import { formatDate } from '@/assets/ts/tool'
 import CommentAll from '@/components/comment/Comment-All.vue'
 import { ref } from 'vue'
-import type { UploadProps } from 'element-plus'
+import { ElMessage, type UploadProps } from 'element-plus'
+import { Delete } from '@element-plus/icons-vue'
+import { deleteDynamic } from '@/api/dynamic'
+import { countComment, deleteComment, deleteCommentCascade } from '@/api/comment'
 
 const props = defineProps(['dynamic'])
 
@@ -74,7 +82,14 @@ const handlePicturePreview  = (url: string) => {
   dialogVisible.value = true
 }
 
-
+// 删除
+const remove = () => {
+  deleteDynamic(props.dynamic.dynamicId).then(() => {
+    // 删除评论
+    deleteCommentCascade(props.dynamic.dynamicId)
+    ElMessage.success("删除成功")
+  })
+}
 
 // 点赞
 const isLike = ref(false)
@@ -86,10 +101,16 @@ const isComment = ref(false)
 const triggerComment = () => {
   isComment.value = !isComment.value
 }
+// 评论数
+const commentCount = ref()
+countComment(props.dynamic.dynamicId).then(res => commentCount.value = res.data)
 
 </script>
 
 <style scoped>
+.edit-icon {
+  width: 20px;
+}
 p {
   margin: 0.5rem 0;
 }

@@ -3,6 +3,7 @@
     ///<summary>
     ///VIEW
     ///</summary>
+    [SugarTable("view_comment")]
     public class CommentView
     {
         

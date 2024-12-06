@@ -22,7 +22,7 @@ namespace blogApi.Application.dynamic
             _dynamicRepository.Insert(dynamic);
             return ResultVo.success();
         }
-        public ResultVo Delete(int dynamicId)
+        public ResultVo Delete(string dynamicId)
         {
             _dynamicRepository.DeleteById(dynamicId);
             return ResultVo.success();
