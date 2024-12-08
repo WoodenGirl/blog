@@ -119,7 +119,7 @@
             Nullable:False
             </summary>           
         </member>
-        <member name="P:blogApi.Application.dynamic.dots.DynamicView.categoryDetail">
+        <member name="P:blogApi.Application.dynamic.dots.DynamicView.categoryName">
             <summary>
             Desc:
             Default:

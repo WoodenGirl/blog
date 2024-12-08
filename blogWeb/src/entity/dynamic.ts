@@ -9,5 +9,5 @@ export interface Dynamic {
   avatar: string,
 
   categoryId: number,
-  categoryDetail: string,
+  categoryName: string,
 }

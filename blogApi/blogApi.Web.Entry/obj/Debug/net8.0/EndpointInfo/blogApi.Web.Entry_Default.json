@@ -366,12 +366,23 @@
         }
       }
     },
-    "/api/category": {
+    "/api/category/{categoryparent}": {
       "get": {
         "tags": [
           "category"
         ],
-        "operationId": "api-category-Get",
+        "operationId": "api-category-categoryparent-Get",
+        "parameters": [
+          {
+            "name": "categoryparent",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -394,7 +405,9 @@
             }
           }
         }
-      },
+      }
+    },
+    "/api/category": {
       "post": {
         "tags": [
           "category"
@@ -853,11 +866,6 @@
             "type": "integer",
             "description": "Desc:父目录\r\nDefault:\r\nNullable:False",
             "format": "int32"
-          },
-          "categoryDetail": {
-            "type": "string",
-            "description": "Desc:详细名称",
-            "nullable": true
           }
         },
         "additionalProperties": false,

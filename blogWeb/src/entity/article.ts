@@ -11,7 +11,7 @@ export interface Article {
   nickname: string,
 
   categoryId: string,
-  categoryDetail: string,
+  categoryName: string,
 }
 export interface ArticleForm {
   articleId: string

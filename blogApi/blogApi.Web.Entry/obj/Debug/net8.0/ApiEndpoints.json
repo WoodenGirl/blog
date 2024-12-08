@@ -125,26 +125,6 @@
   },
   {
     "ContainingType": "blogApi.Application.category.CategoryService",
-    "Method": "Query",
-    "RelativePath": "api/category",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "Furion.UnifyResult.RESTfulResult\u00601[[blogApi.Core.entity.ResultVo, blogApi.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "blogApi.Application.category.CategoryService",
     "Method": "Add",
     "RelativePath": "api/category",
     "HttpMethod": "POST",
@@ -180,6 +160,32 @@
       {
         "Name": "category",
         "Type": "blogApi.Core.entity.Category",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Furion.UnifyResult.RESTfulResult\u00601[[blogApi.Core.entity.ResultVo, blogApi.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "blogApi.Application.category.CategoryService",
+    "Method": "Query",
+    "RelativePath": "api/category/{categoryparent}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoryparent",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

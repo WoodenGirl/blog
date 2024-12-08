@@ -98,11 +98,6 @@
             Nullable:False
             </summary>           
         </member>
-        <member name="P:blogApi.Core.entity.Category.categoryDetail">
-            <summary>
-            Desc:详细名称
-            </summary>  
-        </member>
         <member name="T:blogApi.Core.entity.Comment">
             <summary>
             

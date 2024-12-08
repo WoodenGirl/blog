@@ -1,4 +1,5 @@
 ﻿using blogApi.Application.article.dots;
+using blogApi.Application.comment.dots;
 using blogApi.Core;
 using blogApi.Core.entity;
 using blogApi.Core.sqlsugar;
@@ -15,8 +16,7 @@ namespace blogApi.Application.article
         public ResultVo Query()
         {
             var db = _articleRepository.Context;
-            string viewSql = "SELECT * FROM view_article";
-            List<ArticleView> articles = db.Ado.SqlQuery<ArticleView>(viewSql);
+            List<ArticleView> articles = db.Queryable<ArticleView>().ToList();
             return ResultVo.success(articles);
         }
 
@@ -24,8 +24,7 @@ namespace blogApi.Application.article
         public ResultVo QueryByCategoryId(int categoryId)
         {
             var db = _articleRepository.Context;
-            string viewSql = "SELECT * FROM view_article where categoryId =" + categoryId;
-            List<ArticleView> articles = db.Ado.SqlQuery<ArticleView>(viewSql);
+            List<ArticleView> articles = db.Queryable<ArticleView>().Where(it => it.categoryId == categoryId).ToList();
             return ResultVo.success(articles);
         }
         [HttpPost]

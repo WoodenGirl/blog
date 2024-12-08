@@ -6,7 +6,7 @@
         <el-avatar size="default" fit="cover" :src="comment.avatar"/>
       </el-col>
       <!--  昵称 内容  -->
-      <el-col :span="21" style="margin-left: 0.5rem">
+      <el-col :span="21" style="margin-left: 1rem">
         <p class="nickname">{{ comment.nickname }}</p>
         <!--   一、二级     -->
         <p class="content" v-if="comment.commentReply == null">{{ comment.commentContent }}</p>

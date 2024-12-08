@@ -20,7 +20,7 @@ public class CategoryService : IDynamicApiController
             }
         }
     }
-    public ResultVo Query()
+    public ResultVo Query(int categoryParent)
     {
         List<Category> categories = _categoryRepository.GetList();
         // 构建树结构
@@ -28,7 +28,7 @@ public class CategoryService : IDynamicApiController
         // 获取所有根节点
         foreach (var category in categories)
         {
-            if (category.categoryParent == 0)
+            if (category.categoryParent == categoryParent)
             {
                 categoriesTree.Add(CategoryTree.convert(category));
             }
@@ -41,27 +41,7 @@ public class CategoryService : IDynamicApiController
         return ResultVo.success(categoriesTree);
     }
     public ResultVo Add(Category category)
-    {
-        List<string> categaries = new List<string>();
-        categaries.Add(category.categoryName);
-        // 寻找父节点
-        if (category.categoryParent != 0)
-        {
-            Category temp = new Category();
-            temp.categoryParent = category.categoryParent;
-            while (temp.categoryParent != 0)
-            {
-                temp = _categoryRepository.GetById(temp.categoryParent);
-                categaries.Add(temp.categoryName);
-            }
-            // 获取categoryDetail完整类别名称
-            for (int i = categaries.Count - 1; i >= 1; i--)
-            {
-                category.categoryDetail += categaries[i] + '-';
-            }
-        }
-        category.categoryDetail += categaries[0];
-        // 插入
+    {  
         _categoryRepository.Insert(category);
         return ResultVo.success();
     }

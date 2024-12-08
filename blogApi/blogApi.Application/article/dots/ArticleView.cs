@@ -1,6 +1,8 @@
 ﻿
 namespace blogApi.Application.article.dots
 {
+    [SugarTable("view_article")]
+
     public class ArticleView
     {
         public string articleId { get; set; }
@@ -17,7 +19,7 @@ namespace blogApi.Application.article.dots
 
         public string articleTags { get; set; }
 
-        public string categoryDetail { get; set; }
+        public string categoryName { get; set; }
 
         public string articleContent { get; set; }
 

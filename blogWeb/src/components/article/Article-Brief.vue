@@ -13,7 +13,7 @@
         <!--   文章标题   -->
         <h2>{{ article.articleTitle }}</h2>
         <!--   文章分类   -->
-        <p>文章分类: {{ article.categoryDetail }}</p>
+        <p>文章分类: {{ article.categoryName }}</p>
         <!--   文章标签   -->
         <p class="flex gap-2">文章标签:
           <el-tag

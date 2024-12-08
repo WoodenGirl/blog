@@ -3,7 +3,6 @@
     <el-container>
       <el-header><blog-header></blog-header></el-header>
       <el-container class="main">
-        <el-aside><blog-menu></blog-menu></el-aside>
         <el-container>
           <el-main>
             <router-view :key="$route.fullPath"></router-view>
@@ -16,7 +15,6 @@
 </template>
 <script setup lang="ts">
 
-import BlogMenu from '@/components/layout/Blog-Menu.vue'
 import BlogHeader from '@/components/layout/Blog-Header.vue'
 import BlogFooter from '@/components/layout/Blog-Footer.vue'
 

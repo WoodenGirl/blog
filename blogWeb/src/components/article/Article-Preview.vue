@@ -30,7 +30,7 @@
         <!--  分类 标签  -->
         <el-row :gutter="20">
           <div class="flex gap-2 center">
-            <span>文章分类: {{ article!.categoryDetail }}</span>
+            <span>文章分类: {{ article!.categoryName }}</span>
             <span>标签:
           <el-tag
             v-for="tag in article!.articleTags.split(',')"

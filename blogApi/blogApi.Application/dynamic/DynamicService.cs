@@ -12,8 +12,7 @@ namespace blogApi.Application.dynamic
         public ResultVo Query(int categoryId)
         {
             var db = _dynamicRepository.Context;
-            string viewSql = "SELECT * FROM view_dynamic where categoryId =" + categoryId;
-            List<DynamicView> dynamics = db.Ado.SqlQuery<DynamicView>(viewSql);
+            List<DynamicView> dynamics = db.Queryable<DynamicView>().Where(it => it.categoryId == categoryId).ToList();
             return ResultVo.success(dynamics);
         }
         public ResultVo Add(Dynamic dynamic)

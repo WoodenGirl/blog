@@ -5,7 +5,7 @@
       <el-avatar :src="useUserStore().user.avatar" size="default" fit="cover"></el-avatar>
     </el-col>
     <!--  输入  -->
-    <el-col :span="20" class="comment-input">
+    <el-col :span="19" class="comment-input">
       <el-input
         type="textarea"
         autosize
@@ -41,6 +41,7 @@ const submit = () => {
 .comment-input {
   padding: 5px;
   text-align: center;
+  margin-left: 1rem;
 }
 .comment-commit {
   padding: 5px;

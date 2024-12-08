@@ -38,7 +38,5 @@ namespace blogApi.Core.entity
             /// <summary>
             /// Desc:详细名称
             /// </summary>  
-            public string categoryDetail { get; set; }
-
     }
 }

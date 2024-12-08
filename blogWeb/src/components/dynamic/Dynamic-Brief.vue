@@ -6,7 +6,7 @@
         <el-avatar size="default" fit="cover" :src="dynamic.avatar"/>
       </el-col>
       <!--  昵称 创建时间 -->
-      <el-col :span="21" style="margin-left: 0.5rem">
+      <el-col :span="21" style="margin-left: 1rem">
         <p class="nickname">{{ dynamic.nickname }}</p>
         {{ formatDate(dynamic.createdTime) }}
       </el-col>
@@ -25,7 +25,7 @@
         v-for="src in srcList"
         :key="src"
         class="imgList"
-        :src="'/images/' + src"
+        :src="'http://obs.aprilsxz.fun/' + src"
         fit="cover"
         @click="handlePicturePreview(src)"
       />

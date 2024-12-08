@@ -1,6 +1,6 @@
 import instance from '@/api/request'
 
-export function queryDynamic(categoryId: string) {
+export function queryDynamic(categoryId: number) {
   return instance({
     url: "/dynamic/" + categoryId,
     method: "get"

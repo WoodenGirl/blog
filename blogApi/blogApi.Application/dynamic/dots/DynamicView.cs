@@ -65,7 +65,7 @@
            /// Default:
            /// Nullable:False
            /// </summary>           
-           public string categoryDetail {get;set;}
+           public string categoryName {get;set;}
 
     }
 }

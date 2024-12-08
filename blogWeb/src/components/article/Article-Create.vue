@@ -95,15 +95,15 @@ import {
   type UploadProps,
   type UploadUserFile
 } from 'element-plus'
-import { queryCategory } from '@/api/category'
 import { addArticle, updateArticle } from '@/api/article'
 import router from '@/router'
-import WangEditor from '@/components/tool/Wang-Editor.vue'
+import WangEditor from '@/components/article/Wang-Editor.vue'
 import { useArticlesStore } from '@/stores/article'
 import { useUserStore } from '@/stores/user'
 import { generateUID, getNow } from '@/assets/ts/tool'
 import type { ArticleForm } from '@/entity/article'
 import { popObject, putObject } from '@/assets/ts/obs'
+import { queryCategory } from '@/api/category'
 
 
 // 图片
@@ -133,11 +133,12 @@ const handlePictureCardPreview: UploadProps['onPreview'] = uploadFile => {
 const categories = ref()
 const fetchTreeData = async () => {
   try {
-    categories.value = await queryCategory().then(res => res.data);
+    categories.value = await queryCategory(0).then(res => res.data);
   } catch (error) {
     console.error('Error fetching tree data:', error);
   }
 };
+fetchTreeData()
 fetchTreeData()
 const props = {
   expandTrigger: 'hover' as const,

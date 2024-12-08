@@ -18,11 +18,21 @@ import router from '@/router'
 import { useArticlesStore } from '@/stores/article'
 import { storeToRefs } from 'pinia'
 import type { Article } from '@/entity/article'
+import { useCategoryStore } from '@/stores/category'
+import { onMounted } from 'vue'
 
+const {categoryId} = storeToRefs(useCategoryStore())
+onMounted(() => {
+  useCategoryStore().$subscribe((categoryId) => {
+    articlesStore.fetchArticles(categoryId.events.newValue)
+  });
+});
 // 获取数据
 const articlesStore = useArticlesStore()
 const {articles, article} = storeToRefs(articlesStore)
-if (articlesStore.queryAll) articlesStore.fetchArticles()
+articlesStore.fetchArticles(categoryId.value)
+
+
 
 
 // 点击查看文章

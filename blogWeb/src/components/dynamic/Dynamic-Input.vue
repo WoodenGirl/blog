@@ -6,7 +6,7 @@
         <el-avatar :src="useUserStore().user.avatar" size="default" fit="cover"></el-avatar>
       </el-col>
       <!--  输入  -->
-      <el-col :span="23" class="comment-input">
+      <el-col :span="22" style="margin-left: 1rem">
           <!--  输入框  -->
           <el-input
             type="textarea"
@@ -42,7 +42,7 @@
               />
             </el-col>
             <!--  提交  -->
-            <el-col :span="2" :offset="21">
+            <el-col :span="2" :offset="20">
               <el-button @click="submit">发布动态</el-button>
             </el-col>
           </el-row>
