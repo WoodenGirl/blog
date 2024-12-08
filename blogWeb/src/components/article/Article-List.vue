@@ -19,14 +19,14 @@ import { useArticlesStore } from '@/stores/article'
 import { storeToRefs } from 'pinia'
 import type { Article } from '@/entity/article'
 import { useCategoryStore } from '@/stores/category'
-import { onMounted } from 'vue'
+import { watch } from 'vue'
 
 const {categoryId} = storeToRefs(useCategoryStore())
-onMounted(() => {
-  useCategoryStore().$subscribe((categoryId) => {
-    articlesStore.fetchArticles(categoryId.events.newValue)
-  });
-});
+
+watch(() => categoryId.value, (newValue) => {
+  articlesStore.fetchArticles(newValue)
+})
+
 // 获取数据
 const articlesStore = useArticlesStore()
 const {articles, article} = storeToRefs(articlesStore)

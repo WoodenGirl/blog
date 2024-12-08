@@ -263,7 +263,6 @@ const submitForm = async (formEl: FormInstance | undefined) => {
         })
       }
       // 跳转到首页
-      useArticlesStore().fetchArticles()
       router.push('/');
     } else {
       console.log('error submit!', fields)

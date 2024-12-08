@@ -13,26 +13,24 @@
 <script setup lang="ts">
 import DynamicBrief from '@/components/dynamic/Dynamic-Brief.vue'
 import { queryDynamic } from '@/api/dynamic'
-import { onMounted, ref } from 'vue'
+import { ref, watch } from 'vue'
 import DynamicInput from '@/components/dynamic/Dynamic-Input.vue'
 import type { Dynamic } from '@/entity/dynamic'
 import { storeToRefs } from 'pinia'
 import { useCategoryStore } from '@/stores/category'
 
 const {categoryId} = storeToRefs(useCategoryStore())
-onMounted(() => {
-  useCategoryStore().$subscribe((categoryId) => {
-    fetchDynamics(categoryId.events.newValue)
-  });
-});
+
+watch(() => categoryId.value, (newValue) => {
+  fetchDynamics(newValue)
+})
+
 // 获取数据
 const dynamics = ref<Dynamic[]>([])
 const fetchDynamics = async (categoryId: number) => {
   dynamics.value = await queryDynamic(categoryId).then((res) => res.data)
 }
 fetchDynamics(categoryId.value)
-
-
 
 </script>
 

@@ -25,7 +25,7 @@
         v-for="src in srcList"
         :key="src"
         class="imgList"
-        :src="'http://obs.aprilsxz.fun/' + src"
+        :src="'/images/' + src"
         fit="cover"
         @click="handlePicturePreview(src)"
       />
@@ -63,10 +63,10 @@
 import { formatDate } from '@/assets/ts/tool'
 import CommentAll from '@/components/comment/Comment-All.vue'
 import { ref } from 'vue'
-import { ElMessage, type UploadProps } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import { Delete } from '@element-plus/icons-vue'
 import { deleteDynamic } from '@/api/dynamic'
-import { countComment, deleteComment, deleteCommentCascade } from '@/api/comment'
+import { countComment, deleteCommentCascade } from '@/api/comment'
 
 const props = defineProps(['dynamic'])
 
