@@ -15,7 +15,7 @@
             placeholder="Please input"
             class="dynamic-input"
           />
-          <!--  上传图片  -->
+          <!--  上传文件  -->
           <el-upload
             :file-list="fileList"
             action="#"
@@ -26,6 +26,7 @@
             :on-remove="handleRemove"
             :on-change="handleChange"
             class="dynamic-upload"
+            :class="{'displayNone': displayNone}"
           >
             <el-icon><Plus /></el-icon>
           </el-upload>
@@ -40,9 +41,13 @@
                 :recent="true"
                 fix-pos="auto"
               />
+            </el-col >
+            <!--  上传图片  -->
+            <el-col :span="1" style="margin-right: 1.8rem">
+              <a class="icon element-icons" :class="{'el-icon-tupian1': displayNone, 'el-icon-tupian2': !displayNone}" @click="displayNone = !displayNone"></a>
             </el-col>
             <!--  提交  -->
-            <el-col :span="2" :offset="20">
+            <el-col :span="1" :offset="19">
               <el-button @click="submit">发布动态</el-button>
             </el-col>
           </el-row>
@@ -77,6 +82,7 @@ const appendText = (emoji: any) => {
 }
 
 // 上传图片
+const displayNone = ref(true)
 const fileList = ref<UploadUserFile[]>([])
 const dialogImageUrl = ref('')
 const dialogVisible = ref(false)
@@ -120,6 +126,7 @@ const submit = () => {
       dynamicContent.value = ''
       // 清空图片列表
       fileList.value = []
+      displayNone.value = true
       // 重新渲染
       emits('rerender')
     }
@@ -131,5 +138,9 @@ const submit = () => {
 <style scoped>
 .dynamic-input {
   margin-bottom: 5px;
+}
+.icon {
+  cursor: pointer;
+  font-size: 28px;
 }
 </style>

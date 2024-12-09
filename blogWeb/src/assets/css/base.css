@@ -81,5 +81,11 @@ h1 {
   text-align: center;
 }
 .margin20 {
+  margin: 10px 0;
+}
+.margin20 {
   margin: 20px 0;
+}
+.displayNone {
+  display: none;
 }

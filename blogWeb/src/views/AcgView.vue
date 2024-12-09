@@ -1,8 +1,12 @@
 <template>
-    <el-tab-pane label="source" name="first">User</el-tab-pane>
+    <el-tab-pane label="source" name="first">
+      <acg-list></acg-list>
+    </el-tab-pane>
     <el-tab-pane label="list" name="second">Config</el-tab-pane>
 </template>
+
 <script setup lang="ts">
+import AcgList from '@/components/acg/Acg-List.vue'
 
 
 </script>

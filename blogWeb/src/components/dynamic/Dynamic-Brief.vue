@@ -1,12 +1,12 @@
 <template>
   <el-card>
-    <el-row>
+    <el-row >
       <!--  头像  -->
       <el-col :span="1">
         <el-avatar size="default" fit="cover" :src="dynamic.avatar"/>
       </el-col>
       <!--  昵称 创建时间 -->
-      <el-col :span="21" style="margin-left: 1rem">
+      <el-col :span="21" style="margin-left: 1rem; margin-right: 1.5rem;">
         <p class="nickname">{{ dynamic.nickname }}</p>
         {{ formatDate(dynamic.createdTime) }}
       </el-col>
@@ -67,8 +67,10 @@ import { ElMessage } from 'element-plus'
 import { Delete } from '@element-plus/icons-vue'
 import { deleteDynamic } from '@/api/dynamic'
 import { countComment, deleteCommentCascade } from '@/api/comment'
+import { popObject } from '@/assets/ts/obs'
 
 const props = defineProps(['dynamic'])
+const emits = defineEmits(['rerender'])
 
 // 图片列表
 const srcList = ref<string[]>([])
@@ -85,9 +87,13 @@ const handlePicturePreview  = (url: string) => {
 // 删除
 const remove = () => {
   deleteDynamic(props.dynamic.dynamicId).then(() => {
+    // 删除文件
+    srcList.value.forEach((src) => popObject(src))
     // 删除评论
     deleteCommentCascade(props.dynamic.dynamicId)
     ElMessage.success("删除成功")
+    // 重新渲染
+    emits('rerender')
   })
 }
 

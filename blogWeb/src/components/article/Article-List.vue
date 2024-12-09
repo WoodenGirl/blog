@@ -21,16 +21,16 @@ import type { Article } from '@/entity/article'
 import { useCategoryStore } from '@/stores/category'
 import { watch } from 'vue'
 
-const {categoryId} = storeToRefs(useCategoryStore())
+const {category} = storeToRefs(useCategoryStore())
 
-watch(() => categoryId.value, (newValue) => {
-  articlesStore.fetchArticles(newValue)
+watch(() => category.value, (newValue) => {
+  articlesStore.fetchArticles(newValue!.id)
 })
 
 // 获取数据
 const articlesStore = useArticlesStore()
 const {articles, article} = storeToRefs(articlesStore)
-articlesStore.fetchArticles(categoryId.value)
+articlesStore.fetchArticles(category.value!.id)
 
 
 

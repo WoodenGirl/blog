@@ -1,10 +1,10 @@
 <template>
   <div style="width:70%;">
     <!-- 发表动态  -->
-    <dynamic-input :category-id="categoryId" @rerender="fetchDynamics"></dynamic-input>
+    <dynamic-input :category-id="category!.id" @rerender="fetchDynamics(category!.id)"></dynamic-input>
     <!-- 展示动态  -->
     <div v-for="dynamic of dynamics" :key="dynamic.dynamicId">
-      <dynamic-brief :dynamic="dynamic" class="dynamic-brief"></dynamic-brief>
+      <dynamic-brief :dynamic="dynamic" class="dynamic-brief" @rerender="fetchDynamics(category!.id)"></dynamic-brief>
     </div>
   </div>
 
@@ -19,10 +19,10 @@ import type { Dynamic } from '@/entity/dynamic'
 import { storeToRefs } from 'pinia'
 import { useCategoryStore } from '@/stores/category'
 
-const {categoryId} = storeToRefs(useCategoryStore())
+const {category} = storeToRefs(useCategoryStore())
 
-watch(() => categoryId.value, (newValue) => {
-  fetchDynamics(newValue)
+watch(() => category.value, (newValue) => {
+  fetchDynamics(newValue!.id)
 })
 
 // 获取数据
@@ -30,7 +30,7 @@ const dynamics = ref<Dynamic[]>([])
 const fetchDynamics = async (categoryId: number) => {
   dynamics.value = await queryDynamic(categoryId).then((res) => res.data)
 }
-fetchDynamics(categoryId.value)
+fetchDynamics(category.value!.id)
 
 </script>
 

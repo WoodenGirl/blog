@@ -31,11 +31,7 @@ import { useCategoryStore } from '@/stores/category'
 
 const props = defineProps(['isEdit', 'categoryParent'])
 
-interface Tree {
-  id: number
-  label: string
-  children?: Tree[]
-}
+
 // tree数据
 const dataSource = ref<Tree[]>([])
 const currentId = ref<number>()
@@ -49,7 +45,7 @@ const fetchTreeData = async () => {
 fetchTreeData()
 
 const clickCategory = (data: Tree) => {
-  useCategoryStore().categoryId = data.id
+  useCategoryStore().category = data
 }
 
 // 添加tree节点

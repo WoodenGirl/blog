@@ -1,7 +1,7 @@
 <template>
   <div class="margin20">评论区</div>
   <!-- 发表评论 -->
-  <comment-input @submit-comment="submitComment" class="margin20"></comment-input>
+  <comment-input @submit-comment="submitComment" class="margin10"></comment-input>
 
   <!-- 展示所有评论 -->
   <div v-for="commentRoot in commentRoots" :key="commentRoot.commentId" style="width: 100%;">

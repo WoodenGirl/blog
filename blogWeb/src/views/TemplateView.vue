@@ -6,7 +6,7 @@
     <el-main>
       <el-tabs v-model="activeName" class="demo-tabs">
         <router-view :key="$route.fullPath"></router-view>
-        <el-tab-pane label="article" name="article">
+        <el-tab-pane label="article" :name="articleName">
           <article-list></article-list>
         </el-tab-pane>
         <el-tab-pane label="dynamic" name="dynamic">
@@ -25,8 +25,11 @@ import DynamicList from '@/components/dynamic/Dynamic-List.vue'
 import ArticleList from '@/components/article/Article-List.vue'
 import { ref } from 'vue'
 
-const activeName = ref('article')
 const {isEdit, categoryParent } = storeToRefs(useCategoryStore())
+
+const activeName = ref('first')
+const articleName = ref()
+articleName.value = categoryParent.value == 0 ? 'first' : 'article'
 
 
 </script>

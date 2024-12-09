@@ -2,9 +2,9 @@
   font-family: "element-icons"; /* Project id 4750550 */
   /* Color fonts */
   src: 
-       url('iconfont.woff2?t=1732586028349') format('woff2'),
-       url('iconfont.woff?t=1732586028349') format('woff'),
-       url('iconfont.ttf?t=1732586028349') format('truetype');
+       url('iconfont.woff2?t=1733709463928') format('woff2'),
+       url('iconfont.woff?t=1733709463928') format('woff'),
+       url('iconfont.ttf?t=1733709463928') format('truetype');
 }
 
 .element-icons {
@@ -13,6 +13,14 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.el-icon-tupian1:before {
+  content: "\e8ba";
+}
+
+.el-icon-tupian2:before {
+  content: "\ec8d";
 }
 
 .el-icon-pinglun1:before {
