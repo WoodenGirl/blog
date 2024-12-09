@@ -6,7 +6,7 @@
         <el-avatar size="default" fit="cover" :src="dynamic.avatar"/>
       </el-col>
       <!--  昵称 创建时间 -->
-      <el-col :span="21" style="margin-left: 1rem; margin-right: 1.5rem;">
+      <el-col :span="21" style="margin-left: 1rem">
         <p class="nickname">{{ dynamic.nickname }}</p>
         {{ formatDate(dynamic.createdTime) }}
       </el-col>

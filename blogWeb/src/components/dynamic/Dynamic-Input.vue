@@ -43,7 +43,7 @@
               />
             </el-col >
             <!--  上传图片  -->
-            <el-col :span="1" style="margin-right: 1.8rem">
+            <el-col :span="1">
               <a class="icon element-icons" :class="{'el-icon-tupian1': displayNone, 'el-icon-tupian2': !displayNone}" @click="displayNone = !displayNone"></a>
             </el-col>
             <!--  提交  -->
