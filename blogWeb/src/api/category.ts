@@ -1,6 +1,6 @@
 import instance from '@/api/request'
 
-export function queryCategory(categoryParent: int) {
+export function queryCategory(categoryParent: number) {
   return instance({
     url: "/category/" + categoryParent,
     method: "get",

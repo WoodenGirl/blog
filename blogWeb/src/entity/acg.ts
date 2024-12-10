@@ -36,7 +36,7 @@ const varietyGenre = ['真人秀', '访谈', '娱乐', '人文', '科普']
 
 const acgGenre = (categoryName: string ):string[] => {
   switch (categoryName) {
-    case '小说': return novelGenre_M
+    case '小说': return novelGenre_P
     case '游戏': return gameGenre
     case '电视剧':
     case '电影': return filmGenre
@@ -52,7 +52,31 @@ const novelGenre = (acgType: string):string[] => {
     default: return novelGenre_P
   }
 }
-
+const novelTags_M = ['校园']
+const novelTags_F = ['修仙', '大女主', '电竞', '娱乐圈', '玄学', '校园']
+const novelTags_P = ['文学']
+const comicTags = ['棒球']
+const gameTags = ['类银河城', '养老']
+const filmTags = ['开心麻花']
+const varietyTags = ['选秀']
+const acgTags = (categoryName: string ):string[] => {
+  switch (categoryName) {
+    case '小说': return novelTags_P
+    case '游戏': return gameTags
+    case '电视剧':
+    case '电影': return filmTags
+    case '动漫':
+    case '漫画': return comicTags
+    default: return varietyTags
+  }
+}
+const novelTags = (acgType: string):string[] => {
+  switch (acgType) {
+    case '男频': return novelTags_M
+    case '女频': return novelTags_F
+    default: return novelTags_P
+  }
+}
 // 地区
 const acgRegions = ['大陆', '港台', '韩国', '日本', '美国', '英国', '其它']
 
@@ -68,4 +92,4 @@ const acgStates = [
 // 标签
 const acgLabel = []
 
-export { acgTypes, acgGenre, novelGenre, acgRegions, acgYears, acgStates }
+export { acgTypes, acgGenre, novelGenre, acgRegions, acgYears, acgStates, acgTags, novelTags }

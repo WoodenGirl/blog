@@ -10552,23 +10552,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\april\\.nuget\\packages\\": {},
+    "C:\\Users\\BU6011\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\blog-aprilsxz\\blog\\blogApi\\blogApi.Core\\blogApi.Core.csproj",
+      "projectUniqueName": "E:\\project\\blog\\blogApi\\blogApi.Core\\blogApi.Core.csproj",
       "projectName": "blogApi.Core",
-      "projectPath": "G:\\blog-aprilsxz\\blog\\blogApi\\blogApi.Core\\blogApi.Core.csproj",
-      "packagesPath": "C:\\Users\\april\\.nuget\\packages\\",
-      "outputPath": "G:\\blog-aprilsxz\\blog\\blogApi\\blogApi.Core\\obj\\",
+      "projectPath": "E:\\project\\blog\\blogApi\\blogApi.Core\\blogApi.Core.csproj",
+      "packagesPath": "C:\\Users\\BU6011\\.nuget\\packages\\",
+      "outputPath": "E:\\project\\blog\\blogApi\\blogApi.Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\april\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\BU6011\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

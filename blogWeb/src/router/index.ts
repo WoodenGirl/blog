@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import ArticleList from '@/components/article/Article-List.vue'
 import ArticleCreate from '@/components/article/Article-Create.vue'
 import DynamicList from '@/components/dynamic/Dynamic-List.vue'
 import ArticlePreview from '@/components/article/Article-Preview.vue'

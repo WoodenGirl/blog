@@ -139,7 +139,6 @@ const fetchTreeData = async () => {
   }
 };
 fetchTreeData()
-fetchTreeData()
 const props = {
   expandTrigger: 'hover' as const,
   checkStrictly: true,
@@ -178,7 +177,6 @@ const handleInputConfirm = () => {
 const wangEditorRef = ref<InstanceType<typeof WangEditor>>(null)
 
 // 表单
-
 const formSize = ref<ComponentSize>('default')
 const articleFormRef = ref<FormInstance>()
 // 表单数据
