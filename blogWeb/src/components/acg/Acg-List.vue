@@ -73,6 +73,7 @@ const clearForm = () => {
   acgForm.acgRegion = ''
   acgForm.acgState = ''
   acgForm.acgYear = ''
+  acgForm.acgTag = ''
 }
 // 类型，风格，标签
 const types = ref()
