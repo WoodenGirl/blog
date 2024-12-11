@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fun.aprilsxz.blog.mapper.CommentMapper">
+
+    <resultMap id="BaseResultMap" type="fun.aprilsxz.blog.domain.po.Comment">
+            <id property="commentId" column="comment_id" jdbcType="INTEGER"/>
+            <result property="commentParent" column="comment_parent" jdbcType="INTEGER"/>
+            <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+            <result property="commentContent" column="comment_content" jdbcType="VARCHAR"/>
+            <result property="commentReply" column="comment_reply" jdbcType="VARCHAR"/>
+            <result property="linkedId" column="linked_id" jdbcType="VARCHAR"/>
+            <result property="createdTime" column="created_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        comment_id,comment_parent,user_id,
+        comment_content,comment_reply,linked_id,
+        created_time
+    </sql>
+</mapper>

@@ -1,0 +1,33 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#  redis:
+#    host: localhost
+#    port: 6379
+#    password: 123
+
+mybatis-plus:
+  configuration:
+    default-enum-type-handler: com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler
+
+# knife4j的增强配置，不需要增强可以不配
+knife4j:
+  enable: true
+  openapi:
+    title: blog接口文档
+    description: "blog接口文档"
+    email: xxxx@qq.com
+    concat: yang
+    url: https://aprilsxz.fun
+    version: v1.0.0
+    group:
+      default:
+        group-name: default
+        api-rule: package
+        api-rule-resources:
+          - fun.aprilsxz.blog.controller

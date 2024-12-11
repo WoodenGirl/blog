@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fun.aprilsxz.blog.mapper.DynamicMapper">
+
+    <resultMap id="BaseResultMap" type="fun.aprilsxz.blog.domain.po.Dynamic">
+            <id property="dynamicId" column="dynamic_id" jdbcType="VARCHAR"/>
+            <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+            <result property="categoryId" column="category_id" jdbcType="INTEGER"/>
+            <result property="dynamicContent" column="dynamic_content" jdbcType="VARCHAR"/>
+            <result property="dynamicImages" column="dynamic_images" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="TINYINT"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        dynamic_id,user_id,category_id,
+        dynamic_content,dynamic_images,status,
+        create_time,update_time
+    </sql>
+    <select id="queryByCategoryId" resultType="fun.aprilsxz.blog.domain.vo.DynamicVO">
+        select d.dynamic_id,d.dynamic_content,d.create_time,d.dynamic_images,d.update_time,d.user_id,d.category_id,u.nickname,u.avatar,c.category_name
+        from dynamic d,user u,category c where d.user_id = u.user_id and d.category_id = c.category_id and d.category_id = #{categoryId}
+    </select>
+</mapper>
