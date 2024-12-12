@@ -2,7 +2,7 @@ server:
   port: 8080
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&serverTimezone=Asia/Shanghai
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -31,3 +31,9 @@ knife4j:
         api-rule: package
         api-rule-resources:
           - fun.aprilsxz.blog.controller
+huawei:
+  obs:
+    ak: XVMEKB4Q4OYRDZKLACAE
+    sk: FaB0W6oLFcWbrKYg5kCoMV34Pjjq3bpB67gHK10I
+    bucket-name: blog-aprilsxz
+    end-point: https://obs.cn-east-3.myhuaweicloud.com

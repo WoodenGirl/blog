@@ -2,6 +2,7 @@ package fun.aprilsxz.blog.mapper;
 
 import fun.aprilsxz.blog.domain.po.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Insert;
 
 /**
 * @author yang
@@ -10,7 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity fun.aprilsxz.blog.domain.po.User
 */
 public interface UserMapper extends BaseMapper<User> {
-
 }
 
 
