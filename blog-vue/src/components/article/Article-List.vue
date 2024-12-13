@@ -18,7 +18,7 @@
       size="default"
 
       layout="total, prev, pager, next"
-      :total="1000"
+      :total="total"
       @size-change="fetchArticles"
       @current-change="fetchArticles"
     />
@@ -30,14 +30,14 @@ import ArticleCard from '@/components/article/Article-Card.vue'
 import { formatDate } from '@/assets/ts/tool'
 import router from '@/router'
 import { storeToRefs } from 'pinia'
-import type { Article, ArticleBrief } from '@/entity/article'
+import type { ArticleBrief } from '@/entity/article'
 import { useCategoryStore } from '@/stores/category'
 import { ref, watch } from 'vue'
-import { queryBriefArticle } from '@/api/article'
+import { countArticle, queryBriefArticle } from '@/api/article'
 
 const {category} = storeToRefs(useCategoryStore())
 
-watch(() => category.value, (newValue) => {
+watch(() => category.value, () => {
   fetchArticles()
 })
 
@@ -45,9 +45,11 @@ watch(() => category.value, (newValue) => {
 const articles = ref<ArticleBrief[]>([])
 const currentPage = ref(1)
 const pageSize = ref(10)
+const total = ref()
 
 const fetchArticles = async () => {
   articles.value = await queryBriefArticle(category.value.categoryId, currentPage.value, pageSize.value).then((res) => res.data)
+  total.value = await countArticle(category.value.categoryId).then((res) => res.data)
 }
 
 // 点击查看文章
