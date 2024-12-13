@@ -59,26 +59,31 @@
 <script setup lang="ts">
 import { formatDate } from '@/assets/ts/tool'
 import { Clock, Delete, Edit } from '@element-plus/icons-vue'
-import { useArticlesStore } from '@/stores/article'
 import router from '@/router'
-import { deleteArticle } from '@/api/article'
+import { deleteArticle, queryDetailArticle } from '@/api/article'
 import { ElMessage } from 'element-plus'
-import { popObject } from '@/assets/ts/obs'
-import { storeToRefs } from 'pinia'
 import CommentAll from '@/components/comment/Comment-All.vue'
 import { deleteCommentCascade } from '@/api/comment'
+import { useRoute } from 'vue-router'
+import type { ArticleDetail } from '@/entity/article'
+import { ref } from 'vue'
 
-const articlesStore = useArticlesStore()
-const {article} = storeToRefs(articlesStore)
+// 接收参数
+const articleId = useRoute().params.articleId.toString()
+
+// 获取article
+const article = ref<ArticleDetail>()
+const fetchArticle = async () => {
+  article.value = await queryDetailArticle(articleId).then(res => res.data)
+}
+fetchArticle()
 
 const edit = () => {
-  articlesStore.isEdit = true
   router.push("/create")
 }
+
 const remove = () => {
   deleteArticle(article.value!.articleId).then(() => {
-    // 从obs删除封面
-    popObject(article.value!.articleCover)
     // 删除评论
     deleteCommentCascade(article.value!.articleId)
     ElMessage.success("删除成功！")

@@ -3,11 +3,19 @@ export interface Dynamic {
   dynamicContent: string,
   createdTime: string,
   dynamicImages: string,
+  userId: string,
+  categoryId: number,
+}
+
+export interface DynamicDetail {
+  dynamicId: number,
+  dynamicContent: string,
+  createdTime: string,
+  dynamicImages: string,
 
   userId: string,
   nickname: string,
   avatar: string,
 
-  categoryId: number,
   categoryName: string,
 }

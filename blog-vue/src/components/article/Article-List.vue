@@ -6,39 +6,53 @@
       v-for="article in articles"
       :key="article.articleId"
     >
-      <article-brief :article="article" @click="toPreview(article)"></article-brief>
+      <article-card :article="article" @click="toPreview(article.articleId)"></article-card>
     </el-timeline-item>
   </el-timeline>
+
+  <div class="demo-pagination-block">
+    <div class="demonstration">Total item count</div>
+    <el-pagination
+      v-model:current-page="currentPage"
+      :page-size="pageSize"
+      size="default"
+
+      layout="total, prev, pager, next"
+      :total="1000"
+      @size-change="fetchArticles"
+      @current-change="fetchArticles"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
-import ArticleBrief from '@/components/article/Article-Brief.vue'
+import ArticleCard from '@/components/article/Article-Card.vue'
 import { formatDate } from '@/assets/ts/tool'
 import router from '@/router'
-import { useArticlesStore } from '@/stores/article'
 import { storeToRefs } from 'pinia'
-import type { Article } from '@/entity/article'
+import type { Article, ArticleBrief } from '@/entity/article'
 import { useCategoryStore } from '@/stores/category'
-import { watch } from 'vue'
+import { ref, watch } from 'vue'
+import { queryBriefArticle } from '@/api/article'
 
 const {category} = storeToRefs(useCategoryStore())
 
 watch(() => category.value, (newValue) => {
-  articlesStore.fetchArticles(newValue!.id)
+  fetchArticles()
 })
 
 // 获取数据
-const articlesStore = useArticlesStore()
-const {articles, article} = storeToRefs(articlesStore)
-articlesStore.fetchArticles(category.value!.id)
+const articles = ref<ArticleBrief[]>([])
+const currentPage = ref(1)
+const pageSize = ref(10)
 
-
-
+const fetchArticles = async () => {
+  articles.value = await queryBriefArticle(category.value.categoryId, currentPage.value, pageSize.value).then((res) => res.data)
+}
 
 // 点击查看文章
-const toPreview = (data: Article) => {
-  article.value = data
-  router.push('/article');
+const toPreview = (articleId: string) => {
+  router.push({path: `/articles/`+ articleId});
 }
 </script>
 

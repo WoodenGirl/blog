@@ -25,7 +25,7 @@ import { addComment } from '@/api/comment'
 import { ElMessage } from 'element-plus'
 import CommentSingle from '@/components/comment/Comment-Single.vue'
 import { getNow } from '@/assets/ts/tool'
-import { type Comment, fetchComments } from '@/entity/comment'
+import { type Comment } from '@/entity/comment'
 
 const props = defineProps(['linkedId'])
 const linkedId = props.linkedId

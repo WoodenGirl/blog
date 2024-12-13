@@ -98,11 +98,9 @@ import {
 import { addArticle, updateArticle } from '@/api/article'
 import router from '@/router'
 import WangEditor from '@/components/article/Wang-Editor.vue'
-import { useArticlesStore } from '@/stores/article'
 import { useUserStore } from '@/stores/user'
 import { generateUID, getNow } from '@/assets/ts/tool'
-import type { ArticleForm } from '@/entity/article'
-import { popObject, putObject } from '@/assets/ts/obs'
+import type { Article } from '@/entity/article'
 import { queryCategory } from '@/api/category'
 
 
@@ -112,7 +110,6 @@ const fileList = ref<UploadUserFile[]>([])
 const hideUpload = ref(false)
 // 删除图片
 const handlePictureCardRemove: UploadProps['onRemove'] = () => {
-  if (fileList.value[0].status == "success") {popObject(fileList.value[0].name)}
   hideUpload.value = false
   fileList.value.pop()
 }
@@ -180,7 +177,7 @@ const wangEditorRef = ref<InstanceType<typeof WangEditor>>(null)
 const formSize = ref<ComponentSize>('default')
 const articleFormRef = ref<FormInstance>()
 // 表单数据
-const articleForm = reactive<ArticleForm>({
+const articleForm = reactive<Article>({
   articleId: '',
   articleTitle: '',
   articleCover: '',
@@ -189,18 +186,13 @@ const articleForm = reactive<ArticleForm>({
   articleTags: '',
   articleContent: '',
   createdTime: '',
-  updateTime: ''
+  updateTime: '',
+  articleStatus: 1,
 })
+const isEdit = ref(false)
 // 编辑
-const articlesStore = useArticlesStore()
-if (articlesStore.isEdit && articlesStore.article) {
-  const article = articlesStore.article
-  articleForm.articleId = article.articleId
-  articleForm.createdTime = article.createdTime
-  articleForm.articleTitle = article.articleTitle
-  articleForm.categoryId = article.categoryId
-  articleTags.value = article.articleTags.split(',')
-  // 显示文章
+if (isEdit.value) {
+  /*// 显示文章
   onMounted(() => {
     setTimeout(() => {
       wangEditorRef.value.valueHtml = article.articleContent
@@ -216,10 +208,10 @@ if (articlesStore.isEdit && articlesStore.article) {
   // 显示封面
   articleForm.articleCover = article.articleCover
   hideUpload.value = true
-  fileList.value.push({name: article.articleCover, url: "/images/" + article.articleCover})
+  fileList.value.push({name: article.articleCover, url: "/images/" + article.articleCover})*/
 }
 
-const rules = reactive<FormRules<ArticleForm>>({})
+const rules = reactive<FormRules<Article>>({})
 
 const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
@@ -228,23 +220,15 @@ const submitForm = async (formEl: FormInstance | undefined) => {
       // 处理图片封面
       const file = fileList.value[0]
       if (file.status != "success") { // 若图片不在服务器上，上传
-        // 生成文件名称
-        const suffix = file.name.split('.').pop()
-        const fileName = "articleCover/" + generateUID() + "." + suffix
-        // 上传对象
-        putObject(fileName, file.raw)
-        // 赋值
-        articleForm.articleCover = fileName
+
       }
       // 其他数据赋值
       articleForm.articleTags = articleTags.value.toString()
       articleForm.articleContent = wangEditorRef.value.valueHtml
       // 删除文章未使用图片
-      wangEditorRef.value.handleSave()
+      //wangEditorRef.value.handleSave()
 
-      if (articlesStore.isEdit) { // 修改
-        // 更新修改时间
-        articleForm.updateTime = getNow()
+      if (isEdit) { // 修改
         updateArticle(articleForm).then(res => {
           if (res.code == 200) {
             ElMessage.success("修改成功！")
