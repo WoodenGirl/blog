@@ -48,19 +48,27 @@ export function queryDetailArticle(articleId: string) {
   })
 }
 // 添加文章
-export function addArticle(article: Article) {
+// formData.append("articleCover", fileList.value[0].raw)
+// formData.append('articleJson', JSON.stringify(articleForm))
+export function addArticle(formData: FormData) {
   return instance({
     url: "/article",
     method: "post",
-    data: article
+    data: formData
   })
 }
 // 更新文章
-export function updateArticle(article: Article) {
+// if (file.status != "success") { // 若图片不在服务器上，上传
+//         formData.append("articleCover", fileList.value[0].raw)
+//       } else {
+//         formData.append("articleCover", null)
+//       }
+// 若articleCover为null,则无需重新上传图片，否则还需删除原来的，重新上传新的
+export function updateArticle(formData: FormData) {
   return instance({
     url: "/article",
     method: "put",
-    data: article,
+    data: formData,
   })
 }
 // 删除文章

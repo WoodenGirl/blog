@@ -213,6 +213,7 @@ if (isEdit.value) {
 
 const rules = reactive<FormRules<Article>>({})
 
+const formData = new FormData()
 const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   await formEl.validate((valid, fields) => {
@@ -220,8 +221,12 @@ const submitForm = async (formEl: FormInstance | undefined) => {
       // 处理图片封面
       const file = fileList.value[0]
       if (file.status != "success") { // 若图片不在服务器上，上传
-
+        formData.append("articleCover", fileList.value[0].raw)
+      } else {
+        formData.append("articleCover", null)
       }
+      formData.append('articleJson', JSON.stringify(articleForm))
+
       // 其他数据赋值
       articleForm.articleTags = articleTags.value.toString()
       articleForm.articleContent = wangEditorRef.value.valueHtml
@@ -229,16 +234,13 @@ const submitForm = async (formEl: FormInstance | undefined) => {
       //wangEditorRef.value.handleSave()
 
       if (isEdit) { // 修改
-        updateArticle(articleForm).then(res => {
+        updateArticle(formData).then(res => {
           if (res.code == 200) {
             ElMessage.success("修改成功！")
           }
         })
       } else { // 添加
-        // 记录时间
-        articleForm.createdTime = getNow()
-        articleForm.updateTime = getNow()
-        addArticle(articleForm).then(res => {
+        addArticle(formData).then(res => {
           if (res.code == 200) {
             ElMessage.success("创建成功！")
           }
