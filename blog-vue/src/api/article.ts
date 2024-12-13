@@ -54,6 +54,7 @@ export function addArticle(formData: FormData) {
   return instance({
     url: "/article",
     method: "post",
+    headers: {'Content-Type': 'multipart/form-data'},
     data: formData
   })
 }
@@ -67,7 +68,8 @@ export function addArticle(formData: FormData) {
 export function updateArticle(formData: FormData) {
   return instance({
     url: "/article",
-    method: "put",
+    method: "post",
+    headers: {'Content-Type': 'multipart/form-data'},
     data: formData,
   })
 }

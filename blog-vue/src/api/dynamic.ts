@@ -42,6 +42,7 @@ export function countCommentByUser(userId: string) {
 }
 
 // 添加动态
+// 待修改formdata
 export function addDynamic(dynamic: Dynamic) {
   return instance({
     url: "/dynamic",
