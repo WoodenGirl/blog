@@ -1,7 +1,7 @@
 export interface Dynamic {
-  dynamicId: number,
+  dynamicId?: number,
   dynamicContent: string,
-  createdTime: string,
+  createdTime?: string,
   dynamicImages: string,
   userId: string,
   categoryId: number,

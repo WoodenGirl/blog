@@ -10,39 +10,40 @@
     </el-timeline-item>
   </el-timeline>
 
-  <div class="demo-pagination-block">
-    <div class="demonstration">Total item count</div>
-    <el-pagination
-      v-model:current-page="currentPage"
-      :page-size="pageSize"
-      size="default"
 
-      layout="total, prev, pager, next"
-      :total="1000"
-      @size-change="fetchArticles"
-      @current-change="fetchArticles"
-    />
-  </div>
+  <el-pagination
+    v-model:current-page="currentPage"
+    :page-size="pageSize"
+    size="default"
+
+    layout="total, prev, pager, next"
+    :total="1000"
+    @size-change="fetchArticles"
+    @current-change="fetchArticles"
+  />
+
 </template>
 
 <script setup lang="ts">
 import ArticleCard from '@/components/article/Article-Card.vue'
-import { formatDate } from '@/assets/ts/tool'
+import { formatDate } from '@/tool/time'
 import router from '@/router'
 import { storeToRefs } from 'pinia'
-import type { Article, ArticleBrief } from '@/entity/article'
+import type { ArticleBrief } from '@/entity/article'
 import { useCategoryStore } from '@/stores/category'
 import { ref, watch } from 'vue'
 import { queryBriefArticle } from '@/api/article'
 
 const {category} = storeToRefs(useCategoryStore())
 
-watch(() => category.value, (newValue) => {
+watch(() => category.value, () => {
+  console.log(category.value)
   fetchArticles()
 })
 
 // 获取数据
 const articles = ref<ArticleBrief[]>([])
+// 分页
 const currentPage = ref(1)
 const pageSize = ref(10)
 

@@ -35,7 +35,8 @@
 
 <script setup lang="ts">
 
-import { formatDate } from '@/assets/ts/tool'
+
+import { formatDate } from '@/tool/time'
 
 defineProps(['article'])
 

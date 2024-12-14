@@ -1,13 +1,13 @@
 export interface Article {
-  articleId: string
+  articleId?: string
   articleTitle: string
   articleCover: string
   userId: string
   categoryId: string
   articleTags: string
   articleContent: string
-  createdTime: string
-  updateTime: string
+  createdTime?: string
+  updateTime?: string
   articleStatus: number
 }
 
@@ -39,6 +39,7 @@ export interface ArticleDetail {
   userId: string,
   nickname: string,
 
+  categoryId: string
   categoryName: string,
 }
 

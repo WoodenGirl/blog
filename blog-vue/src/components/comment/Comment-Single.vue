@@ -35,11 +35,12 @@
 <script setup lang="ts">
 
 import { ref } from 'vue'
-import { formatDate, getNow } from '../../assets/ts/tool'
+import { formatDate } from '@/tool/time'
 import CommentInput from '@/components/comment/Comment-Input.vue'
 import { useUserStore } from '@/stores/user'
 import { addComment, deleteComment } from '@/api/comment'
 import { ElMessage } from 'element-plus'
+import type { Comment } from '@/entity/comment'
 
 // 接收一个评论
 const props = defineProps(['comment'])
@@ -57,13 +58,12 @@ const isDisplay = ref(false)
 // 回复评论
 const submitComment = (content: string) => {
   // 评论
-  const commentData = ref({
+  const commentData = ref<Comment>({
     userId: useUserStore().user.userId,
     commentContent: content,
     linkedId: props.comment.linkedId,
-    createdTime: getNow(),
     // 根据评论级别赋值
-    commentParent: '',
+    commentParent: 0,
     commentReply: null
   })
   // 二级评论

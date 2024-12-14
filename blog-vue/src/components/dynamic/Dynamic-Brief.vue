@@ -60,21 +60,20 @@
 
 <script setup lang="ts">
 
-import { formatDate } from '@/assets/ts/tool'
+import { formatDate } from '@/tool/time'
 import CommentAll from '@/components/comment/Comment-All.vue'
 import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import { Delete } from '@element-plus/icons-vue'
 import { deleteDynamic } from '@/api/dynamic'
-import { countComment, deleteCommentCascade } from '@/api/comment'
-import { popObject } from '@/assets/ts/obs'
+import { countComment } from '@/api/comment'
 
 const props = defineProps(['dynamic'])
 const emits = defineEmits(['rerender'])
 
 // 图片列表
 const srcList = ref<string[]>([])
-srcList.value = props.dynamic.dynamicImages.split(";")
+srcList.value = props.dynamic.dynamicImages.split(",")
 srcList.value.pop()
 // 预览图片
 const dialogImageUrl = ref('')
@@ -87,10 +86,6 @@ const handlePicturePreview  = (url: string) => {
 // 删除
 const remove = () => {
   deleteDynamic(props.dynamic.dynamicId).then(() => {
-    // 删除文件
-    srcList.value.forEach((src) => popObject(src))
-    // 删除评论
-    deleteCommentCascade(props.dynamic.dynamicId)
     ElMessage.success("删除成功")
     // 重新渲染
     emits('rerender')

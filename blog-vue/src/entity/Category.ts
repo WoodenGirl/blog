@@ -1,10 +1,10 @@
-interface Category {
+export interface Category {
   categoryId?: number
   categoryName: string
   isInterrupt: number
   categoryParent: number
 }
-interface CategoryTree {
+export interface CategoryTree {
   categoryId: number
   categoryName: string
   isInterrupt: number

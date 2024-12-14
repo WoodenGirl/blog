@@ -57,13 +57,12 @@
 </template>
 
 <script setup lang="ts">
-import { formatDate } from '@/assets/ts/tool'
+import { formatDate } from '@/tool/time'
 import { Clock, Delete, Edit } from '@element-plus/icons-vue'
 import router from '@/router'
 import { deleteArticle, queryDetailArticle } from '@/api/article'
 import { ElMessage } from 'element-plus'
 import CommentAll from '@/components/comment/Comment-All.vue'
-import { deleteCommentCascade } from '@/api/comment'
 import { useRoute } from 'vue-router'
 import type { ArticleDetail } from '@/entity/article'
 import { ref } from 'vue'
@@ -84,8 +83,6 @@ const edit = () => {
 
 const remove = () => {
   deleteArticle(article.value!.articleId).then(() => {
-    // 删除评论
-    deleteCommentCascade(article.value!.articleId)
     ElMessage.success("删除成功！")
     // 跳转上一页
     router.go(-1)

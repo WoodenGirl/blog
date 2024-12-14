@@ -1,19 +1,17 @@
 export interface Comment {
-  commentId: number,
+  commentId?: number,
   commentParent: number,
   userId: string,
   linkedId: string,
-  commentReply: number,
+  commentReply?: number,
   commentContent: string,
-  createdTime: string,
-  replyName: string,
+  createdTime?: string,
 }
 
 export interface CommentDetail {
   commentId: number,
   commentParent: number,
   linkedId: string,
-  commentReply: number,
   commentContent: string,
   createdTime: string,
   replyName: string,
@@ -22,6 +20,6 @@ export interface CommentDetail {
   nickname: string,
   avatar: string,
 
-  children: Comment[],
+  commentChildren: Comment[],
 }
 

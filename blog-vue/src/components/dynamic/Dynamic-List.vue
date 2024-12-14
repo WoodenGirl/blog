@@ -1,13 +1,22 @@
 <template>
   <div style="width:70%;">
     <!-- 发表动态  -->
-    <dynamic-input :category-id="category!.id" @rerender="fetchDynamics(category!.id)"></dynamic-input>
+    <dynamic-input :category-id="category!.categoryId" @rerender="fetchDynamics()"></dynamic-input>
     <!-- 展示动态  -->
     <div v-for="dynamic of dynamics" :key="dynamic.dynamicId">
-      <dynamic-brief :dynamic="dynamic" class="dynamic-brief" @rerender="fetchDynamics(category!.id)"></dynamic-brief>
+      <dynamic-brief :dynamic="dynamic" class="dynamic-brief" @rerender="fetchDynamics()"></dynamic-brief>
     </div>
   </div>
+  <el-pagination
+    v-model:current-page="currentPage"
+    :page-size="pageSize"
+    size="default"
 
+    layout="total, prev, pager, next"
+    :total="1000"
+    @size-change="fetchDynamics"
+    @current-change="fetchDynamics"
+  />
 </template>
 
 <script setup lang="ts">
@@ -21,16 +30,20 @@ import { useCategoryStore } from '@/stores/category'
 
 const {category} = storeToRefs(useCategoryStore())
 
-watch(() => category.value, (newValue) => {
-  fetchDynamics(newValue!.id)
+watch(() => category.value, () => {
+  fetchDynamics()
 })
 
 // 获取数据
 const dynamics = ref<Dynamic[]>([])
-const fetchDynamics = async (categoryId: number) => {
-  dynamics.value = await queryDynamic(categoryId).then((res) => res.data)
+// 分页
+const currentPage = ref(1)
+const pageSize = ref(10)
+
+const fetchDynamics = async () => {
+  dynamics.value = await queryDynamic(category.value.categoryId, currentPage.value, pageSize.value).then((res) => res.data)
 }
-fetchDynamics(category.value!.id)
+fetchDynamics()
 
 </script>
 

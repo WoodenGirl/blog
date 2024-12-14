@@ -68,8 +68,9 @@ import { useUserStore } from '@/stores/user'
 import { ref } from 'vue'
 import { ElMessage, type UploadProps, type UploadUserFile } from 'element-plus'
 import { addDynamic } from '@/api/dynamic'
-import { generateUID, getNow } from '@/assets/ts/tool'
-import { putObject } from '@/assets/ts/obs'
+import { getNow } from '@/tool/time'
+import { putObject } from '@/tool/obs'
+import type { Dynamic } from '@/entity/dynamic'
 
 const props = defineProps(['categoryId'])
 const emits = defineEmits(['rerender'])
@@ -100,22 +101,19 @@ const handlePictureCardPreview: UploadProps['onPreview'] = (uploadFile) => {
 // 发表
 const submit = () => {
   console.log(fileList.value)
-  const dynamic = ref({
+  const dynamic = ref<Dynamic>({
     dynamicContent: dynamicContent.value,
     dynamicImages: "",
-    createdTime: getNow(),
-
     userId: useUserStore().user.userId,
     categoryId: props.categoryId,
   })
 
   // 上传图片
   fileList.value.forEach((file) => {
-    const suffix = file.name.split('.').pop()
-    const fileName = "dynamicImage/" + generateUID() + "." + suffix
+    const fileName = "temp/" + file.name
     // 上传对象
     putObject(fileName, file.raw)
-    dynamic.value.dynamicImages += fileName + ";"
+    dynamic.value.dynamicImages += fileName + ","
   })
 
   // 上传动态

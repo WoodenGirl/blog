@@ -1,11 +1,11 @@
 import instance from '@/api/request'
 import type { Article } from '@/entity/article'
 
-// 查询简略文章，返回数据类型ArticleBreif以及totalCount
+// 查询简略文章，返回数据类型ArticleBreif
 // 按修改时间排序
 export function queryBriefArticle(categoryId: number, currentPage: number, pageSize: number) {
   return instance({
-    url: "/article/categoryId/",
+    url: "/article",
     method: "get",
     params: {
       categoryId,
@@ -14,18 +14,14 @@ export function queryBriefArticle(categoryId: number, currentPage: number, pageS
     }
   })
 }
-// 查询用户的所有文章，返回数据类型ArticleBreif以及totalCount
-export function queryArticleByUser(userId: number, currentPage: number, pageSize: number) {
+// 查询文章总数total
+export function countArticle(categoryId: number) {
   return instance({
-    url: "/article/userId/",
+    url: "/article/count/" + categoryId,
     method: "get",
-    params: {
-      userId,
-      currentPage,
-      pageSize
-    }
   })
 }
+
 // 根据文章id查询详细文章，返回数据类型ArticleDetail
 export function queryDetailArticle(articleId: string) {
   return instance({
@@ -34,33 +30,23 @@ export function queryDetailArticle(articleId: string) {
   })
 }
 // 添加文章
-// formData.append("articleCover", fileList.value[0].raw)
-// formData.append('articleJson', JSON.stringify(articleForm))
-export function addArticle(formData: FormData) {
+export function addArticle(article: Article) {
   return instance({
     url: "/article",
     method: "post",
-    headers: {'Content-Type': 'multipart/form-data'},
-    data: formData
+    data: article
   })
 }
 // 更新文章
-// if (file.status != "success") { // 若图片不在服务器上，上传
-//         formData.append("articleCover", fileList.value[0].raw)
-//       } else {
-//         formData.append("articleCover", null)
-//       }
-// 若articleCover为null,则无需重新上传图片，否则还需删除原来的，重新上传新的
-export function updateArticle(formData: FormData) {
+export function updateArticle(article: Article) {
   return instance({
     url: "/article",
     method: "post",
-    headers: {'Content-Type': 'multipart/form-data'},
-    data: formData,
+    data: article,
   })
 }
 // 删除文章
-// 需要删除所有评论
+// 删除封面，文章内容图片，评论
 export function deleteArticle(articleId: string) {
   return instance({
     url: "/article/" + articleId,

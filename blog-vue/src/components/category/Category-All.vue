@@ -2,10 +2,12 @@
   <el-tree
     style="max-width: 600px"
     :data="categoryTrees"
+    :props="defaultProps"
     node-key="categoryId"
     :highlight-current="true"
     :current-node-key="currentId"
     @node-click="clickCategory"
+
   >
     <template #default="{ node, data }">
         <span class="custom-tree-node" >
@@ -46,6 +48,7 @@ import { addCategory, deleteCategory, queryCategory, updateCategory } from '@/ap
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Delete, Edit, Plus } from '@element-plus/icons-vue'
 import { useCategoryStore } from '@/stores/category'
+import type { Category, CategoryTree } from '@/entity/Category'
 
 
 const props = defineProps(['isEdit', 'categoryParent'])

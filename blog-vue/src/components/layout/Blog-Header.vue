@@ -22,7 +22,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import logo from '@/assets/images/logo.png'
-import { useArticlesStore } from '@/stores/article'
 import { useCategoryStore } from '@/stores/category'
 import { storeToRefs } from 'pinia'
 import router from '@/router'
@@ -65,10 +64,6 @@ const handleSelect = (key: string) => {
     }
   }
 }
-const articlesStore = useArticlesStore()
-
-
-
 </script>
 
 <style scoped>
