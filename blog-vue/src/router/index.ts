@@ -23,7 +23,7 @@ const router = createRouter({
 
 
     { path: '/create', name: 'create',component: ArticleCreate },
-    { path: '/article', name: 'article',component: ArticlePreview },
+    { path: '/article/:articleId', name: 'article',component: ArticlePreview },
     { path: '/dynamic', name: 'dynamic',component: DynamicList },
   ]
 })

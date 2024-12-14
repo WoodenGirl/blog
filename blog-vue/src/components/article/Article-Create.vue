@@ -11,7 +11,10 @@
   >
     <!--  标题  -->
     <el-form-item label="Article Title" prop="title">
-      <el-input v-model="articleForm.articleTitle" placeholder="input article title here" />
+      <el-input
+        v-model="articleForm.articleTitle"
+        placeholder="input article title here"
+      />
     </el-form-item>
     <!--  封面  -->
     <el-form-item label="Article Cover" prop="cover">
@@ -67,7 +70,12 @@
           @keyup.enter="handleInputConfirm"
           @blur="handleInputConfirm"
         />
-        <el-button v-else class="button-new-tag" size="default" @click="showInput">
+        <el-button
+          v-else
+          class="button-new-tag"
+          size="default"
+          @click="showInput"
+        >
           + New Tag
         </el-button>
       </div>
@@ -78,7 +86,9 @@
     </el-form-item>
     <!--  提交取消  -->
     <el-form-item label=" ">
-      <el-button type="primary" @click="submitForm(articleFormRef)">publish</el-button>
+      <el-button type="primary" @click="submitForm(articleFormRef)">
+        publish
+      </el-button>
       <el-button @click="saveForm(articleFormRef)">save</el-button>
     </el-form-item>
   </el-form>
@@ -95,16 +105,13 @@ import {
   type UploadProps,
   type UploadUserFile
 } from 'element-plus'
-import { addArticle, updateArticle } from '@/api/article'
+import { addArticle, queryDetailArticle, updateArticle } from '@/api/article'
 import router from '@/router'
 import WangEditor from '@/components/article/Wang-Editor.vue'
-import { useArticlesStore } from '@/stores/article'
 import { useUserStore } from '@/stores/user'
-import { generateUID, getNow } from '@/assets/ts/tool'
-import type { ArticleForm } from '@/entity/article'
-import { popObject, putObject } from '@/assets/ts/obs'
+import type { Article, ArticleDetail } from '@/entity/article'
 import { queryCategory } from '@/api/category'
-
+import { putObject } from '@/tool/obs'
 
 // 图片
 const fileList = ref<UploadUserFile[]>([])
@@ -112,7 +119,6 @@ const fileList = ref<UploadUserFile[]>([])
 const hideUpload = ref(false)
 // 删除图片
 const handlePictureCardRemove: UploadProps['onRemove'] = () => {
-  if (fileList.value[0].status == "success") {popObject(fileList.value[0].name)}
   hideUpload.value = false
   fileList.value.pop()
 }
@@ -180,46 +186,39 @@ const wangEditorRef = ref<InstanceType<typeof WangEditor>>(null)
 const formSize = ref<ComponentSize>('default')
 const articleFormRef = ref<FormInstance>()
 // 表单数据
-const articleForm = reactive<ArticleForm>({
-  articleId: '',
+const articleForm = reactive<Article>({
   articleTitle: '',
   articleCover: '',
   userId: useUserStore().user.userId,
   categoryId: '',
   articleTags: '',
   articleContent: '',
-  createdTime: '',
-  updateTime: ''
+  articleStatus: 1,
 })
-// 编辑
-const articlesStore = useArticlesStore()
-if (articlesStore.isEdit && articlesStore.article) {
-  const article = articlesStore.article
-  articleForm.articleId = article.articleId
-  articleForm.createdTime = article.createdTime
-  articleForm.articleTitle = article.articleTitle
-  articleForm.categoryId = article.categoryId
-  articleTags.value = article.articleTags.split(',')
-  // 显示文章
-  onMounted(() => {
-    setTimeout(() => {
-      wangEditorRef.value.valueHtml = article.articleContent
-    }, 1500)
-  })
-  // 获取文章所有图片, 方便之后比较删除图片
-  onMounted(() => {
-    setTimeout(() => {
-      wangEditorRef.value.imageList1 = wangEditorRef.value.editorRef.getElemsByType('image')
-    }, 1500)
-  })
 
+const isEdit = ref(false)
+const articleId = ref('')
+// 编辑
+if (isEdit.value) {
+  const article = ref<ArticleDetail>(null)
+  article.value = queryDetailArticle(articleId.value).then(res => res.data)  // 显示文章
+  onMounted(() => {
+    setTimeout(() => {
+      wangEditorRef.value.valueHtml = article.value!.articleContent
+    }, 1500)
+  })
   // 显示封面
-  articleForm.articleCover = article.articleCover
+  articleForm.articleCover = article.value!.articleCover
   hideUpload.value = true
-  fileList.value.push({name: article.articleCover, url: "/images/" + article.articleCover})
+  fileList.value.push({name: article.value!.articleCover, url: "/images/" + article.value!.articleCover})
+  // 其他数据
+  articleForm.articleTitle = article.value!.articleTitle
+  articleForm.categoryId = article.value!.categoryId
+  articleForm.articleContent = article.value!.articleContent
+  articleTags.value = article.value!.articleTags.split(',')
 }
 
-const rules = reactive<FormRules<ArticleForm>>({})
+const rules = reactive<FormRules<Article>>({})
 
 const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
@@ -228,32 +227,21 @@ const submitForm = async (formEl: FormInstance | undefined) => {
       // 处理图片封面
       const file = fileList.value[0]
       if (file.status != "success") { // 若图片不在服务器上，上传
-        // 生成文件名称
-        const suffix = file.name.split('.').pop()
-        const fileName = "articleCover/" + generateUID() + "." + suffix
-        // 上传对象
+        const fileName = "temp/" + file.name
         putObject(fileName, file.raw)
-        // 赋值
         articleForm.articleCover = fileName
       }
       // 其他数据赋值
       articleForm.articleTags = articleTags.value.toString()
       articleForm.articleContent = wangEditorRef.value.valueHtml
-      // 删除文章未使用图片
-      wangEditorRef.value.handleSave()
 
-      if (articlesStore.isEdit) { // 修改
-        // 更新修改时间
-        articleForm.updateTime = getNow()
+      if (isEdit.value) { // 修改
         updateArticle(articleForm).then(res => {
           if (res.code == 200) {
             ElMessage.success("修改成功！")
           }
         })
       } else { // 添加
-        // 记录时间
-        articleForm.createdTime = getNow()
-        articleForm.updateTime = getNow()
         addArticle(articleForm).then(res => {
           if (res.code == 200) {
             ElMessage.success("创建成功！")
@@ -268,8 +256,8 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   })
 }
 const saveForm = (formEl: FormInstance | undefined) => {
-  if (!formEl) return
-  //formEl.resetFields()
+  articleForm.articleStatus = 0
+  submitForm(formEl)
 }
 </script>
 

@@ -1,11 +1,13 @@
 <template>
   <el-tree
     style="max-width: 600px"
-    :data="dataSource"
-    node-key="id"
+    :data="categoryTrees"
+    :props="defaultProps"
+    node-key="categoryId"
     :highlight-current="true"
     :current-node-key="currentId"
     @node-click="clickCategory"
+
   >
     <template #default="{ node, data }">
         <span class="custom-tree-node" >
@@ -18,76 +20,110 @@
         </span>
     </template>
   </el-tree>
-  <Plus @click="append(null)" class="add-icon" ></Plus>
+  <Plus @click="append()" class="add-icon" ></Plus>
+
+  <el-dialog v-model="dialogFormVisible" title="Shipping address" width="500">
+    <el-form :model="category">
+      <el-form-item label="目录名称" label-width="140px">
+        <el-input v-model="category.categoryName" autocomplete="off" />
+      </el-form-item>
+      <el-form-item label="是否中断" label-width="140px">
+        <el-switch v-model="category.isInterrupt" />
+      </el-form-item>
+    </el-form>
+    <template #footer>
+      <div class="dialog-footer">
+        <el-button @click="cancelDialog">Cancel</el-button>
+        <el-button type="primary" @click="confirmDialog">
+          Confirm
+        </el-button>
+      </div>
+    </template>
+  </el-dialog>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { addCategory, deleteCategories, queryCategory, updateCategory } from '@/api/category'
+import { addCategory, deleteCategory, queryCategory, updateCategory } from '@/api/category'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Delete, Edit, Plus } from '@element-plus/icons-vue'
 import { useCategoryStore } from '@/stores/category'
+import type { Category, CategoryTree } from '@/entity/Category'
 
 
 const props = defineProps(['isEdit', 'categoryParent'])
 
 
-// tree数据
-const dataSource = ref<Tree[]>([])
+// 目录树
+const defaultProps = {
+  children: 'categoryChildren',
+  label: 'categoryName',
+}
+const categoryTrees = ref<CategoryTree[]>([])
 const currentId = ref<number>()
-// 获取tree数据
+// 获取目录树数据
 const fetchTreeData = async () => {
-  dataSource.value = await queryCategory(props.categoryParent).then(res => res.data);
+  categoryTrees.value = await queryCategory(props.categoryParent).then(res => res.data);
   // 默认选中第一个节点
-  currentId.value = dataSource.value[0].id
-  clickCategory(dataSource.value[0])
+  currentId.value = categoryTrees.value[0].categoryId
+  clickCategory(categoryTrees.value[0])
 };
 fetchTreeData()
-
-const clickCategory = (data: Tree) => {
+// 点击目录，将数据去全局保存
+const clickCategory = (data: CategoryTree) => {
   useCategoryStore().category = data
 }
 
+// 添加修改
+// 对话框
+const dialogFormVisible = ref(false)
+const isAdd = ref(true)
+const category = ref<Category>({
+  categoryName: '',
+  isInterrupt: 0,
+  categoryParent: 0
+})
 // 添加tree节点
-const append = (data: any) => {
-  ElMessageBox.prompt('Please input category name', 'Add category', {
-    confirmButtonText: 'OK',
-    cancelButtonText: 'Cancel',
-  })
-    .then(({ value }) => {
-      const newChild = {categoryName: value, categoryParent: data ? data.id : props.categoryParent}
-      addCategory(newChild).then((res) => {
-        if (res.code === 200) {
-          fetchTreeData()
-        }
-      });
-    })
-    .catch(() => {
-      ElMessage.info('Input canceled')
-    })
+const append = (data?: CategoryTree) => {
+  isAdd.value = true
+  dialogFormVisible.value = true
+  category.value.categoryParent = data ? data.categoryId : props.categoryParent
 }
 // 修改tree节点
-const update = (data: Tree) => {
-  ElMessageBox.prompt('Please input category name', 'Update category', {
-    confirmButtonText: 'OK',
-    cancelButtonText: 'Cancel',
-    inputValue: data.label
-  })
-    .then(({ value }) => {
-      const newChild = {categoryId: data.id, categoryName: value}
-      updateCategory(newChild).then((res) => {
-        if (res.code === 200) {
-          fetchTreeData()
-        }
-      });
+const update = (data: CategoryTree) => {
+  isAdd.value = false
+  dialogFormVisible.value = true
+  category.value.categoryId = data.categoryId
+  category.value.categoryName = data.categoryName
+  category.value.isInterrupt = data.isInterrupt
+}
+// 取消添加修改
+const cancelDialog = () => {
+  dialogFormVisible.value = false
+  // 清空对话框
+  category.value.categoryName = ''
+  category.value.isInterrupt = 0
+}
+const confirmDialog = () => {
+  if (isAdd.value == true) {
+    addCategory(category.value).then(res => {
+      if (res.code == 200) {
+        ElMessage.success("添加目录成功！")
+        dialogFormVisible.value = false
+      }
+    });
+  } else {
+    updateCategory(category.value).then(res => {
+      if (res.code == 200) {
+        ElMessage.success("修改目录成功！")
+        dialogFormVisible.value = false
+      }
     })
-    .catch(() => {
-      ElMessage.info('Input canceled')
-    })
+  }
 }
 
 // 删除tree节点
-const remove = (data: Tree) => {
+const remove = (data: CategoryTree) => {
   ElMessageBox.confirm(
     'Are you sure to delete it?',
     'Warning',
@@ -98,19 +134,11 @@ const remove = (data: Tree) => {
     }
   )
     .then(() => {
-      const categoryIds = [data.id]
-      // 若存在子目录，删除子目录
-      if (data.children) {
-        for (const tree of data.children) {
-          categoryIds.push(tree.id)
-        }
-      }
-      deleteCategories(categoryIds).then((res) => {
-        if (res.code === 200) {
-          fetchTreeData()
-          ElMessage.success('Delete completed')
-        }
-      })
+     deleteCategory(data.categoryId).then(res => {
+       if (res.code === 200) {
+         ElMessage.success("删除成功！")
+       }
+     })
     })
     .catch(() => {
       ElMessage.info('Delete canceled')
