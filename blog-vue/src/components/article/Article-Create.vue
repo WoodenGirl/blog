@@ -113,8 +113,6 @@ import type { Article, ArticleDetail } from '@/entity/article'
 import { queryCategory } from '@/api/category'
 import { putObject } from '@/tool/obs'
 
-
-
 // 图片
 const fileList = ref<UploadUserFile[]>([])
 // 控制多图片上传
@@ -202,8 +200,8 @@ const isEdit = ref(false)
 const articleId = ref('')
 // 编辑
 if (isEdit.value) {
-  const article = ref<ArticleDetail>()
-  article.value = await queryDetailArticle(articleId.value).then(res => res.data)  // 显示文章
+  const article = ref<ArticleDetail>(null)
+  article.value = queryDetailArticle(articleId.value).then(res => res.data)  // 显示文章
   onMounted(() => {
     setTimeout(() => {
       wangEditorRef.value.valueHtml = article.value!.articleContent
