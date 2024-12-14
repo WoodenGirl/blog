@@ -2,9 +2,9 @@ server:
   port: 8080
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&serverTimezone=Asia/Shanghai
-    username: root
-    password: 123456
+    url: jdbc:mysql://60.204.203.117:3306/blog?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&serverTimezone=Asia/Shanghai
+    username: blog
+    password: BJ3AXbKcaScRZYcy
     driver-class-name: com.mysql.cj.jdbc.Driver
 #  redis:
 #    host: localhost
@@ -37,3 +37,16 @@ huawei:
     sk: FaB0W6oLFcWbrKYg5kCoMV34Pjjq3bpB67gHK10I
     bucket-name: blog-aprilsxz
     end-point: https://obs.cn-east-3.myhuaweicloud.com
+
+blog:
+  jwt:
+    location: classpath:blog.jks
+    alias: blog
+    password: yangyang
+    tokenTTL: 30m
+  auth:
+    excludePaths:
+      - /user/login
+      - /user/register
+      - /article/**
+      - /dynamic/**
