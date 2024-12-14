@@ -1,11 +1,11 @@
 import instance from '@/api/request'
 import type { Article } from '@/entity/article'
 
-// 查询简略文章，返回数据类型ArticleBreif
+// 查询简略文章，返回数据类型ArticleBreif以及totalCount
 // 按修改时间排序
 export function queryBriefArticle(categoryId: number, currentPage: number, pageSize: number) {
   return instance({
-    url: "/article",
+    url: "/article/categoryId/",
     method: "get",
     params: {
       categoryId,
@@ -14,30 +14,16 @@ export function queryBriefArticle(categoryId: number, currentPage: number, pageS
     }
   })
 }
-// 查询文章总数total
-export function countArticle(categoryId: number) {
+// 查询用户的所有文章，返回数据类型ArticleBreif以及totalCount
+export function queryArticleByUser(userId: number, currentPage: number, pageSize: number) {
   return instance({
-    url: "/article/count/" + categoryId,
-    method: "get",
-  })
-}
-// 查询用户的所有文章，返回数据类型ArticleBreif
-export function queryArticleByUser(userId: string, currentPage: number, pageSize: number) {
-  return instance({
-    url: "/article/user",
+    url: "/article/userId/",
     method: "get",
     params: {
       userId,
       currentPage,
       pageSize
     }
-  })
-}
-// 查询用户文章总数total
-export function countArticleByUser(userId: string) {
-  return instance({
-    url: "/article/userCount/" + userId,
-    method: "get",
   })
 }
 // 根据文章id查询详细文章，返回数据类型ArticleDetail
