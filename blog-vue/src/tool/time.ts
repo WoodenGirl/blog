@@ -11,4 +11,4 @@ const getNow = () => {
 
 
 
-export { formatDate, getNow, generateUID,}
+export { formatDate, getNow,}

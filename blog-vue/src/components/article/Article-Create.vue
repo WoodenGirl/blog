@@ -6,7 +6,7 @@
     :rules="rules"
     label-width="auto"
     label-position="left"
-    :size="formSize"
+    size="default"
     status-icon
   >
     <!--  标题  -->
@@ -183,7 +183,6 @@ const handleInputConfirm = () => {
 const wangEditorRef = ref<InstanceType<typeof WangEditor>>(null)
 
 // 表单
-const formSize = ref<ComponentSize>('default')
 const articleFormRef = ref<FormInstance>()
 // 表单数据
 const articleForm = reactive<Article>({
@@ -195,6 +194,7 @@ const articleForm = reactive<Article>({
   articleContent: '',
   articleStatus: 1,
 })
+const rules = reactive<FormRules<Article>>({})
 
 const isEdit = ref(false)
 const articleId = ref('')
@@ -218,7 +218,6 @@ if (isEdit.value) {
   articleTags.value = article.value!.articleTags.split(',')
 }
 
-const rules = reactive<FormRules<Article>>({})
 
 const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return

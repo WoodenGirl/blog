@@ -6,7 +6,7 @@ export interface Article {
   categoryId: string
   articleTags: string
   articleContent: string
-  createdTime?: string
+  createTime?: string
   updateTime?: string
   articleStatus: number
 }
@@ -15,7 +15,7 @@ export interface ArticleBrief {
   articleId: string,
   articleTitle: string,
   articleTags: string,
-  createdTime: string,
+  createTime: string,
   updateTime: string,
   articleCover: string,
 
@@ -30,7 +30,7 @@ export interface ArticleDetail {
   articleId: string,
   articleTitle: string,
   articleTags: string,
-  createdTime: string,
+  createTime: string,
   updateTime: string,
   articleCover: string,
 

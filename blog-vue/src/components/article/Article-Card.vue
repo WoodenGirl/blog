@@ -26,7 +26,7 @@
           </el-tag>
         </p>
         <!--   文章创建时间   -->
-        <p>{{ article.nickname }}创建于{{ formatDate(article.createdTime) }}</p>
+        <p>{{ article.nickname }}创建于{{ formatDate(article.createTime) }}</p>
       </el-col>
     </el-row>
 

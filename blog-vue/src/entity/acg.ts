@@ -10,10 +10,9 @@ export interface Acg {
   acgState: number, // 状态 '0': 连载中，'1': 已完结
   acgChapter: number, // 章节
   acgAddition: string,  // 补充
-
-  acgType: string,  // 类型 女频，男频，出版
-  acgGenre: string, // 风格 古代，现代，修仙等
+  categoryId: string, // 类型
   acgTags: string,  // 标签 大女主等
+
 }
 // 类型
 const novelTypes = ['男频', '女频', '出版']
