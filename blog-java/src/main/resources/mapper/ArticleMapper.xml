@@ -12,7 +12,7 @@
             <result property="categoryId" column="category_id" jdbcType="INTEGER"/>
             <result property="articleContent" column="article_content" jdbcType="VARCHAR"/>
             <result property="articleCover" column="article_cover" jdbcType="VARCHAR"/>
-            <result property="status" column="status" jdbcType="TINYINT"/>
+            <result property="articleStatus" column="status" jdbcType="TINYINT"/>
             <result property="createdTime" column="created_time" jdbcType="TIMESTAMP"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
@@ -20,12 +20,18 @@
     <sql id="Base_Column_List">
         article_id,article_title,user_id,
         article_tags,category_id,article_content,
-        article_cover,status,created_time,
+        article_cover,article_status,create_time,
         update_time
     </sql>
-    <select id="queryByCategoryId" resultType="fun.aprilsxz.blog.domain.vo.ArticleVO">
-        select a.article_id,a.article_title,a.article_tags,a.create_time,a.update_time,a.article_content,a.article_cover,a.user_id,a.category_id,u.nickname,c.category_name
+    <select id="queryByCategoryId" resultType="fun.aprilsxz.blog.domain.vo.ArticleBrief">
+        select a.article_id,a.article_title,a.article_tags,a.create_time,a.update_time,a.article_cover,a.article_status,u.nickname,c.category_name
         from article a, category c, user u
         where a.user_id = u.user_id and a.category_id = c.category_id and a.category_id = #{categoryId}
+    </select>
+
+    <select id="queryDetailById" resultType="fun.aprilsxz.blog.domain.vo.ArticleDetail">
+        select a.article_id,a.article_title,a.article_tags,a.create_time,a.update_time,a.article_content,a.article_status,a.article_cover,a.user_id,a.category_id,u.nickname,c.category_name
+        from article a, category c, user u
+        where a.user_id = u.user_id and a.category_id = c.category_id and a.article_id = #{articleId}
     </select>
 </mapper>

@@ -9,7 +9,7 @@ import fun.aprilsxz.blog.domain.dto.DynamicDto;
 import fun.aprilsxz.blog.domain.po.Comment;
 import fun.aprilsxz.blog.domain.po.Dynamic;
 import fun.aprilsxz.blog.domain.vo.DynamicVO;
-import fun.aprilsxz.blog.enums.LinkedType;
+//import fun.aprilsxz.blog.enums.LinkedType;
 import fun.aprilsxz.blog.service.CommentService;
 import fun.aprilsxz.blog.service.DynamicService;
 import fun.aprilsxz.blog.mapper.DynamicMapper;
@@ -73,8 +73,9 @@ public class DynamicServiceImpl extends ServiceImpl<DynamicMapper, Dynamic>
         removeById(dynamicId);
         //2.删除相关评论
         commentService.remove(new QueryWrapper<Comment>()
-                .eq("linked_id",dynamicId)
-                .eq("linked_type", LinkedType.DYNAMIC));
+                .eq("link_id",dynamicId)
+//                .eq("link_type", LinkType.DYNAMIC));
+        );
         //3.TODO 删除obs上的图片(图片存储格式)
         String dynamicImages = dynamic.getDynamicImages();
     }

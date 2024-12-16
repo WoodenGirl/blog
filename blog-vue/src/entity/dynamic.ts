@@ -16,6 +16,4 @@ export interface DynamicDetail {
   userId: string,
   nickname: string,
   avatar: string,
-
-  categoryName: string,
 }

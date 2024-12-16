@@ -1,6 +1,5 @@
 package fun.aprilsxz.blog.domain.dto;
 
-import com.baomidou.mybatisplus.annotation.TableId;
 import fun.aprilsxz.blog.domain.dto.group.Update;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -9,7 +8,6 @@ import lombok.Data;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 
 @Data
 @ApiModel
@@ -45,5 +43,5 @@ public class ArticleDto {
 
     @NotNull
     @ApiModelProperty("发布状态：0表示草稿，1表示已发布")
-    private Integer status;
+    private Integer articleStatus;
 }

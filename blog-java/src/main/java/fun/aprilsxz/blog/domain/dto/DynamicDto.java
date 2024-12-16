@@ -27,7 +27,4 @@ public class DynamicDto {
     private String dynamicContent;
     @ApiModelProperty("动态图片url")
     private String dynamicImages;
-    @Range(min = 0,max = 1)
-    @ApiModelProperty("状态：0表示草稿，1表示发布")
-    private Integer status;
 }

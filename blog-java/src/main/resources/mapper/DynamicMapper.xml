@@ -17,11 +17,11 @@
 
     <sql id="Base_Column_List">
         dynamic_id,user_id,category_id,
-        dynamic_content,dynamic_images,status,
-        create_time,update_time
+        dynamic_content,dynamic_images,
+        create_time
     </sql>
     <select id="queryByCategoryId" resultType="fun.aprilsxz.blog.domain.vo.DynamicVO">
-        select d.dynamic_id,d.dynamic_content,d.create_time,d.dynamic_images,d.update_time,d.user_id,d.category_id,u.nickname,u.avatar,c.category_name,d.status
-        from dynamic d,user u,category c where d.user_id = u.user_id and d.category_id = c.category_id and d.category_id = #{categoryId}
+        select d.dynamic_id,d.dynamic_content,d.create_time,d.dynamic_images,d.user_id,u.nickname,u.avatar
+        from dynamic d,user u where d.user_id = u.user_id and d.category_id = #{categoryId}
     </select>
 </mapper>

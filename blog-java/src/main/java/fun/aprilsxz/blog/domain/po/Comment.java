@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import fun.aprilsxz.blog.enums.LinkedType;
 import lombok.Data;
 
 /**
@@ -46,12 +45,7 @@ public class Comment implements Serializable {
     /**
      * 
      */
-    private String linkedId;
-
-    /**
-     * 关联的文章类型
-     */
-    private LinkedType linkedType;
+    private String linkId;
 
     /**
      * 创建时间
@@ -78,7 +72,7 @@ public class Comment implements Serializable {
             && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
             && (this.getCommentContent() == null ? other.getCommentContent() == null : this.getCommentContent().equals(other.getCommentContent()))
             && (this.getCommentReply() == null ? other.getCommentReply() == null : this.getCommentReply().equals(other.getCommentReply()))
-            && (this.getLinkedId() == null ? other.getLinkedId() == null : this.getLinkedId().equals(other.getLinkedId()))
+            && (this.getLinkId() == null ? other.getLinkId() == null : this.getLinkId().equals(other.getLinkId()))
             && (this.getCreatedTime() == null ? other.getCreatedTime() == null : this.getCreatedTime().equals(other.getCreatedTime()));
     }
 
@@ -91,7 +85,7 @@ public class Comment implements Serializable {
         result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
         result = prime * result + ((getCommentContent() == null) ? 0 : getCommentContent().hashCode());
         result = prime * result + ((getCommentReply() == null) ? 0 : getCommentReply().hashCode());
-        result = prime * result + ((getLinkedId() == null) ? 0 : getLinkedId().hashCode());
+        result = prime * result + ((getLinkId() == null) ? 0 : getLinkId().hashCode());
         result = prime * result + ((getCreatedTime() == null) ? 0 : getCreatedTime().hashCode());
         return result;
     }
@@ -107,7 +101,7 @@ public class Comment implements Serializable {
         sb.append(", userId=").append(userId);
         sb.append(", commentContent=").append(commentContent);
         sb.append(", commentReply=").append(commentReply);
-        sb.append(", linkedId=").append(linkedId);
+        sb.append(", linkId=").append(linkId);
         sb.append(", createdTime=").append(createdTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

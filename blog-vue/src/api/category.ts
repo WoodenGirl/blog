@@ -1,5 +1,5 @@
 import instance from '@/api/request'
-import type { Category } from '@/entity/Category'
+import type { Category } from '@/entity/category'
 
 // 页面为目录，根据页面id查询目录, 返回数据类型CategoryTree
 export function queryCategory(categoryParent: number) {

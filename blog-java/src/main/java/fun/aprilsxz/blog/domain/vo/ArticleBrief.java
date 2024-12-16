@@ -5,7 +5,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class ArticleVO {
+public class ArticleBrief {
     /**
      * 主键
      */
@@ -15,11 +15,6 @@ public class ArticleVO {
      * 文章标题
      */
     private String articleTitle;
-
-    /**
-     * 用户id
-     */
-    private String userId;
 
     /**
      * nickname
@@ -32,19 +27,9 @@ public class ArticleVO {
     private String articleTags;
 
     /**
-     * 分类id
-     */
-    private Integer categoryId;
-
-    /**
      * 分类名
      */
     private String categoryName;
-
-    /**
-     * 文字内容
-     */
-    private String articleContent;
 
     /**
      * 封面图片

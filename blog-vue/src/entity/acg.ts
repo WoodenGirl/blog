@@ -12,7 +12,6 @@ export interface Acg {
   acgAddition: string,  // 补充
   categoryId: string, // 类型
   acgTags: string,  // 标签 大女主等
-
 }
 // 类型
 const novelTypes = ['男频', '女频', '出版']

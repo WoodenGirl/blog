@@ -1,8 +1,11 @@
 package fun.aprilsxz.blog.service;
 
+import fun.aprilsxz.blog.domain.common.PageResult;
 import fun.aprilsxz.blog.domain.dto.ArticleDto;
 import fun.aprilsxz.blog.domain.po.Article;
 import com.baomidou.mybatisplus.extension.service.IService;
+import fun.aprilsxz.blog.domain.vo.ArticleBrief;
+import fun.aprilsxz.blog.domain.vo.ArticleDetail;
 import fun.aprilsxz.blog.domain.vo.ArticleVO;
 
 import java.util.List;
@@ -19,7 +22,9 @@ public interface ArticleService extends IService<Article> {
      * @param categoryId
      * @return
      */
-    List<ArticleVO> queryByCategoryId(Integer categoryId);
+    PageResult<ArticleBrief> queryByCategoryId(Integer categoryId, Integer currentPage, Integer pageSize);
+
+    ArticleDetail queryDetailById(String articleId);
 
     void addArticle(ArticleDto articleDto);
 

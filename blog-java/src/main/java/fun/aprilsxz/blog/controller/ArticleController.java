@@ -4,8 +4,8 @@ import fun.aprilsxz.blog.domain.common.PageResult;
 import fun.aprilsxz.blog.domain.common.Result;
 import fun.aprilsxz.blog.domain.dto.ArticleDto;
 import fun.aprilsxz.blog.domain.dto.group.Update;
-import fun.aprilsxz.blog.domain.po.Article;
-import fun.aprilsxz.blog.domain.vo.ArticleVO;
+import fun.aprilsxz.blog.domain.vo.ArticleBrief;
+import fun.aprilsxz.blog.domain.vo.ArticleDetail;
 import fun.aprilsxz.blog.service.ArticleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -26,28 +26,22 @@ public class ArticleController {
     @Resource
     ArticleService articleService;
 
-    @GetMapping("/{categoryId}/{pageNum}/{pageSize}")
+    @GetMapping("/{categoryId}/{currentPage}/{pageSize}")
     @ApiOperation("通过categoryId分页查询文章")
     @ApiImplicitParams({@ApiImplicitParam(name = "categoryId",value = "分类id"),
-                        @ApiImplicitParam(name = "pageNum",value = "当前页码"),
+                        @ApiImplicitParam(name = "currentPage",value = "当前页码"),
                         @ApiImplicitParam(name = "pageSize",value = "每页条数")})
-    public Result<PageResult<Article>> pageQueryByCategoryId(@PathVariable("categoryId") Integer categoryId,
-                                                             @PathVariable("pageNum") Integer pageNum,
-                                                             @PathVariable("pageSize") Integer pageSize){
-        return null;
+    public Result<PageResult<ArticleBrief>> pageQueryByCategoryId(@PathVariable("categoryId") Integer categoryId,
+                                                                  @PathVariable("currentPage") Integer currentPage,
+                                                                  @PathVariable("pageSize") Integer pageSize){
+        PageResult<ArticleBrief> pageResult = articleService.queryByCategoryId(categoryId, currentPage, pageSize);
+        return Result.ok(pageResult);
     }
 
-
-    @GetMapping()
-    @ApiOperation("获取所有文章")
-    public Result<List<Article>> queryAll(){
-        return Result.ok(articleService.list());
-    }
-
-    @GetMapping("/categoryId/{categoryId}")
-    @ApiOperation("通过分类id查询文章")
-    public Result<List<ArticleVO>> queryByCategoryId(@PathVariable("categoryId") Integer categoryId){
-        List<ArticleVO> articleVOList = articleService.queryByCategoryId(categoryId);
+    @GetMapping("/articleId/{articleId}")
+    @ApiOperation("通过articleId查询详细文章")
+    public Result<ArticleDetail> queryDetailById(@PathVariable("articleId") String articleId){
+        ArticleDetail articleVOList = articleService.queryDetailById(articleId);
         return Result.ok(articleVOList);
     }
 

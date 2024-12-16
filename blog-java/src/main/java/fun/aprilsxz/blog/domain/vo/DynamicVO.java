@@ -14,17 +14,10 @@ public class DynamicVO {
 
     private String avatar;
 
-    private Integer categoryId;
-
-    private String categoryName;
-
     private String dynamicContent;
 
     private String dynamicImages;
 
-    private Integer status;
-
     private LocalDateTime createTime;
 
-    private LocalDateTime updateTime;
 }

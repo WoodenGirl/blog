@@ -1,24 +1,14 @@
-package fun.aprilsxz.blog.domain.po;
+package fun.aprilsxz.blog.domain.vo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.time.LocalDateTime;
 import lombok.Data;
 
-/**
- * 
- * @TableName article
- */
-@TableName(value ="article")
+import java.time.LocalDateTime;
+
 @Data
-public class Article implements Serializable {
+public class ArticleDetail {
     /**
      * 主键
      */
-    @TableId
     private String articleId;
 
     /**
@@ -32,6 +22,11 @@ public class Article implements Serializable {
     private String userId;
 
     /**
+     * nickname
+     */
+    private String nickname;
+
+    /**
      * 文字标签
      */
     private String articleTags;
@@ -40,6 +35,11 @@ public class Article implements Serializable {
      * 分类id
      */
     private Integer categoryId;
+
+    /**
+     * 分类名
+     */
+    private String categoryName;
 
     /**
      * 文字内容
@@ -65,8 +65,4 @@ public class Article implements Serializable {
      * 更新时间
      */
     private LocalDateTime updateTime;
-
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
-
 }
