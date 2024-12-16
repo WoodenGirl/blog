@@ -7,7 +7,7 @@
     @select="handleSelect"
   >
     <el-menu-item index="1">
-      <el-avatar :size="50" :src="logo" /> &nbsp; Aplrilsxz
+      <el-avatar :size="50" :src="logo" /> &nbsp; 木头女孩
     </el-menu-item>
     <el-menu-item index="2">ACG</el-menu-item>
     <el-menu-item index="3">Interest</el-menu-item>
@@ -16,6 +16,7 @@
 
     <el-menu-item index="6"><router-link to="/dynamic">Dynamic</router-link></el-menu-item>
     <el-menu-item index="7"><router-link to="/create">Create</router-link></el-menu-item>
+    <el-menu-item index="8"><router-link to="/login">Login</router-link></el-menu-item>
   </el-menu>
 </template>
 

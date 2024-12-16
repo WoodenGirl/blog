@@ -8,7 +8,7 @@
       <!--  昵称 创建时间 -->
       <el-col :span="21" style="margin-left: 1rem">
         <p class="nickname">{{ dynamic.nickname }}</p>
-        {{ formatDate(dynamic.createdTime) }}
+        {{ formatDate(dynamic.createTime) }}
       </el-col>
       <!--  删除 -->
       <el-col :span="1">

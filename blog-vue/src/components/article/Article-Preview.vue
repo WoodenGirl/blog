@@ -23,7 +23,7 @@
         <el-row :gutter="20">
           <div class="flex gap-2 center">
             <span>{{ article!.nickname }}</span>
-            <span><el-icon size="20"><clock/></el-icon>创建于{{ formatDate(article!.createdTime) }}</span>
+            <span><el-icon size="20"><clock/></el-icon>创建于{{ formatDate(article!.createTime) }}</span>
             <span><el-icon size="20"><clock/></el-icon>最近更新于{{ formatDate(article!.updateTime) }}</span>
           </div>
         </el-row>

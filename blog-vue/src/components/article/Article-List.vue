@@ -50,6 +50,7 @@ const pageSize = ref(10)
 const fetchArticles = async () => {
   articles.value = await queryBriefArticle(category.value.categoryId, currentPage.value, pageSize.value).then((res) => res.data)
 }
+fetchArticles()
 
 // 点击查看文章
 const toPreview = (articleId: string) => {

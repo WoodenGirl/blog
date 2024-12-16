@@ -21,12 +21,10 @@ instance.interceptors.request.use(config => {
 
 // 响应拦截
 instance.interceptors.response.use(response => {
-  if (response.data.statusCode === 200) {
-    if (response.data.data.code === 200) {
-      return response.data.data;
-    } else {
-      ElNotification.error(response.data.data.message)
-    }
+  if (response.status === 200) {
+      return response.data;
+  } else {
+      ElNotification.error(response.data.msg)
   }
 }, error => {
   console.log(error.response)
