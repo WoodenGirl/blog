@@ -2,6 +2,7 @@ package fun.aprilsxz.blog.controller;
 
 import fun.aprilsxz.blog.domain.common.Result;
 import fun.aprilsxz.blog.domain.po.Category;
+import fun.aprilsxz.blog.domain.vo.CategoryVO;
 import fun.aprilsxz.blog.service.CategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,8 +23,8 @@ public class CategoryController {
 
     @GetMapping("/{categoryId}")
     @ApiOperation("查询子目录，考虑isInterrupt")
-    Result<List<Category>> queryById(@PathVariable("categoryId") Integer categoryId){
-
-        return null;
+    Result<List<CategoryVO>> queryById(@PathVariable("categoryId") Integer categoryId){
+        List<CategoryVO> categoryVOList = categoryService.queryById(categoryId);
+        return Result.ok(categoryVOList);
     }
 }

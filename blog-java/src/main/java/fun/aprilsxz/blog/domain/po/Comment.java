@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
+import fun.aprilsxz.blog.enums.LinkedType;
 import lombok.Data;
 
 /**
@@ -45,6 +47,11 @@ public class Comment implements Serializable {
      * 
      */
     private String linkedId;
+
+    /**
+     * 关联的文章类型
+     */
+    private LinkedType linkedType;
 
     /**
      * 创建时间

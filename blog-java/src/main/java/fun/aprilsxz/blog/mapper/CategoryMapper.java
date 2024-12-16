@@ -3,6 +3,8 @@ package fun.aprilsxz.blog.mapper;
 import fun.aprilsxz.blog.domain.po.Category;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.List;
+
 /**
 * @author yang
 * @description 针对表【category】的数据库操作Mapper
@@ -11,6 +13,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface CategoryMapper extends BaseMapper<Category> {
 
+    List<Category> queryById(Integer categoryId);
 }
 
 

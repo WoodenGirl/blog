@@ -13,4 +13,18 @@
     <sql id="Base_Column_List">
         category_id,category_name,category_parent
     </sql>
+    <select id="queryById" resultType="fun.aprilsxz.blog.domain.po.Category">
+        WITH RECURSIVE SubTree AS (
+            -- 初始查询，选取起始节点
+            SELECT category_id, category_parent,category_name,is_interrupt
+            FROM category
+            WHERE category_id = #{categoryId}
+            UNION ALL
+            -- 递归部分，关联子节点
+            SELECT t.category_id, t.category_parent,t.category_name,t.is_interrupt
+            FROM category t
+                     JOIN SubTree st ON t.category_parent = st.category_id
+        )
+        SELECT * FROM SubTree;
+    </select>
 </mapper>

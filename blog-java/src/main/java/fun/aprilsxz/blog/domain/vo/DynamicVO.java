@@ -1,7 +1,5 @@
 package fun.aprilsxz.blog.domain.vo;
 
-import com.baomidou.mybatisplus.annotation.TableId;
-import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.time.LocalDateTime;

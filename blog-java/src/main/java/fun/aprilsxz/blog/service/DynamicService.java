@@ -1,5 +1,6 @@
 package fun.aprilsxz.blog.service;
 
+import fun.aprilsxz.blog.domain.common.PageResult;
 import fun.aprilsxz.blog.domain.dto.DynamicDto;
 import fun.aprilsxz.blog.domain.po.Dynamic;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -14,7 +15,9 @@ import java.util.List;
 */
 public interface DynamicService extends IService<Dynamic> {
 
-    List<DynamicVO> queryByCategoryId(Integer categoryId);
+    PageResult<DynamicVO> queryByCategoryId(Integer categoryId, Integer currentPage, Integer pageSize);
 
     void addDynamic(DynamicDto dynamicDto);
+
+    void removeByDynamicId(String dynamicId);
 }

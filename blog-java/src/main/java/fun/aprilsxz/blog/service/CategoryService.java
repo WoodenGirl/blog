@@ -2,6 +2,9 @@ package fun.aprilsxz.blog.service;
 
 import fun.aprilsxz.blog.domain.po.Category;
 import com.baomidou.mybatisplus.extension.service.IService;
+import fun.aprilsxz.blog.domain.vo.CategoryVO;
+
+import java.util.List;
 
 /**
 * @author yang
@@ -10,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface CategoryService extends IService<Category> {
 
+    List<CategoryVO> queryById(Integer categoryId);
 }
