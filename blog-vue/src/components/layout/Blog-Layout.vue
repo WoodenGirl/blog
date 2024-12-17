@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <el-header><blog-header></blog-header></el-header>
-    <el-container class="main">
+    <el-container>
       <el-container>
         <el-main>
           <router-view :key="$route.fullPath"></router-view>
@@ -18,4 +18,7 @@ import BlogHeader from '@/components/layout/Blog-Header.vue'
 </script>
 
 <style scoped>
+/*.templateMain {
+  padding-top: 0;
+}*/
 </style>

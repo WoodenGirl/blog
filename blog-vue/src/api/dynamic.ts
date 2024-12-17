@@ -11,7 +11,6 @@ export function queryDynamic(categoryId: number, currentPage: number, pageSize: 
       currentPage,
       pageSize
     }
-
   })
 }
 // 添加动态

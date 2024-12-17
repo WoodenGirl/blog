@@ -1,4 +1,5 @@
 <template>
+  <!-- 时间线展示文章卡片 -->
   <el-timeline style="max-width: 70%">
     <el-timeline-item
       :timestamp="formatDate(article.updateTime)"
@@ -10,7 +11,7 @@
     </el-timeline-item>
   </el-timeline>
 
-
+  <!-- 分页 -->
   <el-pagination
     v-model:current-page="currentPage"
     :page-size="pageSize"
@@ -37,7 +38,6 @@ import { queryBriefArticle } from '@/api/article'
 const {category} = storeToRefs(useCategoryStore())
 
 watch(() => category.value, () => {
-  console.log(category.value)
   fetchArticles()
 })
 

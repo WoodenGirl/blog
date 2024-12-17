@@ -10,6 +10,8 @@ import IndexView from '@/views/template/IndexView.vue'
 import TemplateView from '@/components/layout/TemplateView.vue'
 import LoginView from '@/views/login/LoginView.vue'
 import BlogLayout from '@/components/layout/Blog-Layout.vue'
+import AcgPreview from '@/components/acg/source/Acg-Preview.vue'
+import AcgCreate from '@/components/acg/source/Acg-Create.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,8 +26,8 @@ const router = createRouter({
           ]
         },
         { path: '/create', name: 'create',component: ArticleCreate },
-        { path: '/article/:articleId', name: 'article',component: ArticlePreview },
         { path: '/dynamic', name: 'dynamic',component: DynamicList },
+        { path: '/acgPreview/:acgId', name: 'acgPreview',component: AcgPreview },
       ]
     },
     { path: '/login', name: 'login',component: LoginView },

@@ -3,13 +3,13 @@
     <el-aside>
       <category-all :is-edit="isEdit" :category-parent="categoryParent"></category-all>
     </el-aside>
-    <el-main>
-      <el-tabs v-model="activeName" class="demo-tabs">
+    <el-main class="templateMain">
+      <el-tabs v-model="activeName" class="demo-tabs" tab-position="right">
         <router-view :key="$route.fullPath"></router-view>
-        <el-tab-pane label="article" :name="articleName">
+        <el-tab-pane label="article" :name="articleName" lazy>
           <article-list></article-list>
         </el-tab-pane>
-        <el-tab-pane label="dynamic" name="dynamic">
+        <el-tab-pane label="dynamic" name="dynamic" lazy>
           <dynamic-list></dynamic-list>
         </el-tab-pane>
       </el-tabs>
@@ -35,5 +35,20 @@ articleName.value = categoryParent.value == 0 ? 'first' : 'article'
 </script>
 
 <style scoped>
+.demo-tabs > .el-tabs__content {
+  padding: 32px;
+  color: #6b778c;
+  font-size: 32px;
+  font-weight: 600;
+}
 
+.el-tabs--right .el-tabs__content,
+.el-tabs--left .el-tabs__content {
+  height: 100%;
+}
+
+.templateMain {
+  margin: 0;
+  padding: 0;
+}
 </style>

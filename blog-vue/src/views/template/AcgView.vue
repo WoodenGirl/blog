@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import AcgList from '@/components/acg/Acg-List.vue'
+import AcgList from '@/components/acg/source/Acg-List.vue'
 
 
 </script>

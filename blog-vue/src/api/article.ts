@@ -14,13 +14,6 @@ export function queryBriefArticle(categoryId: number, currentPage: number, pageS
     }
   })
 }
-// 查询文章总数total
-export function countArticle(categoryId: number) {
-  return instance({
-    url: "/article/count/" + categoryId,
-    method: "get",
-  })
-}
 
 // 根据文章id查询详细文章，返回数据类型ArticleDetail
 export function queryDetailArticle(articleId: string) {

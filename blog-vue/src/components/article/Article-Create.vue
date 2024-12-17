@@ -148,9 +148,9 @@ fetchTreeData()
 const props = {
   expandTrigger: 'hover' as const,
   checkStrictly: true,
-  value: 'id',
-  label: 'label',
-  children: 'children',
+  value: 'categoryId',
+  label: 'categoryName',
+  children: 'categoryChildren',
 }
 const handleCascadeChange = (value: string) => {
   articleForm.categoryId = value[value.length - 1]

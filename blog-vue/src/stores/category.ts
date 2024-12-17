@@ -1,12 +1,13 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import type { Category, CategoryTree } from '@/entity/category'
 
 export const useCategoryStore = defineStore('category', () => {
-  const category = ref<CategoryTree>({
+  const category = ref<Category>({
     categoryId: 1,
     categoryName: 'Aprilsxz',
     isInterrupt: 0,
-    categoryChildren: []
+    categoryParent: 0,
   })
   const isEdit = ref(true)
   const categoryParent = ref(0)
