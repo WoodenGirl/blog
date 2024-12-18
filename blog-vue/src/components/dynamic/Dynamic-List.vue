@@ -1,22 +1,23 @@
 <template>
-  <div style="width:70%;">
+  <div class="container">
     <!-- 发表动态  -->
     <dynamic-input :category-id="category!.categoryId" @rerender="fetchDynamics()"></dynamic-input>
     <!-- 展示动态  -->
     <div v-for="dynamic of dynamics" :key="dynamic.dynamicId">
       <dynamic-brief :dynamic="dynamic" class="dynamic-brief" @rerender="fetchDynamics()"></dynamic-brief>
     </div>
-  </div>
-  <el-pagination
-    v-model:current-page="currentPage"
-    :page-size="pageSize"
-    size="default"
+    <el-pagination
+      v-model:current-page="currentPage"
+      :page-size="pageSize"
+      size="default"
 
-    layout="total, prev, pager, next"
-    :total="1000"
-    @size-change="fetchDynamics"
-    @current-change="fetchDynamics"
-  />
+      layout="total, prev, pager, next"
+      :total="1000"
+      @size-change="fetchDynamics"
+      @current-change="fetchDynamics"
+    />
+  </div>
+
 </template>
 
 <script setup lang="ts">

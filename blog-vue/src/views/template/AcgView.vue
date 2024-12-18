@@ -1,12 +1,15 @@
 <template>
     <el-tab-pane label="source" name="first">
-      <acg-list></acg-list>
+      <acg-index></acg-index>
     </el-tab-pane>
-    <el-tab-pane label="list" name="second">Config</el-tab-pane>
+    <el-tab-pane label="list" name="second">
+      <list-index></list-index>
+    </el-tab-pane>
 </template>
 
 <script setup lang="ts">
-import AcgList from '@/components/acg/source/Acg-List.vue'
+import AcgIndex from '@/components/acg/source/Acg-Index.vue'
+import ListIndex from '@/components/acg/list/List-Index.vue'
 
 
 </script>

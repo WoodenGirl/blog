@@ -14,7 +14,6 @@
     <el-menu-item index="4">Technique</el-menu-item>
     <el-menu-item index="5">Life</el-menu-item>
 
-    <el-menu-item index="6"><router-link to="/dynamic">Dynamic</router-link></el-menu-item>
     <el-menu-item index="7"><router-link to="/create">Create</router-link></el-menu-item>
     <el-menu-item index="8"><router-link to="/login">Login</router-link></el-menu-item>
   </el-menu>

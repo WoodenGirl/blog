@@ -22,21 +22,19 @@
   </el-tree>
   <Plus @click="append()" class="add-icon" ></Plus>
 
-  <el-dialog v-model="dialogFormVisible" title="Shipping address" width="500">
+  <el-dialog v-model="dialogFormVisible" :title="dialogTitle" width="500">
     <el-form :model="category">
-      <el-form-item label="目录名称" label-width="140px">
+      <el-form-item label="目录名称" >
         <el-input v-model="category.categoryName" autocomplete="off" />
       </el-form-item>
-      <el-form-item label="是否中断" label-width="140px">
+      <el-form-item label="是否中断" >
         <el-switch v-model="category.isInterrupt" />
       </el-form-item>
     </el-form>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="cancelDialog">Cancel</el-button>
-        <el-button type="primary" @click="confirmDialog">
-          Confirm
-        </el-button>
+        <el-button type="primary" @click="confirmDialog">确定</el-button>
+        <el-button @click="cancelDialog">取消</el-button>
       </div>
     </template>
   </el-dialog>
@@ -77,8 +75,10 @@ const clickCategory = (data: CategoryTree) => {
 // 添加修改
 // 对话框
 const dialogFormVisible = ref(false)
+const dialogTitle = ref('添加目录')
 const isAdd = ref(true)
 const category = ref<Category>({
+  categoryId: 0,
   categoryName: '',
   isInterrupt: 0,
   categoryParent: 0
@@ -86,12 +86,14 @@ const category = ref<Category>({
 // 添加tree节点
 const append = (data?: CategoryTree) => {
   isAdd.value = true
+  dialogTitle.value=  '添加目录'
   dialogFormVisible.value = true
   category.value.categoryParent = data ? data.categoryId : props.categoryParent
 }
 // 修改tree节点
 const update = (data: CategoryTree) => {
   isAdd.value = false
+  dialogTitle.value=  '修改目录'
   dialogFormVisible.value = true
   category.value.categoryId = data.categoryId
   category.value.categoryName = data.categoryName

@@ -26,21 +26,7 @@ export interface AcgBrief {
 }
 
 export interface AcgDetail {
-  acgId: string,   // id
-  acgType: number, // 0: 小说，1：漫画，2：动漫，3：电视剧，4：电影，5：综艺，6：游戏
-  acgName: string, // 名称
-  acgAuthor: string, // 作者
-  acgActor: string, // 演员
-  acgYear: string,  // 年份
-  acgRegion: string,  // 地区
-  acgIntro: string, // 简介
-  acgCover: string, // 封面
-  acgState: number, // 状态 '0': 连载中，'1': 已完结
-  acgChapter: number, // 章节
-  acgTags: string,  // 标签 大女主等
-  acgAddition: string, // 补充信息
-
-  categoryId: number, // 类型
+  acg: Acg,
   categoryName: string, // 类型
 }
 

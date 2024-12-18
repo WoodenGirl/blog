@@ -5,10 +5,4 @@ const formatDate = (date: string) => {
   return format(date, 'yyyy-MM-dd HH:mm:ss');
 }
 
-const getNow = () => {
-  return new Date(Date.now() + 8 * 3600 * 1000).toISOString()
-};
-
-
-
-export { formatDate, getNow,}
+export { formatDate}

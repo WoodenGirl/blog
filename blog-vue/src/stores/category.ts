@@ -3,11 +3,11 @@ import { ref } from 'vue'
 import type { Category, CategoryTree } from '@/entity/category'
 
 export const useCategoryStore = defineStore('category', () => {
-  const category = ref<Category>({
+  const category = ref<CategoryTree>({
     categoryId: 1,
     categoryName: 'Aprilsxz',
     isInterrupt: 0,
-    categoryParent: 0,
+    categoryChildren: []
   })
   const isEdit = ref(true)
   const categoryParent = ref(0)

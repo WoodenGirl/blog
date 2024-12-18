@@ -160,6 +160,7 @@ import { queryCategory } from '@/api/category'
 import { putObject } from '@/tool/obs'
 import { useCategoryStore } from '@/stores/category'
 import type { Category } from '@/entity/category'
+import { valueToHtml } from '@/tool/text'
 
 // 图片
 const fileList = ref<UploadUserFile[]>([])
@@ -254,18 +255,15 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   await formEl.validate((valid, fields) => {
     if (valid) {
       // 处理图片封面
-      const file = fileList.value[0]
-      if (file.status != "success") { // 若图片不在服务器上，上传
-        const fileName = "temp/" + file.name
-        putObject(fileName, file.raw)
-        acgForm.acgCover = fileName
-      }
+      /*const file = fileList.value[0]
+      const fileName = "temp/" + file.name
+      putObject(fileName, file.raw)
+      acgForm.acgCover = fileName*/
       // 其他数据赋值
       acgForm.acgTags = acgTags.value.toString()
+      acgForm.acgIntro = valueToHtml(acgForm.acgIntro)
       // 添加
 
-      // 跳转到首页
-      router.push('/');
     } else {
       console.log('error submit!', fields)
     }

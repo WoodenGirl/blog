@@ -52,12 +52,16 @@
       <el-button type="primary" @click="submitForm(acgQueryRef)">查询</el-button>
       <el-button @click="reset(acgQueryRef)">清空</el-button>
     </el-form-item>
+
+    <!-- 添加acg -->
+    <a class="addAcg" @click="displayAddAcg = true">找不到想要的？点击添加</a>
+
   </el-form>
-  <!-- 添加acg -->
-  <a class="addAcg" @click="displayAddAcg = true">找不到想要的？点击添加</a>
+
   <el-dialog v-model="displayAddAcg" title="添加Acg" width="800">
     <acg-create></acg-create>
   </el-dialog>
+
   <!-- 展示acg -->
   <div class="acgContainer" >
     <acg-card class="acgCard" :acg="acg" v-for="acg in acgList" @click="router.push({path:'/acgPreview/' + acg.acgId})"></acg-card>
@@ -191,10 +195,10 @@ const acgList = ref<AcgBrief[]>([
   }
 }
 .addAcg {
-  display: inline-block;
-  margin-bottom: 1rem;
   color: #4290f7;
   text-decoration: underline;
   cursor: pointer;
+  position: relative;
+  bottom: 0.4rem;
 }
 </style>

@@ -29,7 +29,7 @@ const {isEdit, categoryParent } = storeToRefs(useCategoryStore())
 
 const activeName = ref('first')
 const articleName = ref()
-articleName.value = categoryParent.value == 0 ? 'first' : 'article'
+articleName.value = categoryParent.value != 2 ? 'first' : 'article'
 
 
 </script>

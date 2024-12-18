@@ -92,10 +92,6 @@ const remove = () => {
 </script>
 
 <style scoped>
-.container {
-  width: 100%;
-  position: relative;
-}
 .el-image {
   opacity: 0.5;
   background-size: cover;

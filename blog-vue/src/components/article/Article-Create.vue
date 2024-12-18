@@ -1,97 +1,100 @@
 <template>
-  <el-form
-    ref="articleFormRef"
-    style="max-width: 1200px"
-    :model="articleForm"
-    :rules="rules"
-    label-width="auto"
-    label-position="left"
-    size="default"
-    status-icon
-  >
-    <!--  标题  -->
-    <el-form-item label="Article Title" prop="title">
-      <el-input
-        v-model="articleForm.articleTitle"
-        placeholder="input article title here"
-      />
-    </el-form-item>
-    <!--  封面  -->
-    <el-form-item label="Article Cover" prop="cover">
-      <el-upload
-        :class="hideUpload ? 'hide' : ''"
-        :file-list="fileList"
-        action="#"
-        list-type="picture-card"
-        :auto-upload="false"
-        :on-preview="handlePictureCardPreview"
-        :on-remove="handlePictureCardRemove"
-        :on-change="handlePictureCardChange"
-      >
-        <el-icon><Plus /></el-icon>
-      </el-upload>
-      <el-dialog v-model="dialogVisible">
-        <img
-          w-full
-          :src="dialogImageUrl"
-          alt="Preview Image"
-          style="max-height: 100%; max-width: 100%"
-        />
-      </el-dialog>
-    </el-form-item>
-    <!--  类别  -->
-    <el-form-item label="Article Category" prop="category">
-      <el-cascader
-        v-model="articleForm.categoryId"
-        :options="categories"
-        :props="props"
-        @change="handleCascadeChange"
-      />
-    </el-form-item>
-    <!--  标签  -->
-    <el-form-item label="Article Tags" prop="tags">
-      <div class="flex gap-2">
-        <el-tag
-          v-for="tag in articleTags"
-          :key="tag"
-          closable
-          size="large"
-          :disable-transitions="false"
-          @close="handleClose(tag)"
-        >
-          {{ tag }}
-        </el-tag>
+  <div class="container">
+    <el-form
+      ref="articleFormRef"
+      style="max-width: 1200px"
+      :model="articleForm"
+      :rules="rules"
+      label-width="auto"
+      label-position="left"
+      size="default"
+      status-icon
+    >
+      <!--  标题  -->
+      <el-form-item label="Article Title" prop="title">
         <el-input
-          v-if="inputVisible"
-          ref="InputRef"
-          v-model="inputValue"
-          class="w-20"
-          size="default"
-          @keyup.enter="handleInputConfirm"
-          @blur="handleInputConfirm"
+          v-model="articleForm.articleTitle"
+          placeholder="input article title here"
         />
-        <el-button
-          v-else
-          class="button-new-tag"
-          size="default"
-          @click="showInput"
+      </el-form-item>
+      <!--  封面  -->
+      <el-form-item label="Article Cover" prop="cover">
+        <el-upload
+          :class="hideUpload ? 'hide' : ''"
+          :file-list="fileList"
+          action="#"
+          list-type="picture-card"
+          :auto-upload="false"
+          :on-preview="handlePictureCardPreview"
+          :on-remove="handlePictureCardRemove"
+          :on-change="handlePictureCardChange"
         >
-          + New Tag
+          <el-icon><Plus /></el-icon>
+        </el-upload>
+        <el-dialog v-model="dialogVisible">
+          <img
+            w-full
+            :src="dialogImageUrl"
+            alt="Preview Image"
+            style="max-height: 100%; max-width: 100%"
+          />
+        </el-dialog>
+      </el-form-item>
+      <!--  类别  -->
+      <el-form-item label="Article Category" prop="category">
+        <el-cascader
+          v-model="articleForm.categoryId"
+          :options="categories"
+          :props="props"
+          @change="handleCascadeChange"
+        />
+      </el-form-item>
+      <!--  标签  -->
+      <el-form-item label="Article Tags" prop="tags">
+        <div class="flex gap-2">
+          <el-tag
+            v-for="tag in articleTags"
+            :key="tag"
+            closable
+            size="large"
+            :disable-transitions="false"
+            @close="handleClose(tag)"
+          >
+            {{ tag }}
+          </el-tag>
+          <el-input
+            v-if="inputVisible"
+            ref="InputRef"
+            v-model="inputValue"
+            class="w-20"
+            size="default"
+            @keyup.enter="handleInputConfirm"
+            @blur="handleInputConfirm"
+          />
+          <el-button
+            v-else
+            class="button-new-tag"
+            size="default"
+            @click="showInput"
+          >
+            + New Tag
+          </el-button>
+        </div>
+      </el-form-item>
+      <!--  正文  -->
+      <el-form-item label="Article Content" prop="content">
+        <wang-editor ref="wangEditorRef"></wang-editor>
+      </el-form-item>
+      <!--  提交取消  -->
+      <el-form-item label=" ">
+        <el-button type="primary" @click="submitForm(articleFormRef)">
+          publish
         </el-button>
-      </div>
-    </el-form-item>
-    <!--  正文  -->
-    <el-form-item label="Article Content" prop="content">
-      <wang-editor ref="wangEditorRef"></wang-editor>
-    </el-form-item>
-    <!--  提交取消  -->
-    <el-form-item label=" ">
-      <el-button type="primary" @click="submitForm(articleFormRef)">
-        publish
-      </el-button>
-      <el-button @click="saveForm(articleFormRef)">save</el-button>
-    </el-form-item>
-  </el-form>
+        <el-button @click="saveForm(articleFormRef)">save</el-button>
+      </el-form-item>
+    </el-form>
+  </div>
+
 </template>
 
 <script lang="ts" setup>
