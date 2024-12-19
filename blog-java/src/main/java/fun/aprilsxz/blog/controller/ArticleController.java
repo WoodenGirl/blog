@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import java.util.List;
 
 @RestController
@@ -26,14 +27,9 @@ public class ArticleController {
     @Resource
     ArticleService articleService;
 
-    @GetMapping("/{categoryId}/{currentPage}/{pageSize}")
+    @GetMapping()
     @ApiOperation("通过categoryId分页查询文章")
-    @ApiImplicitParams({@ApiImplicitParam(name = "categoryId",value = "分类id"),
-                        @ApiImplicitParam(name = "currentPage",value = "当前页码"),
-                        @ApiImplicitParam(name = "pageSize",value = "每页条数")})
-    public Result<PageResult<ArticleBrief>> pageQueryByCategoryId(@PathVariable("categoryId") Integer categoryId,
-                                                                  @PathVariable("currentPage") Integer currentPage,
-                                                                  @PathVariable("pageSize") Integer pageSize){
+    public Result<PageResult<ArticleBrief>> pageQueryByCategoryId(@RequestParam @Min(1) Integer categoryId, @RequestParam Integer currentPage, @Min(1) @RequestParam Integer pageSize){
         PageResult<ArticleBrief> pageResult = articleService.queryByCategoryId(categoryId, currentPage, pageSize);
         return Result.ok(pageResult);
     }

@@ -3,6 +3,8 @@ export interface List {   // 添加
   listTitle: string   // 书单标题
   categoryId: number
   listStatus: number  // 书单发布状态0未发布，1发布
+  createTime?: number
+  updateTime?: number
 
   userId: string           // 用户id
   userRemarks: UserRemark[] // 图书评论数组

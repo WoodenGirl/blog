@@ -6,13 +6,14 @@
     <div v-for="dynamic of dynamics" :key="dynamic.dynamicId">
       <dynamic-brief :dynamic="dynamic" class="dynamic-brief" @rerender="fetchDynamics()"></dynamic-brief>
     </div>
+    <!--  分页  -->
     <el-pagination
       v-model:current-page="currentPage"
       :page-size="pageSize"
       size="default"
 
       layout="total, prev, pager, next"
-      :total="1000"
+      :total="total"
       @size-change="fetchDynamics"
       @current-change="fetchDynamics"
     />
@@ -40,9 +41,12 @@ const dynamics = ref<Dynamic[]>([])
 // 分页
 const currentPage = ref(1)
 const pageSize = ref(10)
-
+const total = ref(0)
 const fetchDynamics = async () => {
-  dynamics.value = await queryDynamic(category.value.categoryId, currentPage.value, pageSize.value).then((res) => res.data)
+  await queryDynamic(category.value.categoryId, currentPage.value, pageSize.value).then((res) => {
+    dynamics.value = res.data.list
+    total.value = res.data.total
+  })
 }
 fetchDynamics()
 

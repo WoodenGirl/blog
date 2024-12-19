@@ -11,7 +11,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        category_id,category_name,category_parent
+        category_id,category_name,category_parent,is_interrupt
     </sql>
     <select id="queryById" resultType="fun.aprilsxz.blog.domain.po.Category">
         WITH RECURSIVE SubTree AS (

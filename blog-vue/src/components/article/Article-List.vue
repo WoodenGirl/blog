@@ -7,7 +7,7 @@
       v-for="article in articles"
       :key="article.articleId"
     >
-      <article-card :article="article" @click="toPreview(article.articleId)"></article-card>
+      <article-card :article="article" @click="router.push('/articlePreview/' + article.articleId)"></article-card>
     </el-timeline-item>
   </el-timeline>
 
@@ -18,7 +18,7 @@
     size="default"
 
     layout="total, prev, pager, next"
-    :total="1000"
+    :total="total"
     @size-change="fetchArticles"
     @current-change="fetchArticles"
   />
@@ -46,16 +46,17 @@ const articles = ref<ArticleBrief[]>([])
 // 分页
 const currentPage = ref(1)
 const pageSize = ref(10)
+const total = ref(0)
 
 const fetchArticles = async () => {
-  articles.value = await queryBriefArticle(category.value.categoryId, currentPage.value, pageSize.value).then((res) => res.data)
+  await queryBriefArticle(category.value.categoryId, currentPage.value, pageSize.value).then((res) => {
+    articles.value = res.data.list
+    total.value = res.data.total
+  })
+
 }
 fetchArticles()
 
-// 点击查看文章
-const toPreview = (articleId: string) => {
-  router.push({path: `/articles/`+ articleId});
-}
 </script>
 
 <style scoped>

@@ -3,7 +3,7 @@
     <!--  文章  -->
     <div class="container">
       <!--  背景  -->
-      <el-image :src="'/images/' + article!.articleCover" fit="fill" />
+      <el-image :src="'/images/' + article.articleCover" fit="fill" />
 
       <!--  编辑  -->
       <el-row :gutter="20">
@@ -17,23 +17,23 @@
       <div class="bgContent">
         <!--  标题  -->
         <el-row :gutter="20">
-          <h1 class="center">{{ article!.articleTitle }}</h1>
+          <h1 class="center">{{ article.articleTitle }}</h1>
         </el-row>
         <!--  作者 时间  -->
         <el-row :gutter="20">
           <div class="flex gap-2 center">
-            <span>{{ article!.nickname }}</span>
-            <span><el-icon size="20"><clock/></el-icon>创建于{{ formatDate(article!.createTime) }}</span>
-            <span><el-icon size="20"><clock/></el-icon>最近更新于{{ formatDate(article!.updateTime) }}</span>
+            <span>{{ article.nickname }}</span>
+            <span><el-icon size="20"><clock/></el-icon>创建于{{ article.createTime }}</span>
+            <span><el-icon size="20"><clock/></el-icon>最近更新于{{ article.updateTime }}</span>
           </div>
         </el-row>
         <!--  分类 标签  -->
         <el-row :gutter="20">
           <div class="flex gap-2 center">
-            <span>文章分类: {{ article!.categoryName }}</span>
+            <span>文章分类: {{ article.categoryName }}</span>
             <span>标签:
           <el-tag
-            v-for="tag in article!.articleTags.split(',')"
+            v-for="tag in article.articleTags.split(',')"
             :key="tag"
             size="default"
             :disable-transitions="false"
@@ -46,12 +46,12 @@
 
       <!--  正文  -->
       <div class="w-e-text-container article-content-container">
-        <div v-html="article!.articleContent" data-slate-editor></div>
+        <div v-html="article.articleContent" data-slate-editor></div>
       </div>
     </div>
     <el-divider />
     <!--  评论  -->
-    <comment-all :linked-id="article!.articleId"></comment-all>
+<!--    <comment-all :linked-id="article!.articleId"></comment-all>-->
   </div>
 
 </template>
@@ -71,7 +71,22 @@ import { ref } from 'vue'
 const articleId = useRoute().params.articleId.toString()
 
 // 获取article
-const article = ref<ArticleDetail>()
+const article = ref<ArticleDetail>({
+  articleId: '',
+  articleTitle: '',
+  articleTags: '',
+  createTime: '',
+  updateTime: '',
+  articleCover: '',
+
+  articleContent: '',
+
+  userId: '',
+  nickname: '',
+
+  categoryId: '',
+  categoryName: '',
+})
 const fetchArticle = async () => {
   article.value = await queryDetailArticle(articleId).then(res => res.data)
 }

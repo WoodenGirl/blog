@@ -28,6 +28,7 @@ const router = createRouter({
           ]
         },
         { path: '/create', name: 'create',component: ArticleCreate },
+        { path: '/articlePreview/:articleId', name: 'articlePreview',component: ArticlePreview },
         { path: '/listCreate', name: 'listCreate',component: ListCreate },
         { path: '/acgPreview/:acgId', name: 'acgPreview',component: AcgPreview },
         { path: '/listPreview/:listId', name: 'listPreview',component: ListPreview },
