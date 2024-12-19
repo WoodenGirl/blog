@@ -27,6 +27,9 @@
           login
         </el-button>
       </el-form-item>
+
+      <el-image :src="qq" class="qqIcon" @click="qqLogin"></el-image>
+
     </el-form>
   </div>
 
@@ -38,6 +41,7 @@ import { reactive, ref } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import type { User } from '@/entity/user'
 import router from '@/router'
+import qq from '@/assets/images/qq.png'
 
 const loginFormRef = ref<FormInstance>()
 const loginForm = reactive<User>({
@@ -66,6 +70,9 @@ const login = async (formEl: FormInstance | undefined) => {
     }
   })
 }
+const qqLogin = () => {
+  window.open("https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=102569233&redirect_uri=https%3A%2F%2Fapi.aprilsxz.fun%2Flogin","TencentLogin");
+}
 
 const resetForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return
@@ -75,7 +82,7 @@ const resetForm = (formEl: FormInstance | undefined) => {
 
 <style scoped>
 .loginContainer {
-  background-image: url('@/assets/images/loginBg.jpeg');
+  background-image: url('@/assets/images/loginBg.jpg');
   background-size: cover;
   width: 100%;
   height: 100%;
@@ -97,5 +104,9 @@ const resetForm = (formEl: FormInstance | undefined) => {
 .loginBtn {
   width: 100%;
 }
+.qqIcon {
+  width: 5rem;
+}
+
 </style>
 

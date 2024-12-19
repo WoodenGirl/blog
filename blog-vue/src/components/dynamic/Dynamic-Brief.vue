@@ -3,7 +3,7 @@
     <el-row >
       <!--  头像  -->
       <el-col :span="1">
-        <el-avatar size="default" fit="cover" :src="dynamic.avatar"/>
+        <el-avatar size="default" fit="cover" :src="'/images/'+ dynamic.avatar"/>
       </el-col>
       <!--  昵称 创建时间 -->
       <el-col :span="21" style="margin-left: 1rem">

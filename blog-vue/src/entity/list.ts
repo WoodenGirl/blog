@@ -2,7 +2,7 @@ export interface List {   // 添加
   listId?: string      // 书单id
   listTitle: string   // 书单标题
   categoryId: number
-  listStatus: number  // 书单发布状态0未发布，1发布
+  listStatus: number  // 书单发布状态0私密1公开
   createTime?: number
   updateTime?: number
 

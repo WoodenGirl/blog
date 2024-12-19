@@ -68,7 +68,6 @@ import { useUserStore } from '@/stores/user'
 import { ref } from 'vue'
 import { ElMessage, type UploadProps, type UploadUserFile } from 'element-plus'
 import { addDynamic } from '@/api/dynamic'
-import { getNow } from '@/tool/time'
 import { putObject } from '@/tool/obs'
 import type { Dynamic } from '@/entity/dynamic'
 

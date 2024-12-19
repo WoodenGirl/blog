@@ -152,7 +152,8 @@ const remove = (data: CategoryTree) => {
 .el-tree{
   background-color: #ffffff;
   --el-tree-node-content-height: 50px;
-  --el-tree-node-hover-bg-color: #ECF5FF
+  --el-tree-node-hover-bg-color: #ECF5FF;
+  margin-right: 2rem;
 }
 .custom-tree-node{
   flex: 1;

@@ -1,34 +1,24 @@
 <template>
-  <div style="width:80%;">
-    <!--  文章  -->
-    <div class="container">
+  <div  class="container">
+    <!--  标头  -->
+    <div class="articleHead">
       <!--  背景  -->
       <el-image :src="'/images/' + article.articleCover" fit="fill" />
-
-      <!--  编辑  -->
-      <el-row :gutter="20">
-        <div class="flex gap-2 edit">
-          <a @click="edit()"> <Edit class="edit-icon"></Edit> </a>
-          <a @click="remove()"> <Delete class="edit-icon"></Delete> </a>
-        </div>
-      </el-row>
-
-      <!--  标头  -->
-      <div class="bgContent">
+      <div class="headText">
         <!--  标题  -->
-        <el-row :gutter="20">
+        <el-row>
           <h1 class="center">{{ article.articleTitle }}</h1>
         </el-row>
         <!--  作者 时间  -->
-        <el-row :gutter="20">
+        <el-row>
           <div class="flex gap-2 center">
             <span>{{ article.nickname }}</span>
-            <span><el-icon size="20"><clock/></el-icon>创建于{{ article.createTime }}</span>
-            <span><el-icon size="20"><clock/></el-icon>最近更新于{{ article.updateTime }}</span>
+            <span><el-icon size="20"><clock/></el-icon>创建于{{ formatDate(article.createTime) }}</span>
+            <span><el-icon size="20"><clock/></el-icon>最近更新于{{ formatDate(article.updateTime) }}</span>
           </div>
         </el-row>
         <!--  分类 标签  -->
-        <el-row :gutter="20">
+        <el-row>
           <div class="flex gap-2 center">
             <span>文章分类: {{ article.categoryName }}</span>
             <span>标签:
@@ -39,16 +29,20 @@
             :disable-transitions="false"
           >
             {{ tag }}
-          </el-tag></span>
+          </el-tag>
+        </span>
           </div>
         </el-row>
       </div>
-
-      <!--  正文  -->
-      <div class="w-e-text-container article-content-container">
-        <div v-html="article.articleContent" data-slate-editor></div>
-      </div>
     </div>
+
+    <el-divider />
+
+    <!--  正文  -->
+    <div class="w-e-text-container article-content-container">
+      <div v-html="article.articleContent" data-slate-editor></div>
+    </div>
+
     <el-divider />
     <!--  评论  -->
 <!--    <comment-all :linked-id="article!.articleId"></comment-all>-->
@@ -75,8 +69,8 @@ const article = ref<ArticleDetail>({
   articleId: '',
   articleTitle: '',
   articleTags: '',
-  createTime: '',
-  updateTime: '',
+  createTime: '2024-12-19',
+  updateTime: '2024-12-19',
   articleCover: '',
 
   articleContent: '',
@@ -102,24 +96,24 @@ const remove = () => {
     // 跳转上一页
     router.go(-1)
   })
-
 }
 </script>
 
 <style scoped>
-.el-image {
-  opacity: 0.5;
-  background-size: cover;
-  width: 100%;
-  height: 500px;
+.articleHead {
   position: relative;
 }
-.bgContent {
+.el-image {
+  opacity: 0.3;
+  background-size: cover;
   width: 100%;
-  position: absolute;
-  top: 150px;
+  height: 15rem;
 }
-
+.headText {
+  position: absolute;
+  top: 2rem;
+  left: 20rem;
+}
 .edit {
   position: absolute;
   top: -500px;

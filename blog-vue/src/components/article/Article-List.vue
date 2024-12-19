@@ -9,19 +9,20 @@
     >
       <article-card :article="article" @click="router.push('/articlePreview/' + article.articleId)"></article-card>
     </el-timeline-item>
+
+    <!-- 分页 -->
+    <el-pagination
+      v-model:current-page="currentPage"
+      :page-size="pageSize"
+      size="default"
+
+      layout="total, prev, pager, next"
+      :total="total"
+      @size-change="fetchArticles"
+      @current-change="fetchArticles"
+      v-if="total > 0"
+    />
   </el-timeline>
-
-  <!-- 分页 -->
-  <el-pagination
-    v-model:current-page="currentPage"
-    :page-size="pageSize"
-    size="default"
-
-    layout="total, prev, pager, next"
-    :total="total"
-    @size-change="fetchArticles"
-    @current-change="fetchArticles"
-  />
 
 </template>
 

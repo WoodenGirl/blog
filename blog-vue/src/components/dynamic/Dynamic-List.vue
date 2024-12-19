@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div style="width:70%;">
     <!-- 发表动态  -->
     <dynamic-input :category-id="category!.categoryId" @rerender="fetchDynamics()"></dynamic-input>
     <!-- 展示动态  -->
@@ -16,6 +16,7 @@
       :total="total"
       @size-change="fetchDynamics"
       @current-change="fetchDynamics"
+      v-if="total > 0"
     />
   </div>
 
