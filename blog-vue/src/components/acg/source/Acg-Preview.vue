@@ -31,7 +31,6 @@
           </p>
           <p>年份：{{ acgDetail.acg.acgYear }}</p>
           <p>地区：{{ acgDetail.acg.acgRegion }}</p>
-          <p v-if="acgDetail.acg.acgType != 6">状态：{{ acgDetail.acg.acgState == 0 ? '连载中' : '已完结'}}</p>
         </div>
       </el-col>
     </el-row>
@@ -63,7 +62,6 @@ import CommentAll from '@/components/comment/Comment-All.vue'
 const acgId = useRoute().params.acgId
 const acgSingle = ref<Acg>({
   acgId: '456',   // id
-  acgType: 2,
   acgName: '夏目友人帐 第七季', // 名称
   acgAuthor: '绿川幸', // 作者
   acgActor: '神谷浩史', // 演员

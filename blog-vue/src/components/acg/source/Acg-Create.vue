@@ -155,7 +155,7 @@ import {
   type UploadUserFile
 } from 'element-plus'
 import router from '@/router'
-import { type Acg, acgRegions, acgStates, acgTypes, acgYears } from '@/entity/acg'
+import { type Acg, acgRegions, acgStates, acgYears } from '@/entity/acg'
 import { queryCategory } from '@/api/category'
 import { putObject } from '@/tool/obs'
 import { useCategoryStore } from '@/stores/category'
@@ -233,7 +233,6 @@ const acgFormRef = ref<FormInstance>()
 // 表单数据
 const acgForm = reactive<Acg>({
   acgName: '', // 名称
-  acgType: '', // acg类型
   acgCover: '', // 封面
   categoryId: '', // 类型
   acgTags: '', // 标签

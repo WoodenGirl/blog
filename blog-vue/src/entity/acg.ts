@@ -2,7 +2,6 @@ import type { Category } from '@/entity/category'
 
 export interface Acg {
   acgId?: string,   // id
-  acgType: number, // 0: 小说，1：漫画，2：动漫，3：电视剧，4：电影，5：综艺，6：游戏
   acgName: string, // 名称
   acgAuthor: string, // 作者
   acgActor: string, // 主演
@@ -39,27 +38,7 @@ const gameGenre = ['多人在线', '策略博弈', '角色扮演', '动作冒险
 const filmGenre = ['古装', '现代', '武侠', '科幻', '奇幻', '权谋', '悬疑', '警匪', '家庭', '战争', '喜剧', '犯罪', '正剧']
 const varietyGenre = ['真人秀', '访谈', '娱乐', '人文', '科普']
 
-// 类型
-const acgTypes = [
-  {label: '小说', value: '0'},
-  {label: '漫画', value: '1'},
-  {label: '动漫', value: '2'},
-  {label: '电视剧', value: '3'},
-  {label: '电影', value: '4'},
-  {label: '综艺', value: '5'},
-  {label: '游戏', value: '6'}
-]
-const getAcgType = async (category: Category) => {
-  switch (category.categoryName) {
-    case '小说': return 0;
-    case '漫画': return 1;
-    case '动漫': return 2;
-    case '电视剧': return 3;
-    case '电影': return 4;
-    case '综艺': return 5;
-    case '游戏': return 6;
-  }
-}
+
 // 地区
 const acgRegions = ['大陆', '港台', '韩国', '日本', '美国', '英国', '其它']
 // 年份
@@ -70,7 +49,7 @@ const acgStates = [
   {label: '连载中', value: '0'}
 ]
 
-export {acgTypes,getAcgType, acgRegions, acgYears, acgStates}
+export { acgRegions, acgYears, acgStates}
 
 
 
