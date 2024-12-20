@@ -47,6 +47,7 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import { Delete, Edit, Plus } from '@element-plus/icons-vue'
 import { useCategoryStore } from '@/stores/category'
 import type { Category, CategoryTree } from '@/entity/category'
+import router from '@/router'
 
 
 const props = defineProps(['isEdit', 'categoryParent'])

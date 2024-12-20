@@ -11,8 +11,9 @@ export const useCategoryStore = defineStore('category', () => {
   })
   const isEdit = ref(true)
   const categoryParent = ref(0)
+  const activeName = ref('article')
 
-  return { category, isEdit, categoryParent }}, {
+  return { category, isEdit, categoryParent, activeName }}, {
   persist: {
     storage: sessionStorage,
   }

@@ -34,7 +34,7 @@ export function addArticle(article: Article) {
 export function updateArticle(article: Article) {
   return instance({
     url: "/article",
-    method: "post",
+    method: "put",
     data: article,
   })
 }

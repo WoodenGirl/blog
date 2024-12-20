@@ -7,7 +7,7 @@
       v-for="article in articles"
       :key="article.articleId"
     >
-      <article-card :article="article" @click="router.push('/articlePreview/' + article.articleId)"></article-card>
+      <article-card :article="article" @click="router.push('/articlePreview/' + article.articleId)" @rerender="fetchArticles"></article-card>
     </el-timeline-item>
 
     <!-- 分页 -->
@@ -33,12 +33,12 @@ import router from '@/router'
 import { storeToRefs } from 'pinia'
 import type { ArticleBrief } from '@/entity/article'
 import { useCategoryStore } from '@/stores/category'
-import { ref, watch } from 'vue'
+import { nextTick, ref, watch } from 'vue'
 import { queryBriefArticle } from '@/api/article'
 
 const {category} = storeToRefs(useCategoryStore())
 
-watch(() => category.value, () => {
+watch(() => (category.value), () => {
   fetchArticles()
 })
 
@@ -54,9 +54,8 @@ const fetchArticles = async () => {
     articles.value = res.data.list
     total.value = res.data.total
   })
-
 }
-fetchArticles()
+
 
 </script>
 

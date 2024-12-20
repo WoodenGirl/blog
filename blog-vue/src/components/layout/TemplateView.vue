@@ -4,9 +4,14 @@
       <category-all :is-edit="isEdit" :category-parent="categoryParent"></category-all>
     </el-aside>
     <el-main class="templateMain">
-      <el-tabs v-model="activeName" class="demo-tabs" tab-position="right">
+      <el-tabs
+        v-model="activeName"
+        class="demo-tabs"
+        tab-position="right"
+        @tab-click="handleClick"
+      >
         <router-view :key="$route.fullPath"></router-view>
-        <el-tab-pane label="article" :name="articleName" lazy>
+        <el-tab-pane label="article" name="article" lazy>
           <article-list></article-list>
         </el-tab-pane>
         <el-tab-pane label="dynamic" name="dynamic" lazy>
@@ -23,14 +28,13 @@ import { storeToRefs } from 'pinia'
 import { useCategoryStore } from '@/stores/category'
 import DynamicList from '@/components/dynamic/Dynamic-List.vue'
 import ArticleList from '@/components/article/Article-List.vue'
-import { ref } from 'vue'
+import type { TabsPaneContext } from 'element-plus'
 
-const {isEdit, categoryParent } = storeToRefs(useCategoryStore())
+const {isEdit, categoryParent, activeName } = storeToRefs(useCategoryStore())
 
-const activeName = ref('first')
-const articleName = ref()
-articleName.value = categoryParent.value != 2 ? 'first' : 'article'
-
+const handleClick = (tab: TabsPaneContext) => {
+  activeName.value = tab.paneName!.toString()
+}
 
 </script>
 

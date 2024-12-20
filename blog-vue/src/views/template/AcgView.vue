@@ -1,8 +1,8 @@
 <template>
-    <el-tab-pane label="source" name="first">
+    <el-tab-pane label="source" name="source">
       <acg-index></acg-index>
     </el-tab-pane>
-    <el-tab-pane label="list" name="second">
+    <el-tab-pane label="list" name="list">
       <list-index></list-index>
     </el-tab-pane>
 </template>

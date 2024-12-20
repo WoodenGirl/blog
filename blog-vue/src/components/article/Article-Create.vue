@@ -115,6 +115,8 @@ import { useUserStore } from '@/stores/user'
 import type { Article, ArticleDetail } from '@/entity/article'
 import { queryCategory } from '@/api/category'
 import { putObject } from '@/tool/obs'
+import { routes } from 'vue-router/auto-routes'
+import { useRoute } from 'vue-router'
 
 // 图片
 const fileList = ref<UploadUserFile[]>([])
@@ -183,12 +185,13 @@ const handleInputConfirm = () => {
 }
 
 // 编辑器
-const wangEditorRef = ref<InstanceType<typeof WangEditor>>(null)
+const wangEditorRef = ref<InstanceType<typeof WangEditor> | null>(null)
 
 // 表单
 const articleFormRef = ref<FormInstance>()
 // 表单数据
 const articleForm = reactive<Article>({
+  articleId: '',
   articleTitle: '',
   articleCover: '',
   userId: useUserStore().user.userId,
@@ -199,28 +202,27 @@ const articleForm = reactive<Article>({
 })
 const rules = reactive<FormRules<Article>>({})
 
-const isEdit = ref(false)
-const articleId = ref('')
 // 编辑
-if (isEdit.value) {
-  const article = ref<ArticleDetail>(null)
-  article.value = queryDetailArticle(articleId.value).then(res => res.data)  // 显示文章
+const articleId = useRoute().query.articleId?.toString()
+if (articleId) {
+  const article = ref<ArticleDetail | null>(null)
+  queryDetailArticle(articleId).then(res => article.value = res.data)  // 显示文章
   onMounted(() => {
     setTimeout(() => {
-      wangEditorRef.value.valueHtml = article.value!.articleContent
-    }, 1500)
+      wangEditorRef.value!.valueHtml = article.value!.articleContent
+      // 显示封面
+      articleForm.articleCover = article.value!.articleCover
+      hideUpload.value = true
+      fileList.value.push({name: article.value!.articleCover, url: "/images/" + article.value!.articleCover})
+      // 其他数据
+      articleForm.articleId = article.value!.articleId
+      articleForm.articleTitle = article.value!.articleTitle
+      articleForm.categoryId = article.value!.categoryId
+      articleForm.articleContent = article.value!.articleContent
+      articleTags.value = article.value!.articleTags.split(',')
+    }, 1000)
   })
-  // 显示封面
-  articleForm.articleCover = article.value!.articleCover
-  hideUpload.value = true
-  fileList.value.push({name: article.value!.articleCover, url: "/images/" + article.value!.articleCover})
-  // 其他数据
-  articleForm.articleTitle = article.value!.articleTitle
-  articleForm.categoryId = article.value!.categoryId
-  articleForm.articleContent = article.value!.articleContent
-  articleTags.value = article.value!.articleTags.split(',')
 }
-
 
 const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
@@ -235,9 +237,9 @@ const submitForm = async (formEl: FormInstance | undefined) => {
       }
       // 其他数据赋值
       articleForm.articleTags = articleTags.value.toString()
-      articleForm.articleContent = wangEditorRef.value.valueHtml
+      articleForm.articleContent = wangEditorRef.value!.valueHtml
 
-      if (isEdit.value) { // 修改
+      if (articleId) { // 修改
         updateArticle(articleForm).then(res => {
           if (res.code == 200) {
             ElMessage.success("修改成功！")
@@ -250,8 +252,8 @@ const submitForm = async (formEl: FormInstance | undefined) => {
           }
         })
       }
-      // 跳转到首页
-      router.push('/');
+      // 返回上一页并刷新
+      router.go(-1)
     } else {
       console.log('error submit!', fields)
     }

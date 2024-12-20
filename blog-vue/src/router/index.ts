@@ -27,7 +27,7 @@ const router = createRouter({
             { path: '/life', name: 'life', component: LifeView},
           ]
         },
-        { path: '/create', name: 'create',component: ArticleCreate },
+        { path: '/articleCreate', name: 'articleCreate',component: ArticleCreate },
         { path: '/articlePreview/:articleId', name: 'articlePreview',component: ArticlePreview },
         { path: '/listCreate', name: 'listCreate',component: ListCreate },
         { path: '/acgPreview/:acgId', name: 'acgPreview',component: AcgPreview },

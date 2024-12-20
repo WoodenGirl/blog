@@ -14,7 +14,7 @@
     <el-menu-item index="4">Technique</el-menu-item>
     <el-menu-item index="5">Life</el-menu-item>
 
-    <el-menu-item index="7"><router-link to="/create">Create</router-link></el-menu-item>
+    <el-menu-item index="7"><router-link to="/articleCreate">Create</router-link></el-menu-item>
     <el-menu-item index="8"><router-link to="/login">Login</router-link></el-menu-item>
   </el-menu>
 </template>
@@ -35,30 +35,35 @@ const handleSelect = (key: string) => {
     case '1': {
       isEdit.value = true
       categoryParent.value = 0
+      useCategoryStore().activeName = 'article'
       router.push('/');
       break
     }
     case '2': {
       isEdit.value = false
       categoryParent.value = 2
+      useCategoryStore().activeName = 'source'
       router.push('/acg');
       break
     }
     case '3': {
       isEdit.value = false
       categoryParent.value = 3
+      useCategoryStore().activeName = 'article'
       router.push('/interest');
       break
     }
     case '4': {
       isEdit.value = false
       categoryParent.value = 4
+      useCategoryStore().activeName = 'article'
       router.push('/technique');
       break
     }
     case '5': {
       isEdit.value = false
       categoryParent.value = 5
+      useCategoryStore().activeName = 'article'
       router.push('/life');
       break
     }
