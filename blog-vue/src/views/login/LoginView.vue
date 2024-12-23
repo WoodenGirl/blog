@@ -28,7 +28,9 @@
         </el-button>
       </el-form-item>
 
-      <el-image :src="qq" class="qqIcon" @click="qqLogin"></el-image>
+      <a :href="loginUrl">
+        <el-image :src="qq" class="qqIcon"></el-image>
+      </a>
 
     </el-form>
   </div>
@@ -75,11 +77,10 @@ const resetForm = (formEl: FormInstance | undefined) => {
   formEl.resetFields()
 }
 
-
-const qqLogin = () => {
-  const loginUrl = 'https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=' + import.meta.env.VITE_APP_ID + '&redirect_uri=https%3A%2F%2Fwww.aprilsxz.fun%2Flogin'
+const loginUrl = 'https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=' + import.meta.env.VITE_APP_ID + '&redirect_uri=https%3A%2F%2Fwww.aprilsxz.fun%2Flogin'
+/*const qqLogin = () => {
   window.open(loginUrl,"TencentLogin");
-}
+}*/
 // 获取code
 const code = useRoute().query.code?.toString()
 console.log(code)

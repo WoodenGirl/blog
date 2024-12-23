@@ -14,8 +14,13 @@
     <el-menu-item index="4">Technique</el-menu-item>
     <el-menu-item index="5">Life</el-menu-item>
 
-    <el-menu-item index="7"><router-link to="/articleCreate">Create</router-link></el-menu-item>
-    <el-menu-item index="8"><router-link to="/login">Login</router-link></el-menu-item>
+    <el-menu-item index="6"><router-link to="/articleCreate">Create</router-link></el-menu-item>
+    <el-menu-item index="7" v-if="useUserStore().user">
+      <router-link to="/userCenter">
+        <el-avatar :src="useUserStore().user.avatar"></el-avatar>
+      </router-link>
+    </el-menu-item>
+    <el-menu-item index="7" v-else><router-link to="/login">Login</router-link></el-menu-item>
   </el-menu>
 </template>
 
@@ -25,6 +30,7 @@ import logo from '@/assets/images/logo.png'
 import { useCategoryStore } from '@/stores/category'
 import { storeToRefs } from 'pinia'
 import router from '@/router'
+import { useUserStore } from '@/stores/user'
 
 const activeIndex = ref('0')
 

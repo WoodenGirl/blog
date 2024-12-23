@@ -15,6 +15,7 @@ import AcgCreate from '@/components/acg/source/Acg-Create.vue'
 import ListPreview from '@/components/acg/list/List-Preview.vue'
 import ListCreate from '@/components/acg/list/List-Create.vue'
 import DynamicPreview from '@/components/dynamic/Dynamic-Preview.vue'
+import UserCenter from '@/views/user/UserCenter.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,6 +29,7 @@ const router = createRouter({
             { path: '/life', name: 'life', component: LifeView},
           ]
         },
+        { path: '/userCenter', name: 'userCenter',component: UserCenter },
         { path: '/articleCreate', name: 'articleCreate',component: ArticleCreate },
         { path: '/articlePreview/:articleId', name: 'articlePreview',component: ArticlePreview },
         { path: '/dynamicPreview/:dynamicId', name: 'dynamicPreview',component: DynamicPreview },
