@@ -14,6 +14,7 @@ import AcgPreview from '@/components/acg/source/Acg-Preview.vue'
 import AcgCreate from '@/components/acg/source/Acg-Create.vue'
 import ListPreview from '@/components/acg/list/List-Preview.vue'
 import ListCreate from '@/components/acg/list/List-Create.vue'
+import DynamicPreview from '@/components/dynamic/Dynamic-Preview.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,8 +30,9 @@ const router = createRouter({
         },
         { path: '/articleCreate', name: 'articleCreate',component: ArticleCreate },
         { path: '/articlePreview/:articleId', name: 'articlePreview',component: ArticlePreview },
-        { path: '/listCreate', name: 'listCreate',component: ListCreate },
+        { path: '/dynamicPreview/:dynamicId', name: 'dynamicPreview',component: DynamicPreview },
         { path: '/acgPreview/:acgId', name: 'acgPreview',component: AcgPreview },
+        { path: '/listCreate', name: 'listCreate',component: ListCreate },
         { path: '/listPreview/:listId', name: 'listPreview',component: ListPreview },
       ]
     },

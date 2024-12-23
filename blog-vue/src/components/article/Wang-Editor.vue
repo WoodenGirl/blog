@@ -12,6 +12,7 @@
       :defaultConfig="editorConfig"
       :mode="mode"
       @onCreated="handleCreated"
+      @focusout="$emit('focusout')"
     />
   </div>
 </template>
@@ -24,6 +25,7 @@ import { Editor, Toolbar } from '@wangeditor-next/editor-for-vue'
 import { putObject } from '@/tool/obs'
 import type { IEditorConfig } from '@wangeditor-next/editor'
 
+defineEmits(['focusout'])
 // 编辑器实例，必须用 shallowRef
 const editorRef = shallowRef()
 

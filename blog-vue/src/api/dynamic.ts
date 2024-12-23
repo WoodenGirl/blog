@@ -13,8 +13,14 @@ export function queryDynamic(categoryId: number, currentPage: number, pageSize: 
     }
   })
 }
+// 根据id查询具体动态
+export function queryDynamicById(dynamicId: string) {
+  return instance({
+    url: "/dynamic/" + dynamicId,
+    method: "get",
+  })
+}
 // 添加动态
-// 待修改formdata
 export function addDynamic(dynamic: Dynamic) {
   return instance({
     url: "/dynamic",

@@ -51,6 +51,12 @@ public class DynamicServiceImpl extends ServiceImpl<DynamicMapper, Dynamic>
     }
 
     @Override
+    public DynamicVO queryDetailById(String dynamicId) {
+
+        return dynamicMapper.queryDetailById(dynamicId);
+    }
+
+    @Override
     public void addDynamic(DynamicDto dynamicDto) {
         Dynamic dynamic = new Dynamic();
         BeanUtils.copyProperties(dynamicDto,dynamic);

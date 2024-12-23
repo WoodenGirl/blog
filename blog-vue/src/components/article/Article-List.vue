@@ -7,7 +7,11 @@
       v-for="article in articles"
       :key="article.articleId"
     >
-      <article-card :article="article" @click="router.push('/articlePreview/' + article.articleId)" @rerender="fetchArticles"></article-card>
+      <article-card
+        :article="article"
+        @click="router.push('/articlePreview/' + article.articleId)"
+        @rerender="fetchArticles">
+      </article-card>
     </el-timeline-item>
 
     <!-- 分页 -->
@@ -33,7 +37,7 @@ import router from '@/router'
 import { storeToRefs } from 'pinia'
 import type { ArticleBrief } from '@/entity/article'
 import { useCategoryStore } from '@/stores/category'
-import { nextTick, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 import { queryBriefArticle } from '@/api/article'
 
 const {category} = storeToRefs(useCategoryStore())

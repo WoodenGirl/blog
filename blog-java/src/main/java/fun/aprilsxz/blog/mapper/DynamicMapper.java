@@ -15,6 +15,8 @@ import java.util.List;
 public interface DynamicMapper extends BaseMapper<Dynamic> {
 
     List<DynamicVO> queryByCategoryId(Integer categoryId);
+
+     DynamicVO queryDetailById(String dynamicId);
 }
 
 

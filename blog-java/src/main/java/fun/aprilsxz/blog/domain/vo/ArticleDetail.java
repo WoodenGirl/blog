@@ -29,7 +29,7 @@ public class ArticleDetail {
     /**
      * 文字标签
      */
-    private String articleTags;
+    private String[] articleTags;
 
     /**
      * 分类id

@@ -11,10 +11,10 @@
         @tab-click="handleClick"
       >
         <router-view :key="$route.fullPath"></router-view>
-        <el-tab-pane label="article" name="article" lazy>
+        <el-tab-pane label="article" name="article">
           <article-list></article-list>
         </el-tab-pane>
-        <el-tab-pane label="dynamic" name="dynamic" lazy>
+        <el-tab-pane label="dynamic" name="dynamic">
           <dynamic-list></dynamic-list>
         </el-tab-pane>
       </el-tabs>
@@ -31,7 +31,6 @@ import ArticleList from '@/components/article/Article-List.vue'
 import type { TabsPaneContext } from 'element-plus'
 
 const {isEdit, categoryParent, activeName } = storeToRefs(useCategoryStore())
-
 const handleClick = (tab: TabsPaneContext) => {
   activeName.value = tab.paneName!.toString()
 }

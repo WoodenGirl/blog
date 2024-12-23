@@ -2,7 +2,7 @@
     <el-tab-pane label="source" name="source">
       <acg-index></acg-index>
     </el-tab-pane>
-    <el-tab-pane label="list" name="list">
+    <el-tab-pane label="list" name="list" lazy>
       <list-index></list-index>
     </el-tab-pane>
 </template>

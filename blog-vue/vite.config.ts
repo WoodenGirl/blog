@@ -30,7 +30,6 @@ export default defineConfig({
     }
   }
 })
-
 export const module = {
 
 };

@@ -1,13 +1,10 @@
 package fun.aprilsxz.blog.mapper;
 
-import fun.aprilsxz.blog.domain.dto.ArticleDto;
 import fun.aprilsxz.blog.domain.po.Article;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import fun.aprilsxz.blog.domain.vo.ArticleBrief;
 import fun.aprilsxz.blog.domain.vo.ArticleDetail;
-import fun.aprilsxz.blog.domain.vo.ArticleVO;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 

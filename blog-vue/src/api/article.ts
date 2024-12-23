@@ -18,7 +18,7 @@ export function queryBriefArticle(categoryId: number, currentPage: number, pageS
 // 根据文章id查询详细文章，返回数据类型ArticleDetail
 export function queryDetailArticle(articleId: string) {
   return instance({
-    url: "/article/articleId/" + articleId,
+    url: "/article/" + articleId,
     method: "get",
   })
 }

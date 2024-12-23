@@ -24,7 +24,7 @@ public class ArticleBrief {
     /**
      * 文字标签
      */
-    private String articleTags;
+    private String[] articleTags;
 
     /**
      * 分类名

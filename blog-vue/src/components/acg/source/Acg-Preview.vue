@@ -21,7 +21,7 @@
           <p>类型：{{ acgDetail.categoryName }}</p>
           <p class="flex gap-2">标签:
             <el-tag
-              v-for="tag in acgDetail.acg.acgTags.split(',')"
+              v-for="tag in acgDetail.acg.acgTags"
               :key="tag"
               size="default"
               :disable-transitions="false"

@@ -4,7 +4,12 @@
     <dynamic-input :category-id="category!.categoryId" @rerender="fetchDynamics()"></dynamic-input>
     <!-- 展示动态  -->
     <div v-for="dynamic of dynamics" :key="dynamic.dynamicId">
-      <dynamic-brief :dynamic="dynamic" class="dynamic-brief" @rerender="fetchDynamics()"></dynamic-brief>
+      <dynamic-card
+        :dynamic="dynamic"
+        class="dynamic-brief"
+        @rerender="fetchDynamics()"
+        @click="router.push('/dynamicPreview/' + dynamic.dynamicId)"
+      ></dynamic-card>
     </div>
     <!--  分页  -->
     <el-pagination
@@ -23,13 +28,14 @@
 </template>
 
 <script setup lang="ts">
-import DynamicBrief from '@/components/dynamic/Dynamic-Brief.vue'
 import { queryDynamic } from '@/api/dynamic'
 import { ref, watch } from 'vue'
 import DynamicInput from '@/components/dynamic/Dynamic-Input.vue'
 import type { Dynamic } from '@/entity/dynamic'
 import { storeToRefs } from 'pinia'
 import { useCategoryStore } from '@/stores/category'
+import router from '@/router'
+import DynamicCard from '@/components/dynamic/Dynamic-Card.vue'
 
 const {category} = storeToRefs(useCategoryStore())
 

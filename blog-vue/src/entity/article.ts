@@ -4,7 +4,7 @@ export interface Article {
   articleCover: string
   userId: string
   categoryId: string
-  articleTags: string
+  articleTags: string[]
   articleContent: string
   createTime?: string
   updateTime?: string
@@ -14,7 +14,7 @@ export interface Article {
 export interface ArticleBrief {
   articleId: string,
   articleTitle: string,
-  articleTags: string,
+  articleTags: string[],
   createTime: string,
   updateTime: string,
   articleCover: string,
@@ -29,7 +29,7 @@ export interface ArticleBrief {
 export interface ArticleDetail {
   articleId: string,
   articleTitle: string,
-  articleTags: string,
+  articleTags: string[],
   createTime: string,
   updateTime: string,
   articleCover: string,

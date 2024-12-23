@@ -65,7 +65,7 @@
         <el-form-item prop="tags">
               <div class="flex gap-2">
                 <el-tag
-                  v-for="tag in acgTags"
+                  v-for="tag in acgForm.acgTags"
                   :key="tag"
                   closable
                   size="large"
@@ -210,9 +210,8 @@ const inputValue = ref('')
 const inputVisible = ref(false)
 const InputRef = ref<InstanceType<typeof ElInput>>()
 
-const acgTags = ref(["tag 1", "tag 2"])
 const handleClose = (tag: string) => {
-  acgTags.value.splice(acgTags.value.indexOf(tag), 1)
+  acgForm.acgTags.splice(acgForm.acgTags.indexOf(tag), 1)
 }
 const showInput = () => {
   inputVisible.value = true
@@ -222,7 +221,7 @@ const showInput = () => {
 }
 const handleInputConfirm = () => {
   if (inputValue.value) {
-    acgTags.value.push(inputValue.value)
+    acgForm.acgTags.push(inputValue.value)
   }
   inputVisible.value = false
   inputValue.value = ''
@@ -235,7 +234,7 @@ const acgForm = reactive<Acg>({
   acgName: '', // 名称
   acgCover: '', // 封面
   categoryId: '', // 类型
-  acgTags: '', // 标签
+  acgTags: [], // 标签
   acgState: '', // 状态
   acgAuthor: '', // 作者
   acgActor: '', // 演员
@@ -259,7 +258,6 @@ const submitForm = async (formEl: FormInstance | undefined) => {
       putObject(fileName, file.raw)
       acgForm.acgCover = fileName*/
       // 其他数据赋值
-      acgForm.acgTags = acgTags.value.toString()
       acgForm.acgIntro = valueToHtml(acgForm.acgIntro)
       // 添加
 

@@ -3,6 +3,7 @@ package fun.aprilsxz.blog.controller;
 import fun.aprilsxz.blog.domain.common.PageResult;
 import fun.aprilsxz.blog.domain.common.Result;
 import fun.aprilsxz.blog.domain.dto.DynamicDto;
+import fun.aprilsxz.blog.domain.vo.ArticleDetail;
 import fun.aprilsxz.blog.domain.vo.DynamicVO;
 import fun.aprilsxz.blog.service.DynamicService;
 import io.swagger.annotations.Api;
@@ -30,6 +31,13 @@ public class DynamicController {
     public Result<PageResult<DynamicVO>> queryByCategoryId(@RequestParam @Min(1) Integer categoryId, @RequestParam Integer currentPage, @Min(1) @RequestParam Integer pageSize){
         PageResult<DynamicVO> pageResult = dynamicService.queryByCategoryId(categoryId,currentPage,pageSize);
         return Result.ok(pageResult);
+    }
+
+    @GetMapping("/{dynamicId}")
+    @ApiOperation("通过dynamicId查询详细动态")
+    public Result<DynamicVO> queryDetailById(@PathVariable("dynamicId") String dynamicId){
+        DynamicVO dynamicVO = dynamicService.queryDetailById(dynamicId);
+        return Result.ok(dynamicVO);
     }
 
     @PostMapping()

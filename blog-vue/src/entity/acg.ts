@@ -12,7 +12,7 @@ export interface Acg {
   acgAddition: string, // 补充信息
   acgState: number, // 状态 '0': 连载中，'1': 已完结
   acgChapter: number, // 章节
-  acgTags: string,  // 标签 大女主等
+  acgTags: string[],  // 标签 大女主等
 
   categoryId: number, // 类型
 }

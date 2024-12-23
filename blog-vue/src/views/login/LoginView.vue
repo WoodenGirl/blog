@@ -42,13 +42,14 @@ import type { FormInstance, FormRules } from 'element-plus'
 import type { User } from '@/entity/user'
 import router from '@/router'
 import qq from '@/assets/images/qq.png'
+import { useRoute } from 'vue-router'
+import { loginByQQ } from '@/api/QQLogin'
 
 const loginFormRef = ref<FormInstance>()
 const loginForm = reactive<User>({
   nickname: 'Hello',
   password: '12345678'
 })
-
 const loginRules = reactive<FormRules<User>>({
   nickname: [
     { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' },
@@ -57,7 +58,6 @@ const loginRules = reactive<FormRules<User>>({
     {min: 8, max: 20, message: 'Length should be 8 to 20', trigger: 'blur', },
   ],
 })
-
 const login = async (formEl: FormInstance | undefined) => {
   console.log("click")
   if (!formEl) return
@@ -70,14 +70,27 @@ const login = async (formEl: FormInstance | undefined) => {
     }
   })
 }
-const qqLogin = () => {
-  window.open("https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=102569233&redirect_uri=https%3A%2F%2Fapi.aprilsxz.fun%2Flogin","TencentLogin");
-}
-
 const resetForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return
   formEl.resetFields()
 }
+
+
+const qqLogin = () => {
+  const loginUrl = 'https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=' + import.meta.env.VITE_APP_ID + '&redirect_uri=https%3A%2F%2Fwww.aprilsxz.fun%2Flogin'
+  window.open(loginUrl,"TencentLogin");
+}
+// 获取code
+const code = useRoute().query.code?.toString()
+console.log(code)
+if (code) {
+  loginByQQ(code).then(res => {
+    if (res.code === 200) {
+      router.push('/')
+    }
+  })
+}
+
 </script>
 
 <style scoped>

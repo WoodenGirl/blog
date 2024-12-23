@@ -17,7 +17,7 @@
         <!--   文章标签   -->
         <p class="flex gap-2">文章标签:
           <el-tag
-          v-for="tag in article.articleTags.split(',')"
+          v-for="tag in article.articleTags"
           :key="tag"
           :disable-transitions="false"
           size="default"

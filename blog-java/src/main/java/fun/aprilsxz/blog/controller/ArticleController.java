@@ -34,11 +34,11 @@ public class ArticleController {
         return Result.ok(pageResult);
     }
 
-    @GetMapping("/articleId/{articleId}")
+    @GetMapping("/{articleId}")
     @ApiOperation("通过articleId查询详细文章")
     public Result<ArticleDetail> queryDetailById(@PathVariable("articleId") String articleId){
-        ArticleDetail articleVOList = articleService.queryDetailById(articleId);
-        return Result.ok(articleVOList);
+        ArticleDetail articleVO = articleService.queryDetailById(articleId);
+        return Result.ok(articleVO);
     }
 
     @PostMapping()

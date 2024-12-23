@@ -26,5 +26,5 @@ public class DynamicDto {
     @ApiModelProperty("动态内容")
     private String dynamicContent;
     @ApiModelProperty("动态图片url")
-    private String dynamicImages;
+    private String[] dynamicImages;
 }

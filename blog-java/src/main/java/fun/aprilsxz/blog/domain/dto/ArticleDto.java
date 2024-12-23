@@ -26,7 +26,7 @@ public class ArticleDto {
 
     @NotBlank
     @ApiModelProperty("文章标签")
-    private String articleTags;
+    private String[] articleTags;
 
     @NotNull
     @Min(1)

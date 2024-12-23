@@ -17,6 +17,8 @@ public interface DynamicService extends IService<Dynamic> {
 
     PageResult<DynamicVO> queryByCategoryId(Integer categoryId, Integer currentPage, Integer pageSize);
 
+    DynamicVO queryDetailById(String dynamicId);
+
     void addDynamic(DynamicDto dynamicDto);
 
     void removeByDynamicId(String dynamicId);

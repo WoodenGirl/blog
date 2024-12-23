@@ -23,7 +23,7 @@
             <span>文章分类: {{ article.categoryName }}</span>
             <span>标签:
           <el-tag
-            v-for="tag in article.articleTags.split(',')"
+            v-for="tag in article.articleTags"
             :key="tag"
             size="default"
             :disable-transitions="false"
@@ -68,7 +68,7 @@ const articleId = useRoute().params.articleId.toString()
 const article = ref<ArticleDetail>({
   articleId: '',
   articleTitle: '',
-  articleTags: '',
+  articleTags: [],
   createTime: '2024-12-19',
   updateTime: '2024-12-19',
   articleCover: '',
