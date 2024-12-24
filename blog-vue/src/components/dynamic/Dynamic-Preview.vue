@@ -37,7 +37,7 @@
 
    <el-divider/>
    <!--  评论详情  -->
-   <comment-all :linked-id="dynamic.dynamicId"></comment-all>
+   <comment-all :link-id="dynamicId"></comment-all>
  </div>
 </template>
 
@@ -53,7 +53,7 @@ import { queryDynamicById } from '@/api/dynamic'
 // 接收参数
 const dynamicId = useRoute().params.dynamicId.toString()
 const dynamic = ref<DynamicDetail>({
-  dynamicId: '',
+  dynamicId: dynamicId,
   dynamicContent: '',
   createTime: '2024-12-23',
   dynamicImages: [],

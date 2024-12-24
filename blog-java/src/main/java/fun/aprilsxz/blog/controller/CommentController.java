@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @RequestMapping("/comment")
 @RestController
@@ -19,13 +20,13 @@ public class CommentController {
     @Resource
     CommentService commentService;
 
-    @GetMapping("/{linkedId}")
+    @GetMapping()
     @ApiOperation("分页查询评论")
-    Result<PageResult<CommentVO>> queryComment(@PathVariable("linkedId") String linkedId,
+    Result<PageResult<CommentVO>> queryComment(@RequestParam("linkId") String linkId,
                                                @RequestParam("currentPage") Integer currentPage,
                                                @RequestParam("pageSize") Integer pageSize){
         // TODO comment查询有问题，分页查询时子评论占据了主评论的数量
-        PageResult<CommentVO> commentPageResult = commentService.queryComment(linkedId,currentPage,pageSize);
+        PageResult<CommentVO> commentPageResult = commentService.queryComment(linkId,currentPage,pageSize);
         return Result.ok(commentPageResult);
     }
 

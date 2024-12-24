@@ -2,22 +2,15 @@ import instance from '@/api/request'
 import type { Comment } from '@/entity/comment'
 
 // 查询所有评论，返回类型 CommentDetail
-export function queryComment(linkedId: string, currentPage: number, pageSize: number) {
+export function queryComment(linkId: string, currentPage: number, pageSize: number) {
   return instance({
-    url: "/comment/" + linkedId,
+    url: "/comment",
     method: "get",
     params: {
-      linkedId,
+      linkId,
       currentPage,
       pageSize
     }
-  })
-}
-// 查询所有评论的总数
-export function countComment(linkedId: string) {
-  return instance({
-    url: "/comment/count/" + linkedId,
-    method: "get"
   })
 }
 // 添加评论

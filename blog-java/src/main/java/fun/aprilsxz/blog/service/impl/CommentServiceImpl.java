@@ -31,9 +31,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment>
     CommentMapper commentMapper;
 
     @Override
-    public PageResult<CommentVO> queryComment(String linkedId, Integer currentPage, Integer pageSize) {
+    public PageResult<CommentVO> queryComment(String linkId, Integer currentPage, Integer pageSize) {
         PageHelper.startPage(currentPage,pageSize);
-        Page<CommentVO> commentPage = (Page<CommentVO>)commentMapper.queryComment(linkedId);
+        Page<CommentVO> commentPage = (Page<CommentVO>)commentMapper.queryComment(linkId);
 
         //构建父子关系
         List<CommentVO> commentVOS = commentPage.getResult();

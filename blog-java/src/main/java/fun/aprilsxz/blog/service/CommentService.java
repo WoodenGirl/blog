@@ -12,7 +12,7 @@ import fun.aprilsxz.blog.domain.vo.CommentVO;
 */
 public interface CommentService extends IService<Comment> {
 
-    PageResult<CommentVO> queryComment(String linkedId, Integer currentPage, Integer pageSize);
+    PageResult<CommentVO> queryComment(String linkId, Integer currentPage, Integer pageSize);
 
     void deleteComment(Integer commentId);
 }

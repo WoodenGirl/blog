@@ -20,7 +20,7 @@
     size="default"
 
     layout="total, prev, pager, next"
-    :total="1000"
+    :total="total"
     @size-change="fetchComments"
     @current-change="fetchComments"
   />
@@ -36,15 +36,14 @@ import { ElMessage } from 'element-plus'
 import CommentSingle from '@/components/comment/Comment-Single.vue'
 import { type Comment, type CommentDetail } from '@/entity/comment'
 
-const props = defineProps(['linkedId'])
-const linkedId = props.linkedId
+const props = defineProps(['linkId'])
 
 // 发表根评论
 const submitComment = (content: string) => {
   const commentData = ref<Comment>({
     userId: useUserStore().user.userId,
     commentContent: content,
-    linkedId: props.linkedId,
+    linkId: props.linkId,
     commentParent: 0,
   })
   addComment(commentData.value).then(() => {
@@ -56,11 +55,14 @@ const submitComment = (content: string) => {
 // 分页
 const currentPage = ref(1)
 const pageSize = ref(10)
-
+const total = ref(0)
 // 展示所有评论
 const commentRoots = ref<CommentDetail[]>([])
 const fetchComments = async () => {
-  commentRoots.value = await queryComment(linkedId, currentPage.value, pageSize.value).then(res => res.data)
+  await queryComment(props.linkId, currentPage.value, pageSize.value).then(res => {
+    commentRoots.value = res.data.list
+    total.value = res.data.total
+  })
 }
 fetchComments()
 

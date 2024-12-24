@@ -45,17 +45,15 @@
 
     <el-divider />
     <!--  评论  -->
-<!--    <comment-all :linked-id="article!.articleId"></comment-all>-->
+    <comment-all :link-id="article.articleId"></comment-all>
   </div>
 
 </template>
 
 <script setup lang="ts">
 import { formatDate } from '@/tool/time'
-import { Clock, Delete, Edit } from '@element-plus/icons-vue'
-import router from '@/router'
-import { deleteArticle, queryDetailArticle } from '@/api/article'
-import { ElMessage } from 'element-plus'
+import { Clock } from '@element-plus/icons-vue'
+import { queryDetailArticle } from '@/api/article'
 import CommentAll from '@/components/comment/Comment-All.vue'
 import { useRoute } from 'vue-router'
 import type { ArticleDetail } from '@/entity/article'
@@ -66,7 +64,7 @@ const articleId = useRoute().params.articleId.toString()
 
 // 获取article
 const article = ref<ArticleDetail>({
-  articleId: '',
+  articleId: articleId,
   articleTitle: '',
   articleTags: [],
   createTime: '2024-12-19',
@@ -85,18 +83,6 @@ const fetchArticle = async () => {
   article.value = await queryDetailArticle(articleId).then(res => res.data)
 }
 fetchArticle()
-
-const edit = () => {
-  router.push("/create")
-}
-
-const remove = () => {
-  deleteArticle(article.value!.articleId).then(() => {
-    ElMessage.success("删除成功！")
-    // 跳转上一页
-    router.go(-1)
-  })
-}
 </script>
 
 <style scoped>

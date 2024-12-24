@@ -28,8 +28,11 @@
         <el-input v-model="category.categoryName" autocomplete="off" />
       </el-form-item>
       <el-form-item label="是否中断" >
-        <el-switch v-model="category.isInterrupt" />
+        <el-switch v-model="category.isInterrupt"
+                   :active-value="1"
+                   :inactive-value="0"/>
       </el-form-item>
+
     </el-form>
     <template #footer>
       <div class="dialog-footer">
@@ -48,6 +51,7 @@ import { Delete, Edit, Plus } from '@element-plus/icons-vue'
 import { useCategoryStore } from '@/stores/category'
 import type { Category, CategoryTree } from '@/entity/category'
 import router from '@/router'
+import { routes } from 'vue-router/auto-routes'
 
 
 const props = defineProps(['isEdit', 'categoryParent'])
@@ -97,8 +101,10 @@ const update = (data: CategoryTree) => {
   dialogTitle.value=  '修改目录'
   dialogFormVisible.value = true
   category.value.categoryId = data.categoryId
+  category.value.categoryParent = null
   category.value.categoryName = data.categoryName
   category.value.isInterrupt = data.isInterrupt
+  console.log(category.value.isInterrupt)
 }
 // 取消添加修改
 const cancelDialog = () => {
@@ -112,17 +118,19 @@ const confirmDialog = () => {
     addCategory(category.value).then(res => {
       if (res.code == 200) {
         ElMessage.success("添加目录成功！")
-        dialogFormVisible.value = false
       }
     });
   } else {
     updateCategory(category.value).then(res => {
       if (res.code == 200) {
         ElMessage.success("修改目录成功！")
-        dialogFormVisible.value = false
       }
     })
   }
+  cancelDialog()
+  setTimeout(() => {
+    fetchTreeData()
+  }, 500)
 }
 
 // 删除tree节点
