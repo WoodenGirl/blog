@@ -37,6 +37,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment>
 
         //构建父子关系
         List<CommentVO> commentVOS = commentPage.getResult();
+        System.out.println(commentVOS);
         List<CommentVO> commentVOList = processComments(commentVOS);
 
         PageResult<CommentVO> pageResult = new PageResult<>();
@@ -65,6 +66,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment>
             if (comment.getCommentParent() != null) {
                 CommentVO parent = commentMap.get(comment.getCommentParent());
                 if (parent != null) {
+                    if(parent.getCommentChildren() == null){
+                        parent.setCommentChildren(new ArrayList<>());
+                    }
                     parent.getCommentChildren().add(comment);
                 }
             }

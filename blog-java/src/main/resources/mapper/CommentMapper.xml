@@ -22,6 +22,6 @@
     <select id="queryComment" resultType="fun.aprilsxz.blog.domain.vo.CommentVO">
         select c.comment_id,c.comment_parent, c.link_id, c.comment_content, c.create_time, u.user_id, u.nickname, u.avatar
         from comment c, user u
-        where c.link_id = #{linkedId}
+        where c.link_id = #{linkedId} and c.user_id = u.user_id
     </select>
 </mapper>
