@@ -3,6 +3,7 @@ package fun.aprilsxz.blog.controller;
 import fun.aprilsxz.blog.domain.common.PageResult;
 import fun.aprilsxz.blog.domain.common.Result;
 import fun.aprilsxz.blog.domain.dto.DynamicDto;
+import fun.aprilsxz.blog.domain.dto.group.Update;
 import fun.aprilsxz.blog.domain.vo.ArticleDetail;
 import fun.aprilsxz.blog.domain.vo.DynamicVO;
 import fun.aprilsxz.blog.service.DynamicService;
@@ -42,7 +43,8 @@ public class DynamicController {
 
     @PostMapping()
     @ApiOperation("新增动态")
-    public Result<Void> addDynamic( @RequestBody @Valid DynamicDto dynamicDto){
+    @Validated(Update.class)
+    public Result<Void> addDynamic( @RequestBody DynamicDto dynamicDto){
         dynamicService.addDynamic(dynamicDto);
         return Result.ok();
     }

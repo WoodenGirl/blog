@@ -112,6 +112,15 @@ public class ObsServiceImpl implements ObsService {
         return true;
     }
 
+    @Override
+    public boolean moveObject(String sourceObjectName, String destObjectName) {
+        boolean b = copyObject(sourceObjectName, destObjectName);
+        if(!b){
+            return false;
+        }
+        return deleteObject(sourceObjectName);
+    }
+
     private void printFail(ObsException e) {
         // 请求失败,打印http状态码
         System.out.println("HTTP Code:" + e.getResponseCode());

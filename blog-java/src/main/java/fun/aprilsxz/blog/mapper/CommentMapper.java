@@ -2,6 +2,9 @@ package fun.aprilsxz.blog.mapper;
 
 import fun.aprilsxz.blog.domain.po.Comment;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import fun.aprilsxz.blog.domain.vo.CommentVO;
+
+import java.util.List;
 
 /**
 * @author yang
@@ -11,6 +14,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface CommentMapper extends BaseMapper<Comment> {
 
+    List<CommentVO> queryComment(String linkedId);
 }
 
 

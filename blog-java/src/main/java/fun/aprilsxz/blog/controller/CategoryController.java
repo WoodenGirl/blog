@@ -1,17 +1,19 @@
 package fun.aprilsxz.blog.controller;
 
 import fun.aprilsxz.blog.domain.common.Result;
+import fun.aprilsxz.blog.domain.dto.CategoryDto;
+import fun.aprilsxz.blog.domain.dto.group.Insert;
+import fun.aprilsxz.blog.domain.dto.group.Update;
 import fun.aprilsxz.blog.domain.po.Category;
 import fun.aprilsxz.blog.domain.vo.CategoryVO;
 import fun.aprilsxz.blog.service.CategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 @Api(tags = "分类接口")
@@ -26,5 +28,21 @@ public class CategoryController {
     Result<List<CategoryVO>> queryById(@PathVariable("categoryId") Integer categoryId){
         List<CategoryVO> categoryVOList = categoryService.queryById(categoryId);
         return Result.ok(categoryVOList);
+    }
+
+    @PostMapping()
+    @ApiOperation("添加目录")
+    @Validated(Insert.class)
+    Result<Void> addCategory(@RequestBody CategoryDto categoryDto){
+        categoryService.addCategory(categoryDto);
+        return Result.ok();
+    }
+
+    @PutMapping()
+    @ApiOperation("修改目录 参数category只能修改两项{categoryName,isInterrupt}")
+    @Validated(Update.class)
+    Result<Void> updateCategory(@RequestBody CategoryDto categoryDto){
+        categoryService.updateCategory(categoryDto);
+        return Result.ok();
     }
 }

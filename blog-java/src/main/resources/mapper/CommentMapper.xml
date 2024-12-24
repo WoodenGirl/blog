@@ -10,13 +10,18 @@
             <result property="userId" column="user_id" jdbcType="VARCHAR"/>
             <result property="commentContent" column="comment_content" jdbcType="VARCHAR"/>
             <result property="commentReply" column="comment_reply" jdbcType="VARCHAR"/>
-            <result property="linkedId" column="linked_id" jdbcType="VARCHAR"/>
-            <result property="createdTime" column="created_time" jdbcType="TIMESTAMP"/>
+            <result property="linkId" column="linked_id" jdbcType="VARCHAR"/>
+            <result property="createTime" column="created_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         comment_id,comment_parent,user_id,
-        comment_content,comment_reply,linked_id,
+        comment_content,comment_reply,link_id,
         created_time
     </sql>
+    <select id="queryComment" resultType="fun.aprilsxz.blog.domain.vo.CommentVO">
+        select c.comment_id,c.comment_parent, c.link_id, c.comment_content, c.create_time, u.user_id, u.nickname, u.avatar
+        from comment c, user u
+        where c.link_id = #{linkedId}
+    </select>
 </mapper>

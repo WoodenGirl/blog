@@ -2,6 +2,7 @@ package fun.aprilsxz.blog.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import fun.aprilsxz.blog.domain.dto.CategoryDto;
 import fun.aprilsxz.blog.domain.po.Category;
 import fun.aprilsxz.blog.domain.vo.CategoryVO;
 import fun.aprilsxz.blog.service.CategoryService;
@@ -9,10 +10,7 @@ import fun.aprilsxz.blog.mapper.CategoryMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -38,6 +36,18 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category>
         }).collect(Collectors.toList());
 
         return buildTree(categoryVOList).getCategoryChildren();
+    }
+
+    @Override
+    public void addCategory(CategoryDto categoryDto) {
+        Category category = BeanUtil.copyProperties(categoryDto, Category.class);
+        categoryMapper.insert(category);
+    }
+
+    @Override
+    public void updateCategory(CategoryDto categoryDto) {
+        Category category = BeanUtil.copyProperties(categoryDto, Category.class);
+        categoryMapper.updateById(category);
     }
 
     // 构建目录树的方法

@@ -13,6 +13,7 @@ import fun.aprilsxz.blog.domain.vo.DynamicVO;
 import fun.aprilsxz.blog.service.CommentService;
 import fun.aprilsxz.blog.service.DynamicService;
 import fun.aprilsxz.blog.mapper.DynamicMapper;
+import fun.aprilsxz.blog.service.ObsService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +35,8 @@ public class DynamicServiceImpl extends ServiceImpl<DynamicMapper, Dynamic>
     DynamicMapper dynamicMapper;
     @Resource
     CommentService commentService;
+    @Resource
+    ObsService obsService;
 
     @Override
     public PageResult<DynamicVO> queryByCategoryId(Integer categoryId, Integer currentPage, Integer pageSize) {
@@ -82,8 +85,10 @@ public class DynamicServiceImpl extends ServiceImpl<DynamicMapper, Dynamic>
                 .eq("link_id",dynamicId)
 //                .eq("link_type", LinkType.DYNAMIC));
         );
-        //3.TODO 删除obs上的图片(图片存储格式)
+        //3.删除obs上的图片(图片存储格式)
         String dynamicImages = dynamic.getDynamicImages();
+        obsService.deleteObject(dynamicImages);
+
     }
 }
 

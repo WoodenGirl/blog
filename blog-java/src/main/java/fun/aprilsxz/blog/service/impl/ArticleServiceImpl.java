@@ -9,8 +9,10 @@ import fun.aprilsxz.blog.domain.po.Article;
 import fun.aprilsxz.blog.domain.vo.ArticleBrief;
 import fun.aprilsxz.blog.domain.vo.ArticleDetail;
 import fun.aprilsxz.blog.domain.vo.DynamicVO;
+import fun.aprilsxz.blog.exception.CommonException;
 import fun.aprilsxz.blog.service.ArticleService;
 import fun.aprilsxz.blog.mapper.ArticleMapper;
+import fun.aprilsxz.blog.service.ObsService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article>
     implements ArticleService{
     @Resource
     ArticleMapper articleMapper;
+    @Resource
+    ObsService obsService;
 
     @Override
     public PageResult<ArticleBrief> queryByCategoryId(Integer categoryId, Integer currentPage, Integer pageSize) {
@@ -57,6 +61,14 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article>
         article.setArticleId(UUID.randomUUID().toString());
         article.setCreateTime(LocalDateTime.now());
         article.setUpdateTime(LocalDateTime.now());
+
+        //将封面图片转移至articleCover
+        String articleCover = articleDto.getArticleCover();
+        String des = articleCover.replaceFirst("temp", "articleCover");
+        boolean b = obsService.copyObject(articleCover, des);
+        if(!b){
+            throw new CommonException("封面上传失败",501);
+        }
         articleMapper.insert(article);
     }
 

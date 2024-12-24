@@ -1,5 +1,6 @@
 package fun.aprilsxz.blog.service;
 
+import fun.aprilsxz.blog.domain.dto.CategoryDto;
 import fun.aprilsxz.blog.domain.po.Category;
 import com.baomidou.mybatisplus.extension.service.IService;
 import fun.aprilsxz.blog.domain.vo.CategoryVO;
@@ -14,4 +15,8 @@ import java.util.List;
 public interface CategoryService extends IService<Category> {
 
     List<CategoryVO> queryById(Integer categoryId);
+
+    void addCategory(CategoryDto categoryDto);
+
+    void updateCategory(CategoryDto categoryDto);
 }

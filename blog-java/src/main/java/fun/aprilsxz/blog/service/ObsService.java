@@ -9,4 +9,6 @@ public interface ObsService {
     boolean deleteObject(String objectName);
 
     boolean deleteObjects(String objectsName);
+
+    boolean moveObject(String sourceObjectName,String destObjectName);
 }
