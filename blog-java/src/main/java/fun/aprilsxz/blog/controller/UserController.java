@@ -31,4 +31,19 @@ public class UserController {
         UserLoginVO userLoginVO = userService.register(loginFormDTO);
         return Result.ok(userLoginVO);
     }
+
+    /*
+        export  function loginByQQ(code: string) {
+          return instance({
+            url: "/qqLogin?code=" + code,
+            method: "get",
+          })
+        }
+     */
+    @GetMapping("/qqLogin")
+    @ApiOperation("qq登录")
+    Result<UserLoginVO> qqLogin(@RequestParam("code") String code){
+        UserLoginVO userLoginVO = userService.qqLogin(code);
+        return Result.ok(userLoginVO);
+    }
 }

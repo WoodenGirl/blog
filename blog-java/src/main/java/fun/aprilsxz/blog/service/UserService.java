@@ -16,4 +16,6 @@ public interface UserService extends IService<User> {
     UserLoginVO login(LoginFormDTO loginFormDTO);
 
     UserLoginVO register(LoginFormDTO loginFormDTO);
+
+    UserLoginVO qqLogin(String code);
 }

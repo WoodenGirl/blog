@@ -1,8 +1,5 @@
 package fun.aprilsxz.blog.domain.dto;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import fun.aprilsxz.blog.domain.dto.group.Delete;
 import fun.aprilsxz.blog.domain.dto.group.Insert;
 import fun.aprilsxz.blog.domain.dto.group.Update;
 import io.swagger.annotations.ApiModel;
