@@ -10,7 +10,7 @@ export const useUserStore = defineStore('user', () => {
     avatar: avatar,
     email: '',
     password: '',
-    signature: ''
+    signature: '我是我自己！'
   })
   return { user }}, {
   persist: {

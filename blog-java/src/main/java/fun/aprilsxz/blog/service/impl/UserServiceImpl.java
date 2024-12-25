@@ -113,7 +113,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         map.put("client_id","102569233");
         map.put("client_secret","a2FCzXqthGdonY5P");
         //TODO 回调地址
-        map.put("redirect_uri","");
+        map.put("redirect_uri","https://www.aprilsxz.fun/login");
         map.put("fmt","json");
         map.put("code",code);
         String body = HttpRequest.get(mapToParam("https://graph.qq.com/oauth2.0/token",map))
