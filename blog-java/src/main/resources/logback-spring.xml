@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- 修改一下路径-->
+    <property name="PATH" value="./log"/>
+
+    <!-- 默认的一些配置 -->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+<!--            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) %green(%-50logger{50}:%-4line) %thread %green(%-18X{LOG_ID}) %msg%n</Pattern>-->
+<!--            <Pattern>%d{mm:ss.SSS} %highlight(%-5level) %blue(%-30logger{30}:%-4line) %thread %green(%-18X{LOG_ID}) %msg%n</Pattern>-->
+            <!-- 使用默认的输出格式打印 -->
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+<!--        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
+<!--            <level>INFO</level>-->
+<!--        </filter>-->
+    </appender>
+
+    <appender name="TRACE_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${PATH}/trace.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${PATH}/trace.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <layout>
+<!--            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %-50logger{50}:%-4line %green(%-18X{LOG_ID}) %msg%n</pattern>-->
+            <!-- 使用默认的输出格式打印 -->
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </layout>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>TRACE</level>
+        </filter>
+    </appender>
+
+    <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${PATH}/error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${PATH}/error.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <layout>
+<!--            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %-50logger{50}:%-4line %green(%-18X{LOG_ID}) %msg%n</pattern>-->
+            <!-- 使用默认的输出格式打印 -->
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </layout>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+<!--    <root level="ERROR">-->
+<!--        <appender-ref ref="ERROR_FILE" />-->
+<!--    </root>-->
+
+<!--    <root level="TRACE">-->
+<!--        <appender-ref ref="TRACE_FILE" />-->
+<!--    </root>-->
+
+<!--    <root level="INFO">-->
+<!--        <appender-ref ref="STDOUT" />-->
+<!--    </root>-->
+    <root level="INFO">
+        <appender-ref ref="ERROR_FILE" />
+        <appender-ref ref="TRACE_FILE" />
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
