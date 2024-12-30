@@ -39,13 +39,12 @@ public class ObsServiceImpl implements ObsService {
 
     /**
      * 复制多个对象
-     * @param sourceObjectName 源文件名，以逗号分割
+     * @param sourceObjectNames 源文件名，以逗号分割
      * @param destObjectName 目标文件名
      */
     @Override
-    public boolean copyObjects(String sourceObjectName, String destObjectName) {
-        String[] objects = sourceObjectName.split(",");
-        for (String object : objects) {
+    public boolean copyObjects(String[] sourceObjectNames, String destObjectName) {
+        for (String object : sourceObjectNames) {
             if(!copyObject(object,destObjectName + object)){
                 return false;
             }
@@ -77,11 +76,10 @@ public class ObsServiceImpl implements ObsService {
      * @return 操作是否成功
      */
     @Override
-    public boolean deleteObjects(String objectsName) {
-        String[] objects = objectsName.split(",");
-        KeyAndVersion[] keyAndVersions = new KeyAndVersion[objects.length];
-        for (int i = 0; i < objects.length; i++) {
-            keyAndVersions[i].setKey(objects[i]);
+    public boolean deleteObjects(String[] objectsName) {
+        KeyAndVersion[] keyAndVersions = new KeyAndVersion[objectsName.length];
+        for (int i = 0; i < objectsName.length; i++) {
+            keyAndVersions[i].setKey(objectsName[i]);
         }
         try {
             String bucketName = obsProperties.getBucketName();

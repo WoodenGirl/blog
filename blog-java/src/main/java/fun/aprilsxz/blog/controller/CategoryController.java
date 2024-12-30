@@ -25,7 +25,7 @@ public class CategoryController {
 
     @GetMapping("/{categoryId}")
     @ApiOperation("查询子目录，考虑isInterrupt")
-    Result<List<CategoryVO>> queryById(@PathVariable("categoryId") Integer categoryId){
+    public Result<List<CategoryVO>> queryById(@PathVariable("categoryId") Integer categoryId){
         List<CategoryVO> categoryVOList = categoryService.queryById(categoryId);
         return Result.ok(categoryVOList);
     }
@@ -33,7 +33,7 @@ public class CategoryController {
     @PostMapping()
     @ApiOperation("添加目录")
     @Validated(Insert.class)
-    Result<Void> addCategory(@RequestBody CategoryDto categoryDto){
+    public Result<Void> addCategory(@RequestBody CategoryDto categoryDto){
         categoryService.addCategory(categoryDto);
         return Result.ok();
     }
@@ -41,7 +41,7 @@ public class CategoryController {
     @PutMapping()
     @ApiOperation("修改目录 参数category只能修改两项{categoryName,isInterrupt}")
     @Validated(Update.class)
-    Result<Void> updateCategory(@RequestBody CategoryDto categoryDto){
+    public Result<Void> updateCategory(@RequestBody CategoryDto categoryDto){
         categoryService.updateCategory(categoryDto);
         return Result.ok();
     }

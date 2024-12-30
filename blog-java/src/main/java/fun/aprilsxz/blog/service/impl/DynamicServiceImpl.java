@@ -1,5 +1,6 @@
 package fun.aprilsxz.blog.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.Page;
@@ -17,10 +18,14 @@ import fun.aprilsxz.blog.service.ObsService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
 * @author yang
@@ -43,10 +48,15 @@ public class DynamicServiceImpl extends ServiceImpl<DynamicMapper, Dynamic>
         PageHelper.startPage(currentPage,pageSize);
         Page<DynamicVO> dynamicVOPage = (Page<DynamicVO>) dynamicMapper.queryByCategoryId(categoryId);
 
+        List<DynamicVO> dynamicVOS = dynamicVOPage.getResult();
+        if(CollectionUtil.isNotEmpty(dynamicVOS)){
+            dynamicVOS = dynamicVOS.stream().peek(dynamicVO -> dynamicVO.setDynamicImages(dynamicVO.getDynamicImagesString().split(","))).collect(Collectors.toList());
+        }
+
         PageResult<DynamicVO> pageResult = new PageResult<>();
         pageResult.setPages(dynamicVOPage.getPages());
         pageResult.setTotal(dynamicVOPage.getTotal());
-        pageResult.setList(dynamicVOPage.getResult());
+        pageResult.setList(dynamicVOS);
 
         System.out.println(pageResult);
 
@@ -55,8 +65,11 @@ public class DynamicServiceImpl extends ServiceImpl<DynamicMapper, Dynamic>
 
     @Override
     public DynamicVO queryDetailById(String dynamicId) {
-
-        return dynamicMapper.queryDetailById(dynamicId);
+        DynamicVO dynamicVO = dynamicMapper.queryDetailById(dynamicId);
+        if(dynamicVO != null && StringUtils.hasLength(dynamicVO.getDynamicImagesString())){
+            dynamicVO.setDynamicImages(dynamicVO.getDynamicImagesString().split(","));
+        }
+        return dynamicVO;
     }
 
     @Override
@@ -87,8 +100,9 @@ public class DynamicServiceImpl extends ServiceImpl<DynamicMapper, Dynamic>
         );
         //3.删除obs上的图片(图片存储格式)
         String dynamicImages = dynamic.getDynamicImages();
-        obsService.deleteObject(dynamicImages);
-
+        String[] images = dynamicImages.split(",");
+//        System.out.println(images);
+        obsService.deleteObjects(images);
     }
 }
 

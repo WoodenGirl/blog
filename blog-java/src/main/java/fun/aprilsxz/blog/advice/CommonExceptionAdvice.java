@@ -1,9 +1,11 @@
 package fun.aprilsxz.blog.advice;
 
+import cn.hutool.core.collection.CollectionUtil;
 import fun.aprilsxz.blog.domain.common.Result;
 import fun.aprilsxz.blog.exception.BadRequestException;
 import fun.aprilsxz.blog.exception.CommonException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.support.MethodArgumentNotValidException;
 import org.springframework.validation.BindException;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.util.WebUtils;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -44,9 +47,11 @@ public class CommonExceptionAdvice {
 
     @ExceptionHandler(BindException.class)
     public Object handleBindException(BindException e) {
-        log.error("请求参数绑定异常 ->BindException， {}", e.getMessage());
+        List<String> messages = e.getBindingResult().getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.toList());
+        String message = CollectionUtil.join(messages, ";");
+        log.error("请求参数绑定异常 ->BindException， {}", message);
         log.debug("", e);
-        return processResponse(new BadRequestException("请求参数格式错误"));
+        return processResponse(new BadRequestException(message));
     }
 
 //    @ExceptionHandler(NestedServletException.class)

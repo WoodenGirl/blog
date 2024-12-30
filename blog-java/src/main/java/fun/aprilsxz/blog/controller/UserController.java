@@ -42,7 +42,7 @@ public class UserController {
      */
     @GetMapping("/qqLogin")
     @ApiOperation("qq登录")
-    Result<UserLoginVO> qqLogin(@RequestParam("code") String code){
+    public Result<UserLoginVO> qqLogin(@RequestParam("code") String code){
         UserLoginVO userLoginVO = userService.qqLogin(code);
         return Result.ok(userLoginVO);
     }

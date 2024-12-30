@@ -18,6 +18,8 @@ public class DynamicVO {
 
     private String[] dynamicImages;
 
+    private String dynamicImagesString;
+
     private LocalDateTime createTime;
 
 }
