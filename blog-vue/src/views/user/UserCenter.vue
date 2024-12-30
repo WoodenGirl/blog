@@ -1,11 +1,10 @@
 <template>
-用户中心
   <el-row>
     <!--  用户信息  -->
-    <el-col>
-
+    <el-col :span="8">
+      <user-info></user-info>
     </el-col>
-    <!--  撰写  -->
+    <!--  我的  -->
     <el-col>
 
     </el-col>
@@ -14,6 +13,7 @@
 
 <script setup lang="ts">
 
+import UserInfo from '@/components/user/UserInfo.vue'
 </script>
 
 <style scoped>

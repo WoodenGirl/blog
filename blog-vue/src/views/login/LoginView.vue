@@ -78,9 +78,7 @@ const resetForm = (formEl: FormInstance | undefined) => {
 }
 
 const loginUrl = 'https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=' + import.meta.env.VITE_APP_ID + '&redirect_uri=https%3A%2F%2Fwww.aprilsxz.fun%2Flogin'
-/*const qqLogin = () => {
-  window.open(loginUrl,"TencentLogin");
-}*/
+
 // 获取code
 const code = useRoute().query.code?.toString()
 console.log(code)

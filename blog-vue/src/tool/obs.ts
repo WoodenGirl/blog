@@ -2,10 +2,10 @@ import ObsClient from 'esdk-obs-browserjs'
 import { ElMessage } from 'element-plus'
 
 // OBS
-const AccessKeyID = "XVMEKB4Q4OYRDZKLACAE"
-const SecretAccessKey = "FaB0W6oLFcWbrKYg5kCoMV34Pjjq3bpB67gHK10I"
-const BUCKET = "blog-aprilsxz"
-const SERVER = "https://obs.cn-east-3.myhuaweicloud.com"
+const AccessKeyID = import.meta.env.VITE_ACCESS_KEY
+const SecretAccessKey = import.meta.env.VITE_SECRET_KEY
+const BUCKET = import.meta.env.VITE_OBS_BUCKET
+const SERVER = import.meta.env.VITE_OBS_SERVER
 
 
 // 实例
