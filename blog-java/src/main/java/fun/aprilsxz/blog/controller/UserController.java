@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 @RestController
-@RequestMapping()
+@RequestMapping("/user")
 @Api(tags = "用户相关接口")
 public class UserController {
     @Resource
