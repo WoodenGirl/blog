@@ -102,7 +102,7 @@ const submit = () => {
   console.log(fileList.value)
   const dynamic = ref<Dynamic>({
     dynamicContent: dynamicContent.value,
-    dynamicImages: "",
+    dynamicImages: [],
     userId: useUserStore().user.userId,
     categoryId: props.categoryId,
   })
@@ -112,7 +112,7 @@ const submit = () => {
     const fileName = "temp/" + file.name
     // 上传对象
     putObject(fileName, file.raw)
-    dynamic.value.dynamicImages += fileName + ","
+    dynamic.value.dynamicImages.push(fileName)
   })
 
   // 上传动态
