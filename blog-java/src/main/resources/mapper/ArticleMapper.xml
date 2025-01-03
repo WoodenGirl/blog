@@ -24,13 +24,13 @@
         update_time
     </sql>
     <select id="queryByCategoryId" resultType="fun.aprilsxz.blog.domain.vo.ArticleBrief">
-        select a.article_id,a.article_title,a.article_tags,a.create_time,a.update_time,a.article_cover,a.article_status,u.nickname,c.category_name
+        select a.article_id,a.article_title,a.article_tags,a.create_time,a.update_time,a.article_cover,a.article_status,u.nickname,c.category_name,u.avatar
         from article a, category c, user u
         where a.user_id = u.user_id and a.category_id = c.category_id and a.category_id = #{categoryId}
     </select>
 
     <select id="queryDetailById" resultType="fun.aprilsxz.blog.domain.vo.ArticleDetail">
-        select a.article_id,a.article_title,a.article_tags,a.create_time,a.update_time,a.article_content,a.article_status,a.article_cover,a.user_id,a.category_id,u.nickname,c.category_name
+        select a.article_id,a.article_title,a.article_tags,a.create_time,a.update_time,a.article_content,a.article_status,a.article_cover,a.user_id,a.category_id,u.nickname,c.category_name,u.avatar
         from article a, category c, user u
         where a.user_id = u.user_id and a.category_id = c.category_id and a.article_id = #{articleId}
     </select>

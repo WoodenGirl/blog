@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @RestController
@@ -29,14 +30,14 @@ public class ArticleController {
 
     @GetMapping()
     @ApiOperation("通过categoryId分页查询文章")
-    public Result<PageResult<ArticleBrief>> pageQueryByCategoryId(@RequestParam @Min(1) Integer categoryId, @RequestParam Integer currentPage, @Min(1) @RequestParam Integer pageSize){
+    public Result<PageResult<ArticleBrief>> pageQueryByCategoryId(@RequestParam @Min(value = 1,message = "分类id最少为1") Integer categoryId, @RequestParam Integer currentPage, @Min(1) @RequestParam Integer pageSize){
         PageResult<ArticleBrief> pageResult = articleService.queryByCategoryId(categoryId, currentPage, pageSize);
         return Result.ok(pageResult);
     }
 
     @GetMapping("/{articleId}")
     @ApiOperation("通过articleId查询详细文章")
-    public Result<ArticleDetail> queryDetailById(@PathVariable("articleId") String articleId){
+    public Result<ArticleDetail> queryDetailById(@PathVariable("articleId") @NotBlank(message = "分类id不能为空") String articleId){
         ArticleDetail articleVO = articleService.queryDetailById(articleId);
         return Result.ok(articleVO);
     }
@@ -50,15 +51,14 @@ public class ArticleController {
 
     @PutMapping()
     @ApiOperation("更新文章")
-    @Validated(Update.class)
-    public Result<Void> updateArticle(@Valid @RequestBody ArticleDto articleDto){
+    public Result<Void> updateArticle(@RequestBody @Validated(Update.class) ArticleDto articleDto){
         articleService.updateArticle(articleDto);
         return Result.ok();
     }
 
     @DeleteMapping("/{articleId}")
     @ApiOperation("根据articleId删除文章")
-    public Result<Void> deleteByArticleId(@PathVariable("articleId") String articleId){
+    public Result<Void> deleteByArticleId(@PathVariable("articleId") @NotBlank(message = "文章id不能为空") String articleId){
         articleService.removeById(articleId);
         return Result.ok();
     }

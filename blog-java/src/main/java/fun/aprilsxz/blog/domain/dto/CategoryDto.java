@@ -35,7 +35,6 @@ public class CategoryDto {
      */
     @ApiModelProperty("父目录id")
     @NotNull @Min(0)
-    @Null(groups = Update.class)
     private Integer categoryParent;
 
     /**

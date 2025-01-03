@@ -28,12 +28,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category>
     @Override
     public List<CategoryVO> queryById(Integer categoryId) {
         List<Category> categoryList = categoryMapper.queryById(categoryId);
-        List<CategoryVO> categoryVOList = categoryList.stream().map(new Function<Category, CategoryVO>() {
-            @Override
-            public CategoryVO apply(Category category) {
-                return BeanUtil.copyProperties(category, CategoryVO.class);
-            }
-        }).collect(Collectors.toList());
+        List<CategoryVO> categoryVOList = categoryList.stream().map(category -> BeanUtil.copyProperties(category, CategoryVO.class)).collect(Collectors.toList());
 
         return buildTree(categoryVOList).getCategoryChildren();
     }

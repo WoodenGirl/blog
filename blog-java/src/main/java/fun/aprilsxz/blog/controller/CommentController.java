@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @RequestMapping("/comment")
 @RestController
@@ -25,7 +24,6 @@ public class CommentController {
     public Result<PageResult<CommentVO>> queryComment(@RequestParam("linkId") String linkId,
                                                @RequestParam("currentPage") Integer currentPage,
                                                @RequestParam("pageSize") Integer pageSize){
-        // TODO comment查询有问题，分页查询时子评论占据了主评论的数量
         PageResult<CommentVO> commentPageResult = commentService.queryComment(linkId,currentPage,pageSize);
         return Result.ok(commentPageResult);
     }
@@ -33,7 +31,6 @@ public class CommentController {
     @PostMapping()
     @ApiOperation("添加评论")
     public Result<Void> addComment(@RequestBody Comment comment){
-        // TODO createTime等统一处理
         comment.setCreateTime(LocalDateTime.now());
         commentService.save(comment);
         return Result.ok();

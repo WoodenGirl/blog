@@ -1,23 +1,24 @@
 package fun.aprilsxz.blog.service.impl;
 
-import cn.hutool.core.collection.ListUtil;
+import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import fun.aprilsxz.blog.domain.common.PageResult;
 import fun.aprilsxz.blog.domain.po.Comment;
-import fun.aprilsxz.blog.domain.po.User;
 import fun.aprilsxz.blog.domain.vo.CommentVO;
-import fun.aprilsxz.blog.service.CommentService;
 import fun.aprilsxz.blog.mapper.CommentMapper;
-import lombok.Builder;
+import fun.aprilsxz.blog.service.CommentService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.time.ZoneOffset;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
 * @author yang
@@ -33,58 +34,36 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment>
     @Override
     public PageResult<CommentVO> queryComment(String linkId, Integer currentPage, Integer pageSize) {
         PageHelper.startPage(currentPage,pageSize);
+        //1.查询顶级评论
         Page<CommentVO> commentPage = (Page<CommentVO>)commentMapper.queryComment(linkId);
-
-        //构建父子关系
         List<CommentVO> commentVOS = commentPage.getResult();
-        System.out.println(commentVOS);
-        List<CommentVO> commentVOList = processComments(commentVOS);
+        if(CollUtil.isEmpty(commentVOS)){
+            return null;
+        }
+
+        //2.查询对应的子评论
+        List<Integer> ids = commentVOS.stream().map(CommentVO::getCommentId).collect(Collectors.toList());
+        List<CommentVO> commentChildren = commentMapper.selectBatchParentIds(ids);
+
+        // 3. 构建评论树
+        Map<Integer, CommentVO> commentMap = new HashMap<>();
+        for (CommentVO comment : commentVOS) {
+            commentMap.put(comment.getCommentId(), comment);
+        }
+        for (CommentVO commentChild : commentChildren) {
+            CommentVO commentVO = commentMap.get(commentChild.getCommentParent());
+            if(commentVO.getCommentChildren() == null){
+                commentVO.setCommentChildren(new ArrayList<>());
+            }
+            commentVO.getCommentChildren().add(commentChild);
+        }
 
         PageResult<CommentVO> pageResult = new PageResult<>();
-        pageResult.setList(commentVOList);
+        pageResult.setList(commentVOS);
         pageResult.setTotal(commentPage.getTotal());
         pageResult.setPages(commentPage.getPages());
 
         return pageResult;
-    }
-
-    /**
-     * 构建评论父子关系
-     * @param comments
-     * @return
-     */
-    public static List<CommentVO> processComments(List<CommentVO> comments) {
-        Map<Integer, CommentVO> commentMap = new HashMap<>();
-
-        // 将所有评论放入Map中，便于通过ID查找
-        for (CommentVO comment : comments) {
-            commentMap.put(comment.getCommentId(), comment);
-        }
-
-        // 构建评论的父子关系
-        for (CommentVO comment : comments) {
-            if (comment.getCommentParent() != null) {
-                CommentVO parent = commentMap.get(comment.getCommentParent());
-                if (parent != null) {
-                    if(parent.getCommentChildren() == null){
-                        parent.setCommentChildren(new ArrayList<>());
-                    }
-                    parent.getCommentChildren().add(comment);
-                }
-            }
-        }
-
-        // 提取顶级评论（即parentId为null的评论）
-        List<CommentVO> topLevelComments = new ArrayList<>();
-        for (CommentVO comment : commentMap.values()) {
-            if (comment.getCommentParent() == null) {
-                topLevelComments.add(comment);
-            }
-        }
-
-        topLevelComments.sort((o1, o2) -> (int) (o1.getCreateTime().toEpochSecond(ZoneOffset.UTC) - o2.getCreateTime().toEpochSecond(ZoneOffset.UTC)));
-
-        return topLevelComments;
     }
 
     /**
@@ -103,7 +82,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment>
         //3.删除评论
         commentMapper.deleteById(commentId);
         //4.删除子评论
-        commentMapper.delete(new QueryWrapper<Comment>().eq("link_id",commentId));
+        commentMapper.delete(new QueryWrapper<Comment>().eq("comment_parent",commentId));
     }
 }
 

@@ -26,7 +26,7 @@
     </select>
 
     <select id="queryDetailById" resultType="fun.aprilsxz.blog.domain.vo.DynamicVO">
-        select d.dynamic_id,d.dynamic_content,d.create_time,d.dynamic_images as dynamicImagesString,d.user_id,u.nickname,u.avatar
+        select d.dynamic_id,d.dynamic_content,d.create_time,d.dynamic_images,d.user_id,u.nickname,u.avatar
         from dynamic d,user u where d.user_id = u.user_id and d.dynamic_id = #{dynamicId}
     </select>
 </mapper>

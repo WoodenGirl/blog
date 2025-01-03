@@ -15,6 +15,7 @@ import fun.aprilsxz.blog.service.CommentService;
 import fun.aprilsxz.blog.service.DynamicService;
 import fun.aprilsxz.blog.mapper.DynamicMapper;
 import fun.aprilsxz.blog.service.ObsService;
+import org.aspectj.weaver.ast.Var;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,8 +23,7 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -49,8 +49,14 @@ public class DynamicServiceImpl extends ServiceImpl<DynamicMapper, Dynamic>
         Page<DynamicVO> dynamicVOPage = (Page<DynamicVO>) dynamicMapper.queryByCategoryId(categoryId);
 
         List<DynamicVO> dynamicVOS = dynamicVOPage.getResult();
+        //将dynamicImages转换为images数组
         if(CollectionUtil.isNotEmpty(dynamicVOS)){
-            dynamicVOS = dynamicVOS.stream().peek(dynamicVO -> dynamicVO.setDynamicImages(dynamicVO.getDynamicImagesString().split(","))).collect(Collectors.toList());
+            dynamicVOS = dynamicVOS.stream().peek(dynamicVO -> {
+                String dynamicImages = dynamicVO.getDynamicImages();
+                if(StringUtils.hasLength(dynamicImages)){
+                    dynamicVO.setImages(dynamicImages.split(","));
+                }
+            }).collect(Collectors.toList());
         }
 
         PageResult<DynamicVO> pageResult = new PageResult<>();
@@ -66,8 +72,9 @@ public class DynamicServiceImpl extends ServiceImpl<DynamicMapper, Dynamic>
     @Override
     public DynamicVO queryDetailById(String dynamicId) {
         DynamicVO dynamicVO = dynamicMapper.queryDetailById(dynamicId);
-        if(dynamicVO != null && StringUtils.hasLength(dynamicVO.getDynamicImagesString())){
-            dynamicVO.setDynamicImages(dynamicVO.getDynamicImagesString().split(","));
+        //如果dynamic非空，且有图片信息，将图片String转为数组
+        if(dynamicVO != null && StringUtils.hasLength(dynamicVO.getDynamicImages())){
+            dynamicVO.setImages(dynamicVO.getDynamicImages().split(","));
         }
         return dynamicVO;
     }

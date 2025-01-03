@@ -16,9 +16,9 @@ public class DynamicVO {
 
     private String dynamicContent;
 
-    private String[] dynamicImages;
+    private String dynamicImages;
 
-    private String dynamicImagesString;
+    private String[] images;
 
     private LocalDateTime createTime;
 
