@@ -42,6 +42,7 @@ const handleSelect = (key: string) => {
       isEdit.value = true
       categoryParent.value = 0
       useCategoryStore().activeName = 'article'
+      useCategoryStore().category.categoryId = 1
       router.push('/');
       break
     }
@@ -49,6 +50,7 @@ const handleSelect = (key: string) => {
       isEdit.value = false
       categoryParent.value = 2
       useCategoryStore().activeName = 'source'
+      useCategoryStore().category.categoryId = 2
       router.push('/acg');
       break
     }
@@ -56,6 +58,7 @@ const handleSelect = (key: string) => {
       isEdit.value = false
       categoryParent.value = 3
       useCategoryStore().activeName = 'article'
+      useCategoryStore().category.categoryId = 3
       router.push('/interest');
       break
     }
@@ -63,6 +66,7 @@ const handleSelect = (key: string) => {
       isEdit.value = false
       categoryParent.value = 4
       useCategoryStore().activeName = 'article'
+      useCategoryStore().category.categoryId = 4
       router.push('/technique');
       break
     }
@@ -70,6 +74,7 @@ const handleSelect = (key: string) => {
       isEdit.value = false
       categoryParent.value = 5
       useCategoryStore().activeName = 'article'
+      useCategoryStore().category.categoryId = 5
       router.push('/life');
       break
     }

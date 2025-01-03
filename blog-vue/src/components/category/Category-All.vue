@@ -67,9 +67,13 @@ const currentId = ref<number>()
 // 获取目录树数据
 const fetchTreeData = async () => {
   categoryTrees.value = await queryCategory(props.categoryParent).then(res => res.data);
-  // 默认选中第一个节点
-  currentId.value = categoryTrees.value[0].categoryId
-  clickCategory(categoryTrees.value[0])
+  if (useCategoryStore().category.categoryId < 6) {
+    // 默认选中第一个节点
+    currentId.value = categoryTrees.value[0].categoryId
+    clickCategory(categoryTrees.value[0])
+  } else {
+    currentId.value = useCategoryStore().category.categoryId
+  }
 };
 fetchTreeData()
 // 点击目录，将数据去全局保存
