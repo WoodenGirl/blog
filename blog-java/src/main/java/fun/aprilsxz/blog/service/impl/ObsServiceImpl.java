@@ -40,12 +40,15 @@ public class ObsServiceImpl implements ObsService {
     /**
      * 复制多个对象
      * @param sourceObjectNames 源文件名，以逗号分割
-     * @param destObjectName 目标文件名
+     * @param destObjectNames 目标文件名
      */
     @Override
-    public boolean copyObjects(String[] sourceObjectNames, String destObjectName) {
-        for (String object : sourceObjectNames) {
-            if(!copyObject(object,destObjectName + object)){
+    public boolean copyObjects(String[] sourceObjectNames, String[] destObjectNames) {
+        if(sourceObjectNames.length != destObjectNames.length){
+            return false;
+        }
+        for(int i = 0; i < sourceObjectNames.length; i++){
+            if(!copyObject(sourceObjectNames[i],destObjectNames[i])){
                 return false;
             }
         }
@@ -79,7 +82,7 @@ public class ObsServiceImpl implements ObsService {
     public boolean deleteObjects(String[] objectsName) {
         KeyAndVersion[] keyAndVersions = new KeyAndVersion[objectsName.length];
         for (int i = 0; i < objectsName.length; i++) {
-            keyAndVersions[i].setKey(objectsName[i]);
+            keyAndVersions[i] = new KeyAndVersion(objectsName[i]);
         }
         try {
             String bucketName = obsProperties.getBucketName();
@@ -117,6 +120,19 @@ public class ObsServiceImpl implements ObsService {
             return false;
         }
         return deleteObject(sourceObjectName);
+    }
+
+    @Override
+    public boolean moveObjects(String[] sourceObjectNames, String[] destObjectNames) {
+        if(sourceObjectNames.length != destObjectNames.length){
+            return false;
+        }
+        for(int i = 0; i < sourceObjectNames.length; i++){
+            if(!moveObject(sourceObjectNames[i],destObjectNames[i])){
+                return false;
+            }
+        }
+        return true;
     }
 
     private void printFail(ObsException e) {

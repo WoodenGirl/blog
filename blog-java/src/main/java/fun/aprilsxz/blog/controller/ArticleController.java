@@ -8,8 +8,6 @@ import fun.aprilsxz.blog.domain.vo.ArticleBrief;
 import fun.aprilsxz.blog.domain.vo.ArticleDetail;
 import fun.aprilsxz.blog.service.ArticleService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +16,6 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import java.util.List;
 
 @RestController
 @Api(tags = "文章接口")
@@ -59,7 +56,7 @@ public class ArticleController {
     @DeleteMapping("/{articleId}")
     @ApiOperation("根据articleId删除文章")
     public Result<Void> deleteByArticleId(@PathVariable("articleId") @NotBlank(message = "文章id不能为空") String articleId){
-        articleService.removeById(articleId);
+        articleService.removeByArticleId(articleId);
         return Result.ok();
     }
 }

@@ -26,4 +26,6 @@ public interface ArticleService extends IService<Article> {
     void addArticle(ArticleDto articleDto);
 
     void updateArticle(ArticleDto articleDto);
+
+    void removeByArticleId(String articleId);
 }

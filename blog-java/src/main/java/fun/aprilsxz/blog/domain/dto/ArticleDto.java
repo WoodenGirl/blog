@@ -24,7 +24,6 @@ public class ArticleDto {
     @ApiModelProperty("用户id")
     private String userId;
 
-    @NotBlank
     @ApiModelProperty("文章标签")
     private String[] articleTags;
 

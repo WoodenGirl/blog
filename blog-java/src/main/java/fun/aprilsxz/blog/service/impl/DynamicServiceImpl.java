@@ -1,6 +1,6 @@
 package fun.aprilsxz.blog.service.impl;
 
-import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.Page;
@@ -10,12 +10,11 @@ import fun.aprilsxz.blog.domain.dto.DynamicDto;
 import fun.aprilsxz.blog.domain.po.Comment;
 import fun.aprilsxz.blog.domain.po.Dynamic;
 import fun.aprilsxz.blog.domain.vo.DynamicVO;
-//import fun.aprilsxz.blog.enums.LinkedType;
+import fun.aprilsxz.blog.exception.CommonException;
+import fun.aprilsxz.blog.mapper.DynamicMapper;
 import fun.aprilsxz.blog.service.CommentService;
 import fun.aprilsxz.blog.service.DynamicService;
-import fun.aprilsxz.blog.mapper.DynamicMapper;
 import fun.aprilsxz.blog.service.ObsService;
-import org.aspectj.weaver.ast.Var;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,9 +22,9 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
-import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 
 /**
 * @author yang
@@ -85,6 +84,19 @@ public class DynamicServiceImpl extends ServiceImpl<DynamicMapper, Dynamic>
         BeanUtils.copyProperties(dynamicDto,dynamic);
         dynamic.setDynamicId(UUID.randomUUID().toString());
         dynamic.setCreateTime(LocalDateTime.now());
+        //处理图片
+        String[] dynamicImages = dynamicDto.getDynamicImages();
+        if(CollUtil.isNotEmpty(Arrays.asList(dynamicImages))){
+            String[] desDynamicImages = Arrays.stream(dynamicImages)
+                            .map(s -> s.replaceFirst("temp","dynamic"))
+                            .toArray(String[]::new);
+            boolean b = obsService.moveObjects(dynamicImages,desDynamicImages);
+            if(!b){
+                throw new CommonException("图片上传失败",503);
+            }
+            String images = CollUtil.join(Arrays.asList(desDynamicImages), ",");
+            dynamic.setDynamicImages(images);
+        }
 
         dynamicMapper.insert(dynamic);
     }
@@ -107,9 +119,11 @@ public class DynamicServiceImpl extends ServiceImpl<DynamicMapper, Dynamic>
         );
         //3.删除obs上的图片(图片存储格式)
         String dynamicImages = dynamic.getDynamicImages();
-        String[] images = dynamicImages.split(",");
-//        System.out.println(images);
-        obsService.deleteObjects(images);
+        if(StringUtils.hasLength(dynamicImages)){
+            String[] images = dynamicImages.split(",");
+            obsService.deleteObjects(images);
+        }
+
     }
 }
 
