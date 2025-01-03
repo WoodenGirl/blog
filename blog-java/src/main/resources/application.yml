@@ -14,6 +14,7 @@ spring:
 #    password: 123
 
 mybatis-plus:
+  type-handlers-package: fun.aprilsxz.blog.config
   configuration:
     default-enum-type-handler: org.apache.ibatis.type.EnumOrdinalTypeHandler
   mapper-locations: classpath:mapper/**/*Mapper.xml

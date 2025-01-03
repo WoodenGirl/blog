@@ -16,7 +16,7 @@ public class DynamicVO {
 
     private String dynamicContent;
 
-    private String dynamicImages;
+    private String[] dynamicImages;
 
     private String[] images;
 

@@ -9,7 +9,7 @@
             <result property="userId" column="user_id" jdbcType="VARCHAR"/>
             <result property="categoryId" column="category_id" jdbcType="INTEGER"/>
             <result property="dynamicContent" column="dynamic_content" jdbcType="VARCHAR"/>
-            <result property="dynamicImages" column="dynamic_images" jdbcType="VARCHAR"/>
+            <result property="dynamicImages" column="dynamic_images" typeHandler="fun.aprilsxz.blog.config.StringArrayTypeHandler"/>
             <result property="status" column="status" jdbcType="TINYINT"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>

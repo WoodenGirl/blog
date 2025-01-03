@@ -43,14 +43,14 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article>
         Page<ArticleBrief> articleBriefPage = (Page<ArticleBrief>) articleMapper.queryByCategoryId(categoryId);
 
         List<ArticleBrief> result = articleBriefPage.getResult();
-        result = result.stream().peek(new Consumer<ArticleBrief>() {
+        /*result = result.stream().peek(new Consumer<ArticleBrief>() {
             @Override
             public void accept(ArticleBrief articleBrief) {
                 if (articleBrief != null && StringUtils.hasLength(articleBrief.getArticleTags())) {
                     articleBrief.setTags(articleBrief.getArticleTags().split(","));
                 }
             }
-        }).collect(Collectors.toList());
+        }).collect(Collectors.toList());*/
 
         PageResult<ArticleBrief> pageResult = new PageResult<>();
         pageResult.setPages(articleBriefPage.getPages());
@@ -65,9 +65,9 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article>
     @Override
     public ArticleDetail queryDetailById(String articleId) {
         ArticleDetail articleDetail = articleMapper.queryDetailById(articleId);
-        if(articleDetail != null && StringUtils.hasLength(articleDetail.getArticleTags())){
+        /*if(articleDetail != null && StringUtils.hasLength(articleDetail.getArticleTags())){
             articleDetail.setTags(articleDetail.getArticleTags().split(","));
-        }
+        }*/
         return articleDetail;
     }
 

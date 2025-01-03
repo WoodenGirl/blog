@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
+import fun.aprilsxz.blog.config.StringArrayTypeHandler;
 import lombok.Data;
 
 /**

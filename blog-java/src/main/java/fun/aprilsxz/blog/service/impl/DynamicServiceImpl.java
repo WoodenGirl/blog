@@ -49,7 +49,7 @@ public class DynamicServiceImpl extends ServiceImpl<DynamicMapper, Dynamic>
         Page<DynamicVO> dynamicVOPage = (Page<DynamicVO>) dynamicMapper.queryByCategoryId(categoryId);
 
         List<DynamicVO> dynamicVOS = dynamicVOPage.getResult();
-        //将dynamicImages转换为images数组
+        /*//将dynamicImages转换为images数组
         if(CollectionUtil.isNotEmpty(dynamicVOS)){
             dynamicVOS = dynamicVOS.stream().peek(dynamicVO -> {
                 String dynamicImages = dynamicVO.getDynamicImages();
@@ -57,7 +57,7 @@ public class DynamicServiceImpl extends ServiceImpl<DynamicMapper, Dynamic>
                     dynamicVO.setImages(dynamicImages.split(","));
                 }
             }).collect(Collectors.toList());
-        }
+        }*/
 
         PageResult<DynamicVO> pageResult = new PageResult<>();
         pageResult.setPages(dynamicVOPage.getPages());
@@ -73,9 +73,9 @@ public class DynamicServiceImpl extends ServiceImpl<DynamicMapper, Dynamic>
     public DynamicVO queryDetailById(String dynamicId) {
         DynamicVO dynamicVO = dynamicMapper.queryDetailById(dynamicId);
         //如果dynamic非空，且有图片信息，将图片String转为数组
-        if(dynamicVO != null && StringUtils.hasLength(dynamicVO.getDynamicImages())){
+        /*if(dynamicVO != null && StringUtils.hasLength(dynamicVO.getDynamicImages())){
             dynamicVO.setImages(dynamicVO.getDynamicImages().split(","));
-        }
+        }*/
         return dynamicVO;
     }
 
