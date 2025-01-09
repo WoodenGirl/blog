@@ -285,17 +285,21 @@ const submitForm = async (formEl: FormInstance | undefined) => {
       articleForm.articleContent = wangEditorRef.value!.valueHtml
 
       if (articleId) { // 修改
-        updateArticle(articleForm).then(res => {
-          if (res.code == 200) {
-            ElMessage.success("修改成功！")
-          }
-        })
+        setTimeout(()=> {
+          updateArticle(articleForm).then(res => {
+            if (res.code == 200) {
+              ElMessage.success("修改成功！")
+            }
+          })
+        }, 500)
       } else { // 添加
-        addArticle(articleForm).then(res => {
-          if (res.code == 200) {
-            ElMessage.success("创建成功！")
-          }
-        })
+        setTimeout(()=> {
+          addArticle(articleForm).then(res => {
+            if (res.code == 200) {
+              ElMessage.success("创建成功！")
+            }
+          })
+        }, 500)
       }
       // 返回上一页并刷新
       router.go(-1)
