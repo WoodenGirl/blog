@@ -110,6 +110,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article>
             obsService.deleteObject(article1.getArticleCover());
             //更新新封面
             while(!obsService.copyObject(articleCover, articleCover.replaceFirst("temp", "articleCover"))){}
+            article.setArticleCover(articleCover.replaceFirst("temp","articleCover"));
         }
         articleMapper.updateById(article);
     }
