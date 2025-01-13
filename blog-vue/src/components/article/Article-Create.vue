@@ -284,21 +284,25 @@ const submitForm = async (formEl: FormInstance | undefined) => {
       // 其他数据赋值
       articleForm.articleContent = wangEditorRef.value!.valueHtml
 
-      if (articleId) { // 修改
-        updateArticle(articleForm).then(res => {
-          if (res.code == 200) {
-            ElMessage.success("修改成功！")
-          }
+      setTimeout(() => {
+        if (articleId) { // 修改
+          updateArticle(articleForm).then(res => {
+            if (res.code == 200) {
+              ElMessage.success("修改成功！")
+            }
+          })
+        } else { // 添加
+          addArticle(articleForm).then(res => {
+            if (res.code == 200) {
+              ElMessage.success("创建成功！")
+            }
+          })
+        }
+        // 返回上一页并刷新
+        router.push('/').then(() => {
+          window.location.reload()
         })
-      } else { // 添加
-        addArticle(articleForm).then(res => {
-          if (res.code == 200) {
-            ElMessage.success("创建成功！")
-          }
-        })
-      }
-      // 返回上一页并刷新
-      router.go(-1)
+      }, 500)
     }
   })
 }
