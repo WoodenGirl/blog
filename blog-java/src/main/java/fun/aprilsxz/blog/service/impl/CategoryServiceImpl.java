@@ -1,17 +1,26 @@
 package fun.aprilsxz.blog.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import fun.aprilsxz.blog.domain.dto.CategoryDto;
+import fun.aprilsxz.blog.domain.po.Article;
 import fun.aprilsxz.blog.domain.po.Category;
+import fun.aprilsxz.blog.domain.po.Dynamic;
 import fun.aprilsxz.blog.domain.vo.CategoryVO;
-import fun.aprilsxz.blog.service.CategoryService;
+import fun.aprilsxz.blog.mapper.ArticleMapper;
 import fun.aprilsxz.blog.mapper.CategoryMapper;
+import fun.aprilsxz.blog.mapper.CommentMapper;
+import fun.aprilsxz.blog.mapper.DynamicMapper;
+import fun.aprilsxz.blog.service.CategoryService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.*;
-import java.util.function.Function;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -24,6 +33,12 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category>
     implements CategoryService{
     @Resource
     CategoryMapper categoryMapper;
+    @Resource
+    ArticleMapper articleMapper;
+    @Resource
+    DynamicMapper dynamicMapper;
+    @Resource
+    CommentMapper commentMapper;
 
     @Override
     public List<CategoryVO> queryById(Integer categoryId) {
@@ -43,6 +58,26 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category>
     public void updateCategory(CategoryDto categoryDto) {
         Category category = BeanUtil.copyProperties(categoryDto, Category.class);
         categoryMapper.updateById(category);
+    }
+
+    /**
+     * 删除目录下的所有子目录，以及目录下的所有内容
+     * @param categoryId 分类id
+     */
+    @Override
+    @Transactional
+    // TODO 其他插入删除等操作关联category_to_link表
+    public void deleteCategory(Integer categoryId) {
+        List<Category> categoryList = categoryMapper.queryById(categoryId);
+        //.1.查询子目录id
+        List<Integer> ids = categoryList.stream().map(Category::getCategoryId).collect(Collectors.toList());
+        // 2.查询
+        // 1. 删除对应的评论
+//        commentMapper.delete(new QueryWrapper<Comment>().in("link_id",))
+        // 2. 删除所有的文章和动态
+        articleMapper.delete(new QueryWrapper<Article>().in("category_id",ids));
+        dynamicMapper.delete(new QueryWrapper<Dynamic>().in("category_id",ids));
+
     }
 
     // 构建目录树的方法

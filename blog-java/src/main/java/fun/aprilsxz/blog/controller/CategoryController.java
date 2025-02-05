@@ -4,7 +4,6 @@ import fun.aprilsxz.blog.domain.common.Result;
 import fun.aprilsxz.blog.domain.dto.CategoryDto;
 import fun.aprilsxz.blog.domain.dto.group.Insert;
 import fun.aprilsxz.blog.domain.dto.group.Update;
-import fun.aprilsxz.blog.domain.po.Category;
 import fun.aprilsxz.blog.domain.vo.CategoryVO;
 import fun.aprilsxz.blog.service.CategoryService;
 import io.swagger.annotations.Api;
@@ -13,7 +12,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import java.util.List;
 
@@ -43,6 +41,13 @@ public class CategoryController {
     @ApiOperation("修改目录 参数category只能修改两项{categoryName,isInterrupt}")
     public Result<Void> updateCategory(@RequestBody @Validated(Update.class) CategoryDto categoryDto){
         categoryService.updateCategory(categoryDto);
+        return Result.ok();
+    }
+
+    @DeleteMapping("/categoryId/{categoryId}")
+    @ApiOperation(("删除目录下的所有子目录，以及目录下的所有内容"))
+    public Result<Void> deleteCategory(@PathVariable("categoryId") Integer categoryId){
+        categoryService.deleteCategory(categoryId);
         return Result.ok();
     }
 }
