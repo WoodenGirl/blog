@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fun.aprilsxz.blog.mapper.CategoryToLinkMapper">
+
+    <resultMap id="BaseResultMap" type="fun.aprilsxz.blog.domain.po.CategoryToLink">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="linkId" column="link_id" jdbcType="VARCHAR"/>
+            <result property="categoryId" column="category_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,link_id,category_id
+    </sql>
+</mapper>
